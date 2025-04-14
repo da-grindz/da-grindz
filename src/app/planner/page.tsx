@@ -56,9 +56,7 @@ export default function Planner() {
 
       setPlannerData((prev) => {
         const updated = { ...prev };
-        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][
-          data.fromMealType
-        ].filter((_, i) => i !== data.index);
+        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][data.fromMealType].filter((_, i) => i !== data.index);
 
         const current = updated[targetDay][targetMealType];
         if (!current.includes(draggedMeal)) {
@@ -139,20 +137,21 @@ export default function Planner() {
           </Col>
 
           <Col lg={6}>
-            <Table
-              bordered
-              className="text-center align-middle"
-              style={{ borderCollapse: 'collapse' }}
-            >
+            <Table bordered className="text-center align-middle" style={{ borderCollapse: 'collapse' }}>
               <thead>
                 <tr>
-                  <th scope="col" aria-hidden="true">
-                    &nbsp;
-                  </th>
+                  <th scope="col" aria-hidden="true">&nbsp;</th>
                   {meals.map((meal) => (
                     <th
                       key={meal}
-                      style={{ backgroundColor: '#FFE7B3', color: '#2D2A26' }}
+                      style={{
+                        backgroundColor: '#FFE7B3',
+                        color: '#2D2A26',
+                        fontWeight: 600,
+                        fontSize: '1rem',
+                        border: 'none',
+                        padding: '12px',
+                      }}
                     >
                       {meal}
                     </th>
@@ -162,7 +161,17 @@ export default function Planner() {
               <tbody>
                 {days.map((day) => (
                   <tr key={day}>
-                    <th style={{ backgroundColor: '#DCE7E2', color: '#00684A' }}>
+                    <th
+                      scope="row"
+                      style={{
+                        backgroundColor: '#DCE7E2',
+                        color: '#00684A',
+                        fontWeight: 'bold',
+                        fontSize: '0.9rem',
+                        border: 'none',
+                        padding: '12px',
+                      }}
+                    >
                       {day}
                     </th>
                     {meals.map((mealType) => (
@@ -181,14 +190,16 @@ export default function Planner() {
                         {plannerData[day][mealType].length > 0 ? (
                           plannerData[day][mealType].map((mealName, i) => (
                             <div
-                              key={`${mealName}-${day}-${mealType}`}
+                              key={`${mealName}-${day}-${mealType}-${i}`}
                               draggable
-                              onDragStart={(e) => handleDragStart(e, {
-                                meal: mealName,
-                                fromDay: day,
-                                fromMealType: mealType,
-                                index: i,
-                              })}
+                              onDragStart={(e) =>
+                                handleDragStart(e, {
+                                  meal: mealName,
+                                  fromDay: day,
+                                  fromMealType: mealType,
+                                  index: i,
+                                })
+                              }
                               style={{
                                 backgroundColor: '#FFF7E6',
                                 padding: '6px',
@@ -247,18 +258,12 @@ export default function Planner() {
                   Meal Tracker
                 </Card.Title>
                 <p style={{ color: '#2D2A26', marginBottom: '0.5rem' }}>
-                  <span>
-                    Meals Remaining:
-                    <br />
-                    <strong>12</strong>
-                  </span>
+                  Meals Remaining:
+                  <strong> 12 </strong>
                 </p>
                 <p style={{ color: '#2D2A26' }}>
-                  <span>
-                    Points Remaining:
-                    <br />
-                    <strong>45</strong>
-                  </span>
+                  Points Remaining:
+                  <strong> 45 </strong>
                 </p>
 
                 <hr />
@@ -267,32 +272,20 @@ export default function Planner() {
                   Macros Summary
                 </Card.Title>
                 <p className="mb-1">
-                  <span>
-                    Protein:
-                    <br />
-                    <strong>120g</strong>
-                  </span>
+                  Protein:
+                  <strong> 120g </strong>
                 </p>
                 <p className="mb-1">
-                  <span>
-                    Carbs:
-                    <br />
-                    <strong>210g</strong>
-                  </span>
+                  Carbs:
+                  <strong> 210g </strong>
                 </p>
                 <p className="mb-1">
-                  <span>
-                    Fat:
-                    <br />
-                    <strong>65g</strong>
-                  </span>
+                  Fat:
+                  <strong> 65g </strong>
                 </p>
                 <p className="mb-1">
-                  <span>
-                    Calories:
-                    <br />
-                    <strong>1,850 kcal</strong>
-                  </span>
+                  Calories:
+                  <strong> 1,850 kcal </strong>
                 </p>
 
                 <hr />
