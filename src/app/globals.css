@@ -45,3 +45,13 @@ body {
 footer, footer a {
   color: var(--nat-navbar-text-color);
 }
+
+#allergy-banner {
+  background: #DCE7E2;
+  color: #00684A;
+}
+
+#allergy-form {
+  background: #FFF7E6;
+  color: #de6b00;
+}
