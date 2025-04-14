@@ -101,7 +101,9 @@ export default function Planner() {
                             width: '100%',
                           }}
                           aria-label={`Meal slot for ${day} ${meal}`}
-                        />
+                        >
+                          <span className="visually-hidden">{`Meal slot for ${day} ${meal}`}</span>
+                        </button>
                       </td>
                     ))}
                   </tr>
