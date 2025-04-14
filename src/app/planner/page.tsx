@@ -56,7 +56,9 @@ export default function Planner() {
 
       setPlannerData((prev) => {
         const updated = { ...prev };
-        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][data.fromMealType].filter((_, i) => i !== data.index);
+        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][
+          data.fromMealType
+        ].filter((_, i) => i !== data.index);
 
         const current = updated[targetDay][targetMealType];
         if (!current.includes(draggedMeal)) {
@@ -102,7 +104,14 @@ export default function Planner() {
           </p>
         </div>
 
-        <h1 className="text-center mb-4" style={{ fontWeight: 600, color: '#00684A', fontSize: '2.5rem' }}>
+        <h1
+          className="text-center mb-4"
+          style={{
+            fontWeight: 600,
+            color: '#00684A',
+            fontSize: '2.5rem',
+          }}
+        >
           Weekly Meal Plan
         </h1>
 
@@ -140,7 +149,9 @@ export default function Planner() {
             <Table bordered className="text-center align-middle" style={{ borderCollapse: 'collapse' }}>
               <thead>
                 <tr>
-                  <th scope="col" aria-hidden="true">&nbsp;</th>
+                  <th scope="col" aria-hidden="true">
+                    &nbsp;
+                  </th>
                   {meals.map((meal) => (
                     <th
                       key={meal}
@@ -190,16 +201,14 @@ export default function Planner() {
                         {plannerData[day][mealType].length > 0 ? (
                           plannerData[day][mealType].map((mealName, i) => (
                             <div
-                              key={`${mealName}-${day}-${mealType}-${i}`}
+                              key={`${day}-${mealType}-${mealName}`}
                               draggable
-                              onDragStart={(e) =>
-                                handleDragStart(e, {
-                                  meal: mealName,
-                                  fromDay: day,
-                                  fromMealType: mealType,
-                                  index: i,
-                                })
-                              }
+                              onDragStart={(e) => handleDragStart(e, {
+                                meal: mealName,
+                                fromDay: day,
+                                fromMealType: mealType,
+                                index: i,
+                              })}
                               style={{
                                 backgroundColor: '#FFF7E6',
                                 padding: '6px',
