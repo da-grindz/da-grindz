@@ -90,15 +90,16 @@ export default function Planner() {
                     </th>
                     {meals.map((meal) => (
                       <td key={`${day}-${meal}`} style={{ border: 'none', padding: '8px' }}>
-                        <div
+                        <button
+                          type="button"
                           style={{
                             minHeight: '60px',
                             border: '1px dotted #aaa',
                             borderRadius: '10px',
                             padding: '6px',
                             backgroundColor: '#ffffffc9',
+                            width: '100%',
                           }}
-                          role="region"
                           aria-label={`Meal slot for ${day} ${meal}`}
                         />
                       </td>
