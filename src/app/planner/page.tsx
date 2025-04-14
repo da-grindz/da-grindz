@@ -8,7 +8,7 @@ const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
 export default function Planner() {
   return (
-    <div className='planner-page'>
+    <div className="planner-page">
       <Container>
         {/* Mood Banner */}
         <div
@@ -29,7 +29,7 @@ export default function Planner() {
         </div>
 
         <h1
-          className='text-center mb-4'
+          className="text-center mb-4"
           style={{
             fontWeight: 600,
             color: '#00684A',
@@ -45,7 +45,7 @@ export default function Planner() {
             <Table
               bordered
               responsive
-              className='text-center align-middle'
+              className="text-center align-middle"
               style={{
                 borderCollapse: 'collapse',
                 backgroundColor: '#F9F6EF',
@@ -98,7 +98,8 @@ export default function Planner() {
                             padding: '6px',
                             backgroundColor: '#ffffffc9',
                           }}
-                          aria-label={`Drop meal for ${day} ${meal}`}
+                          role="region"
+                          aria-label={`Meal slot for ${day} ${meal}`}
                         />
                       </td>
                     ))}
@@ -109,7 +110,7 @@ export default function Planner() {
           </Col>
 
           {/* Sidebar */}
-          <Col lg={3} className='mt-4 mt-lg-0'>
+          <Col lg={3} className="mt-4 mt-lg-0">
             <Card
               style={{
                 backgroundColor: '#DCE7E2',
@@ -136,19 +137,19 @@ export default function Planner() {
                 <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '1rem' }}>
                   Macros Summary
                 </Card.Title>
-                <p className='mb-1'>
+                <p className="mb-1">
                   Protein:
                   <strong> 120g </strong>
                 </p>
-                <p className='mb-1'>
+                <p className="mb-1">
                   Carbs:
                   <strong> 210g </strong>
                 </p>
-                <p className='mb-1'>
+                <p className="mb-1">
                   Fat:
                   <strong> 65g </strong>
                 </p>
-                <p className='mb-1'>
+                <p className="mb-1">
                   Calories:
                   <strong> 1,850 kcal </strong>
                 </p>
