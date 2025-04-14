@@ -53,7 +53,12 @@ export default function Planner() {
             >
               <thead>
                 <tr>
-                  <th style={{ backgroundColor: '#F9F6EF', border: 'none' }} />
+                  <th
+                    scope="col"
+                    style={{ backgroundColor: '#F9F6EF', border: 'none' }}
+                  >
+                    Day
+                  </th>
                   {meals.map((meal) => (
                     <th
                       key={meal}
@@ -75,11 +80,10 @@ export default function Planner() {
                 {days.map((day) => (
                   <tr key={day}>
                     <th
+                      scope="row"
                       style={{
                         backgroundColor: '#DCE7E2',
                         color: '#00684A',
-                        writingMode: 'vertical-rl',
-                        textOrientation: 'mixed',
                         fontWeight: 'bold',
                         fontSize: '0.9rem',
                         border: 'none',
@@ -89,9 +93,12 @@ export default function Planner() {
                       {day}
                     </th>
                     {meals.map((meal) => (
-                      <td key={`${day}-${meal}`} style={{ border: 'none', padding: '8px' }}>
-                        <button
-                          type="button"
+                      <td
+                        key={`${day}-${meal}`}
+                        style={{ border: 'none', padding: '8px' }}
+                      >
+                        {/* TODO: Replace this <div> with a <button> or interactive element when ready */}
+                        <div
                           style={{
                             minHeight: '60px',
                             border: '1px dotted #aaa',
@@ -100,10 +107,7 @@ export default function Planner() {
                             backgroundColor: '#ffffffc9',
                             width: '100%',
                           }}
-                          aria-label={`Meal slot for ${day} ${meal}`}
-                        >
-                          <span className="visually-hidden">{`Meal slot for ${day} ${meal}`}</span>
-                        </button>
+                        />
                       </td>
                     ))}
                   </tr>
@@ -123,10 +127,21 @@ export default function Planner() {
               }}
             >
               <Card.Body>
-                <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                <Card.Title
+                  style={{
+                    color: '#00684A',
+                    fontWeight: 'bold',
+                    fontSize: '1.2rem',
+                  }}
+                >
                   Meal Tracker
                 </Card.Title>
-                <p style={{ color: '#2D2A26', marginBottom: '0.5rem' }}>
+                <p
+                  style={{
+                    color: '#2D2A26',
+                    marginBottom: '0.5rem',
+                  }}
+                >
                   Meals Remaining:
                   <strong> 12 </strong>
                 </p>
@@ -137,7 +152,14 @@ export default function Planner() {
 
                 <hr />
 
-                <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '1rem' }}>
+                <Card.Title
+                  style={{
+                    color: '#00684A',
+                    fontWeight: 'bold',
+                    fontSize: '1.1rem',
+                    marginTop: '1rem',
+                  }}
+                >
                   Macros Summary
                 </Card.Title>
                 <p className="mb-1">
@@ -156,17 +178,6 @@ export default function Planner() {
                   Calories:
                   <strong> 1,850 kcal </strong>
                 </p>
-
-                <hr />
-
-                <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '1rem' }}>
-                  Favorite Meals
-                </Card.Title>
-                <ul style={{ paddingLeft: '1.2rem', fontSize: '0.9rem', color: '#2D2A26' }}>
-                  <li>Bulgogi Bowl – Korean BBQ</li>
-                  <li>Lemon Chicken – Asian Mix</li>
-                  <li>Veggie Stir Fry – Stir Crazy</li>
-                </ul>
               </Card.Body>
             </Card>
           </Col>
