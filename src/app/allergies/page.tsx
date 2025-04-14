@@ -1,23 +1,29 @@
 'use client';
 
-import { Col, Container, Image, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 
 /** The Allergy page. */
 const Allergy = () => (
   <main>
     <Container id="allergy-page" fluid className="py-3">
-      <Row className="align-middle text-center">
-        <Col xs={4}>
-          <Image src="next.svg" width="150px" alt="" />
-        </Col>
+      <Container id="allergy-banner" className="p-4">
+        <Row className="align-middle text-center">
+          <Col className="text-center px-5">
+            <h1>What are you allergic to?</h1>
+            <p>
+              Here at UH Manoa, we offer a lot of different types of food. Let us know what dietary restrictions
+              you have so that we can help you stay safe!
+              Your health and well-being are our top priorities.
+              By sharing your allergies or dietary preferences,
+              we can ensure that you have access to meals that suit your needs and provide a
+              worry-free dining experience.
+            </p>
+          </Col>
+        </Row>
+      </Container>
 
-        <Col xs={8} className="d-flex flex-column justify-content-center">
-          <h1>Welcome to this template</h1>
-        </Col>
-      </Row>
     </Container>
   </main>
 );
 
 export default Allergy;
-// This is a placeholder for the allergy page.
