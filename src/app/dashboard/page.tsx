@@ -4,7 +4,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import VegetarianVibesDash from '@/components/VegetarianVibesDash';
 
 const DashboardPage = () => (
-  <Container id="dashboard-page" fluid className="py-3">
+  <Container id="vegetarian-vibes" fluid className="py-3">
     {/* Dashboard Banner */}
     <Container id="dashboard-banner" className="p-4">
       <Row className="align-middle text-center">
