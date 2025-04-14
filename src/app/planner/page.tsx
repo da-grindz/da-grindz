@@ -1,36 +1,39 @@
 'use client';
-import React from "react";
-import { Container, Row, Col, Table, Card } from "react-bootstrap";
 
-const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const meals = ["Breakfast", "Lunch", "Dinner", "Snacks"];
+import React from 'react';
+import { Container, Row, Col, Table, Card } from 'react-bootstrap';
+
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
 export default function Planner() {
   return (
-    <div className="planner-page">
+    <div className='planner-page'>
       <Container>
         {/* Mood Banner */}
         <div
           style={{
-            backgroundColor: "#FFF7E6",
-            padding: "1rem",
-            marginBottom: "1.5rem",
-            borderRadius: "12px",
-            textAlign: "center",
-            fontStyle: "italic",
-            color: "#A8442A",
+            backgroundColor: '#FFF7E6',
+            padding: '1rem',
+            marginBottom: '1.5rem',
+            borderRadius: '12px',
+            textAlign: 'center',
+            fontStyle: 'italic',
+            color: '#A8442A',
             fontWeight: 500,
           }}
         >
-          💪 You’re in <strong>Grindz for Gains</strong> mode — high protein recommended today!
+          💪 You’re in 
+          <strong>Grindz for Gains</strong> 
+          mode — high protein recommended today!
         </div>
 
         <h1
-          className="text-center mb-4"
+          className='text-center mb-4'
           style={{
-            fontWeight: "600",
-            color: "#00684A",
-            fontSize: "2.5rem",
+            fontWeight: '600',
+            color: '#00684A',
+            fontSize: '2.5rem',
           }}
         >
           Weekly Meal Plan
