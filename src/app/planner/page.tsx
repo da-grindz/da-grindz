@@ -8,7 +8,7 @@ const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
 export default function Planner() {
   return (
-    <div className="planner-page">
+    <div className='planner-page'>
       <Container>
         {/* Mood Banner */}
         <div
@@ -23,15 +23,15 @@ export default function Planner() {
             fontWeight: 500,
           }}
         >
-          💪 You’re in
+          You&apos;re in
           <strong> Grindz for Gains </strong>
           mode — high protein recommended today!
         </div>
 
         <h1
-          className="text-center mb-4"
+          className='text-center mb-4'
           style={{
-            fontWeight: '600',
+            fontWeight: 600,
             color: '#00684A',
             fontSize: '2.5rem',
           }}
@@ -45,7 +45,7 @@ export default function Planner() {
             <Table
               bordered
               responsive
-              className="text-center align-middle"
+              className='text-center align-middle'
               style={{
                 borderCollapse: 'collapse',
                 backgroundColor: '#F9F6EF',
@@ -53,7 +53,7 @@ export default function Planner() {
             >
               <thead>
                 <tr>
-                  <th style={{ backgroundColor: '#F9F6EF', border: 'none' }}></th>
+                  <th style={{ backgroundColor: '#F9F6EF', border: 'none' }} />
                   {meals.map((meal) => (
                     <th
                       key={meal}
@@ -89,10 +89,7 @@ export default function Planner() {
                       {day}
                     </th>
                     {meals.map((meal) => (
-                      <td
-                        key={`${day}-${meal}`}
-                        style={{ border: 'none', padding: '8px' }}
-                      >
+                      <td key={`${day}-${meal}`} style={{ border: 'none', padding: '8px' }}>
                         <div
                           style={{
                             minHeight: '60px',
@@ -101,6 +98,7 @@ export default function Planner() {
                             padding: '6px',
                             backgroundColor: '#ffffffc9',
                           }}
+                          aria-label={`Drop meal for ${day} ${meal}`}
                         />
                       </td>
                     ))}
@@ -111,7 +109,7 @@ export default function Planner() {
           </Col>
 
           {/* Sidebar */}
-          <Col lg={3} className="mt-4 mt-lg-0">
+          <Col lg={3} className='mt-4 mt-lg-0'>
             <Card
               style={{
                 backgroundColor: '#DCE7E2',
@@ -121,66 +119,46 @@ export default function Planner() {
               }}
             >
               <Card.Body>
-                <Card.Title
-                  style={{
-                    color: '#00684A',
-                    fontWeight: 'bold',
-                    fontSize: '1.2rem',
-                  }}
-                >
+                <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.2rem' }}>
                   Meal Tracker
                 </Card.Title>
                 <p style={{ color: '#2D2A26', marginBottom: '0.5rem' }}>
-                  Meals Remaining: <strong>12</strong>
+                  Meals Remaining:
+                  <strong> 12 </strong>
                 </p>
                 <p style={{ color: '#2D2A26' }}>
-                  Points Remaining: <strong>45</strong>
+                  Points Remaining:
+                  <strong> 45 </strong>
                 </p>
 
                 <hr />
 
-                <Card.Title
-                  style={{
-                    color: '#00684A',
-                    fontWeight: 'bold',
-                    fontSize: '1.1rem',
-                    marginTop: '1rem',
-                  }}
-                >
+                <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '1rem' }}>
                   Macros Summary
                 </Card.Title>
-                <p className="mb-1">
-                  Protein: <strong>120g</strong>
+                <p className='mb-1'>
+                  Protein:
+                  <strong> 120g </strong>
                 </p>
-                <p className="mb-1">
-                  Carbs: <strong>210g</strong>
+                <p className='mb-1'>
+                  Carbs:
+                  <strong> 210g </strong>
                 </p>
-                <p className="mb-1">
-                  Fat: <strong>65g</strong>
+                <p className='mb-1'>
+                  Fat:
+                  <strong> 65g </strong>
                 </p>
-                <p className="mb-1">
-                  Calories: <strong>1,850 kcal</strong>
+                <p className='mb-1'>
+                  Calories:
+                  <strong> 1,850 kcal </strong>
                 </p>
 
                 <hr />
 
-                <Card.Title
-                  style={{
-                    color: '#00684A',
-                    fontWeight: 'bold',
-                    fontSize: '1.1rem',
-                    marginTop: '1rem',
-                  }}
-                >
+                <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '1rem' }}>
                   Favorite Meals
                 </Card.Title>
-                <ul
-                  style={{
-                    paddingLeft: '1.2rem',
-                    fontSize: '0.9rem',
-                    color: '#2D2A26',
-                  }}
-                >
+                <ul style={{ paddingLeft: '1.2rem', fontSize: '0.9rem', color: '#2D2A26' }}>
                   <li>Bulgogi Bowl – Korean BBQ</li>
                   <li>Lemon Chicken – Asian Mix</li>
                   <li>Veggie Stir Fry – Stir Crazy</li>
