@@ -29,6 +29,9 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   color: #8a3d07;
+  min-height: 100vh;
+  flex-direction: column;
+  display: flex;
 }
 
 #landing-page {
