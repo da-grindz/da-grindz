@@ -4,15 +4,12 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Table, Card } from 'react-bootstrap';
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
+const mealTypes = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
 type MealData = { [day: string]: { [meal: string]: string[] } };
 
 const initialPlannerData: MealData = Object.fromEntries(
-  days.map((day) => [
-    day,
-    Object.fromEntries(meals.map((meal) => [meal, []])),
-  ]),
+  days.map((day) => [day, Object.fromEntries(mealTypes.map((meal) => [meal, []]))]),
 );
 
 const mealBankMock = [
@@ -26,6 +23,9 @@ const mealBankMock = [
 
 export default function Planner() {
   const [plannerData, setPlannerData] = useState<MealData>(initialPlannerData);
+  const [view, setView] = useState<'weekly' | 'macros'>('weekly');
+  const [macroGoals] = useState({ protein: 150, carbs: 250, fats: 70 });
+  const [currentMacros] = useState({ protein: 120, carbs: 210, fats: 65 });
 
   const handleDragStart = (
     e: React.DragEvent,
@@ -56,13 +56,13 @@ export default function Planner() {
 
       setPlannerData((prev) => {
         const updated = { ...prev };
-        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][
-          data.fromMealType
-        ].filter((_, i) => i !== data.index);
+        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][data.fromMealType].filter(
+          (_, i) => i !== data.index,
+        );
 
-        const current = updated[targetDay][targetMealType];
-        if (!current.includes(draggedMeal)) {
-          updated[targetDay][targetMealType] = [...current, draggedMeal];
+        const targetMeals = updated[targetDay][targetMealType];
+        if (!targetMeals.includes(draggedMeal)) {
+          updated[targetDay][targetMealType] = [...targetMeals, draggedMeal];
         }
 
         return updated;
@@ -104,20 +104,27 @@ export default function Planner() {
           </p>
         </div>
 
-        <h1
-          className="text-center mb-4"
-          style={{
-            fontWeight: 600,
-            color: '#00684A',
-            fontSize: '2.5rem',
-          }}
-        >
-          Weekly Meal Plan
-        </h1>
+        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+          <button
+            type="button"
+            onClick={() => setView(view === 'weekly' ? 'macros' : 'weekly')}
+            style={{
+              backgroundColor: '#00684A',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '0.5rem 1rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+            }}
+          >
+            {view === 'weekly' ? 'Switch to Macros Overview' : 'Back to Weekly Plan'}
+          </button>
+        </div>
 
-        <Row>
+        <Row className="align-items-stretch">
           <Col lg={3}>
-            <Card className="mb-4">
+            <Card className="h-100 mb-4">
               <Card.Body>
                 <Card.Title style={{ color: '#00684A', fontSize: '1.1rem', fontWeight: 'bold' }}>
                   Grindz Vault
@@ -146,157 +153,189 @@ export default function Planner() {
           </Col>
 
           <Col lg={6}>
-            <Table bordered className="text-center align-middle" style={{ borderCollapse: 'collapse' }}>
-              <thead>
-                <tr>
-                  <th scope="col" aria-hidden="true">
-                    &nbsp;
-                  </th>
-                  {meals.map((meal) => (
-                    <th
-                      key={meal}
-                      style={{
-                        backgroundColor: '#FFE7B3',
-                        color: '#2D2A26',
-                        fontWeight: 600,
-                        fontSize: '1rem',
-                        border: 'none',
-                        padding: '12px',
-                      }}
-                    >
-                      {meal}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {days.map((day) => (
-                  <tr key={day}>
-                    <th
-                      scope="row"
-                      style={{
-                        backgroundColor: '#DCE7E2',
-                        color: '#00684A',
-                        fontWeight: 'bold',
-                        fontSize: '0.9rem',
-                        border: 'none',
-                        padding: '12px',
-                      }}
-                    >
-                      {day}
-                    </th>
-                    {meals.map((mealType) => (
-                      <td
-                        key={`${day}-${mealType}`}
-                        onDrop={(e) => handleDrop(e, day, mealType)}
-                        onDragOver={allowDrop}
-                        style={{
-                          minHeight: '80px',
-                          backgroundColor: '#ffffffc9',
-                          border: '1px dotted #aaa',
-                          borderRadius: '8px',
-                          padding: '6px',
-                        }}
-                      >
-                        {plannerData[day][mealType].length > 0 ? (
-                          plannerData[day][mealType].map((mealName, i) => (
-                            <div
-                              key={`${day}-${mealType}-${mealName}`}
-                              draggable
-                              onDragStart={(e) => handleDragStart(e, {
-                                meal: mealName,
-                                fromDay: day,
-                                fromMealType: mealType,
-                                index: i,
-                              })}
+            <Card className="h-100" style={{ backgroundColor: '#FFF7E6', border: 'none', borderRadius: '12px' }}>
+              <Card.Body>
+                <Card.Title
+                  style={{
+                    color: '#00684A',
+                    fontWeight: 'bold',
+                    fontSize: '1.5rem',
+                    textAlign: 'center',
+                    marginBottom: '1.5rem',
+                  }}
+                >
+                  {view === 'weekly' ? 'Weekly Meal Plan' : 'Macros Goal Overview'}
+                </Card.Title>
+
+                {view === 'weekly' ? (
+                  <Table bordered className="text-center align-middle mb-0" style={{ borderCollapse: 'collapse' }}>
+                    <thead>
+                      <tr>
+                        <th aria-label="Day" />
+                        {mealTypes.map((mealHeader) => (
+                          <th
+                            key={mealHeader}
+                            style={{
+                              backgroundColor: '#FFE7B3',
+                              color: '#2D2A26',
+                              fontWeight: 600,
+                              fontSize: '1rem',
+                              border: 'none',
+                              padding: '12px',
+                            }}
+                          >
+                            {mealHeader}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {days.map((day) => (
+                        <tr key={day}>
+                          <th
+                            style={{
+                              backgroundColor: '#DCE7E2',
+                              color: '#00684A',
+                              fontWeight: 'bold',
+                              fontSize: '0.9rem',
+                              border: 'none',
+                              padding: '12px',
+                            }}
+                          >
+                            {day}
+                          </th>
+                          {mealTypes.map((mealType) => (
+                            <td
+                              key={`${day}-${mealType}`}
+                              onDrop={(e) => handleDrop(e, day, mealType)}
+                              onDragOver={allowDrop}
                               style={{
-                                backgroundColor: '#FFF7E6',
+                                minHeight: '80px',
+                                backgroundColor: '#ffffffc9',
+                                border: '1px dotted #aaa',
+                                borderRadius: '8px',
                                 padding: '6px',
-                                marginBottom: '4px',
-                                borderRadius: '6px',
-                                color: '#A8442A',
-                                fontWeight: 500,
-                                fontSize: '0.9rem',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
                               }}
                             >
-                              <span>{mealName}</span>
-                              <button
-                                type="button"
-                                onClick={() => handleDelete(day, mealType, i)}
-                                style={{
-                                  background: 'none',
-                                  border: 'none',
-                                  color: '#A8442A',
-                                  fontWeight: 'bold',
-                                  fontSize: '1rem',
-                                  marginLeft: '8px',
-                                  cursor: 'pointer',
-                                }}
-                              >
-                                Delete
-                              </button>
-                            </div>
-                          ))
-                        ) : (
-                          <span style={{ color: '#ccc', fontSize: '0.85rem' }}>
-                            Empty
-                          </span>
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+                              {plannerData[day][mealType].length > 0 ? (
+                                plannerData[day][mealType].map((mealName, idx, arr) => {
+                                  const occurrence = arr.slice(0, idx).filter((m) => m === mealName).length;
+                                  const uniqueKey = `${day}-${mealType}-${mealName}-${occurrence}`;
+
+                                  return (
+                                    <div
+                                      key={uniqueKey}
+                                      draggable
+                                      onDragStart={(e) => handleDragStart(e, {
+                                        meal: mealName,
+                                        fromDay: day,
+                                        fromMealType: mealType,
+                                        index: occurrence,
+                                      })}
+                                      style={{
+                                        backgroundColor: '#FFF7E6',
+                                        padding: '6px',
+                                        marginBottom: '4px',
+                                        borderRadius: '6px',
+                                        color: '#A8442A',
+                                        fontWeight: 500,
+                                        fontSize: '0.9rem',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                      }}
+                                    >
+                                      <span>{mealName}</span>
+                                      <button
+                                        type="button"
+                                        onClick={() => handleDelete(day, mealType, occurrence)}
+                                        style={{
+                                          background: 'none',
+                                          border: 'none',
+                                          color: '#A8442A',
+                                          fontWeight: 'bold',
+                                          fontSize: '1rem',
+                                          marginLeft: '8px',
+                                          cursor: 'pointer',
+                                        }}
+                                      >
+                                        x
+                                      </button>
+                                    </div>
+                                  );
+                                })
+                              ) : (
+                                <span style={{ color: '#ccc', fontSize: '0.85rem' }}>Empty</span>
+                              )}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                ) : (
+                  <>
+                    {['protein', 'carbs', 'fats'].map((macro) => {
+                      const value = currentMacros[macro as keyof typeof currentMacros];
+                      const goal = macroGoals[macro as keyof typeof macroGoals];
+                      const percent = Math.min((value / goal) * 100, 100);
+                      return (
+                        <div key={macro} style={{ marginBottom: '1.5rem' }}>
+                          <strong style={{ textTransform: 'capitalize', fontSize: '1.1rem' }}>
+                            {`${macro}: ${value}g / ${goal}g`}
+                          </strong>
+                          <div
+                            style={{
+                              backgroundColor: '#ddd',
+                              borderRadius: '6px',
+                              overflow: 'hidden',
+                              height: '20px',
+                              marginTop: '0.25rem',
+                            }}
+                          >
+                            <div
+                              style={{
+                                width: `${percent}%`,
+                                height: '100%',
+                                backgroundColor: '#00684A',
+                              }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </>
+                )}
+              </Card.Body>
+            </Card>
           </Col>
 
-          <Col lg={3} className="mt-4 mt-lg-0">
-            <Card
-              style={{
-                backgroundColor: '#DCE7E2',
-                border: 'none',
-                padding: '1rem',
-                borderRadius: '12px',
-              }}
-            >
+          <Col lg={3}>
+            <Card className="h-100" style={{ backgroundColor: '#DCE7E2', border: 'none', borderRadius: '12px' }}>
               <Card.Body>
                 <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.2rem' }}>
                   Meal Tracker
                 </Card.Title>
-                <p style={{ color: '#2D2A26', marginBottom: '0.5rem' }}>
-                  Meals Remaining:
-                  <strong> 12 </strong>
-                </p>
-                <p style={{ color: '#2D2A26' }}>
-                  Points Remaining:
-                  <strong> 45 </strong>
-                </p>
-
-                <hr />
-
-                <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '1rem' }}>
-                  Macros Summary
-                </Card.Title>
                 <p className="mb-1">
                   Protein:
-                  <strong> 120g </strong>
+                  <br />
+                  <strong>120g</strong>
                 </p>
                 <p className="mb-1">
                   Carbs:
-                  <strong> 210g </strong>
+                  <br />
+                  <strong>210g</strong>
                 </p>
                 <p className="mb-1">
                   Fat:
-                  <strong> 65g </strong>
+                  <br />
+                  <strong>65g</strong>
                 </p>
                 <p className="mb-1">
                   Calories:
-                  <strong> 1,850 kcal </strong>
+                  <br />
+                  <strong>1,850 kcal</strong>
                 </p>
-
                 <hr />
               </Card.Body>
             </Card>
