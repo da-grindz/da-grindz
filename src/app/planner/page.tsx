@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Table, Card } from 'react-bootstrap';
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
+const mealTypes = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
 type MealData = { [day: string]: { [meal: string]: string[] } };
 
 const initialPlannerData: MealData = Object.fromEntries(
-  days.map((day) => [day, Object.fromEntries(meals.map((meal) => [meal, []]))]),
+  days.map((day) => [day, Object.fromEntries(mealTypes.map((meal) => [meal, []]))]),
 );
 
 const mealBankMock = [
@@ -38,20 +38,18 @@ export default function Planner() {
     e.preventDefault();
     const data = JSON.parse(e.dataTransfer.getData('text/plain'));
 
-    // Add from Grindz Vault
     if (!data.fromDay && data.meal) {
       setPlannerData((prev) => {
         const updated = { ...prev };
-        const meals = updated[targetDay][targetMealType];
-        if (!meals.includes(data.meal)) {
-          updated[targetDay][targetMealType] = [...meals, data.meal];
+        const currentMeals = updated[targetDay][targetMealType];
+        if (!currentMeals.includes(data.meal)) {
+          updated[targetDay][targetMealType] = [...currentMeals, data.meal];
         }
         return updated;
       });
       return;
     }
 
-    // Move from one planner cell to another
     if (data.fromDay && data.fromMealType !== undefined && data.index !== undefined) {
       const draggedMeal = plannerData[data.fromDay][data.fromMealType][data.index];
       if (!draggedMeal) return;
@@ -62,9 +60,9 @@ export default function Planner() {
           (_, i) => i !== data.index,
         );
 
-        const meals = updated[targetDay][targetMealType];
-        if (!meals.includes(draggedMeal)) {
-          updated[targetDay][targetMealType] = [...meals, draggedMeal];
+        const targetMeals = updated[targetDay][targetMealType];
+        if (!targetMeals.includes(draggedMeal)) {
+          updated[targetDay][targetMealType] = [...targetMeals, draggedMeal];
         }
 
         return updated;
@@ -174,9 +172,9 @@ export default function Planner() {
                     <thead>
                       <tr>
                         <th aria-label="Day" />
-                        {meals.map((meal) => (
+                        {mealTypes.map((mealHeader) => (
                           <th
-                            key={meal}
+                            key={mealHeader}
                             style={{
                               backgroundColor: '#FFE7B3',
                               color: '#2D2A26',
@@ -186,7 +184,7 @@ export default function Planner() {
                               padding: '12px',
                             }}
                           >
-                            {meal}
+                            {mealHeader}
                           </th>
                         ))}
                       </tr>
@@ -206,7 +204,7 @@ export default function Planner() {
                           >
                             {day}
                           </th>
-                          {meals.map((mealType) => (
+                          {mealTypes.map((mealType) => (
                             <td
                               key={`${day}-${mealType}`}
                               onDrop={(e) => handleDrop(e, day, mealType)}
@@ -228,14 +226,12 @@ export default function Planner() {
                                     <div
                                       key={uniqueKey}
                                       draggable
-                                      onDragStart={(e) =>
-                                        handleDragStart(e, {
-                                          meal: mealName,
-                                          fromDay: day,
-                                          fromMealType: mealType,
-                                          index: occurrence,
-                                        })
-                                      }
+                                      onDragStart={(e) => handleDragStart(e, {
+                                        meal: mealName,
+                                        fromDay: day,
+                                        fromMealType: mealType,
+                                        index: occurrence,
+                                      })}
                                       style={{
                                         backgroundColor: '#FFF7E6',
                                         padding: '6px',
@@ -286,7 +282,7 @@ export default function Planner() {
                       return (
                         <div key={macro} style={{ marginBottom: '1.5rem' }}>
                           <strong style={{ textTransform: 'capitalize', fontSize: '1.1rem' }}>
-                            {macro}: {value}g / {goal}g
+                            {`${macro}: ${value}g / ${goal}g`}
                           </strong>
                           <div
                             style={{
@@ -318,19 +314,7 @@ export default function Planner() {
             <Card className="h-100" style={{ backgroundColor: '#DCE7E2', border: 'none', borderRadius: '12px' }}>
               <Card.Body>
                 <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.2rem' }}>
-                  {view === 'weekly' ? 'Meal Tracker' : 'Meal Tracker'}
-                </Card.Title>
-                <p style={{ color: '#2D2A26', marginBottom: '0.5rem' }}>
-                  Meals Remaining:
-                  <strong> 12 </strong>
-                </p>
-                <p style={{ color: '#2D2A26' }}>
-                  Points Remaining:
-                  <strong> 45 </strong>
-                </p>
-                <hr />
-                <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '1rem' }}>
-                  Macros Summary
+                  Meal Tracker
                 </Card.Title>
                 <p className="mb-1">
                   Protein:
