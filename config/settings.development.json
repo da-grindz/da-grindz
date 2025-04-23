@@ -143,7 +143,7 @@
       "floor": "02",
       "hours": "Mon- Thu: 8 am- 6 pm,\nFri: 8 am- 5 pm",
       "phone": "808-942-7688",
-      "email": "\u003CNull\u003E",
+      "email": null,
       "website": "https://restaurants.subway.com/united-states/hi/honolulu/2465-campus-rd",
       "notes": null,
       "x": -157.819044765102,
