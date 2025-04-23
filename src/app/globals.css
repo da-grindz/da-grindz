@@ -27,22 +27,41 @@ body {
   background: url("/bg.jpg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   color: #8a3d07;
-  min-height: 100vh;
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
+  background-attachment: scroll;
 }
 
 #landing-page {
+  flex: 1;
   max-width: 700px;
   margin: 0 auto;
 }
 #landing-page h1 {
   color: #ff7c01;
+  font-size: 3.3rem;
+  font-weight: 600;
 }
 #landing-page h3 {
-  color: #de6b00;
+  color: #ff7c01;
+}
+
+.landingcontainer {
+  background-color: rgba(255, 255, 255, 0.712);
+  padding: 20px;
+  margin-bottom: 40px;
+  border-radius: 10px;
+}
+
+.landingbutton {
+  background-color: #2b6555 !important;
+  color: #FFF !important;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
 }
 
 footer, footer a {
