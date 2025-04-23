@@ -9,10 +9,7 @@ const meals = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 type MealData = { [day: string]: { [meal: string]: string[] } };
 
 const initialPlannerData: MealData = Object.fromEntries(
-  days.map((day) => [
-    day,
-    Object.fromEntries(meals.map((meal) => [meal, []])),
-  ]),
+  days.map((day) => [day, Object.fromEntries(meals.map((meal) => [meal, []]))]),
 );
 
 const mealBankMock = [
@@ -41,31 +38,33 @@ export default function Planner() {
     e.preventDefault();
     const data = JSON.parse(e.dataTransfer.getData('text/plain'));
 
+    // Add from Grindz Vault
     if (!data.fromDay && data.meal) {
       setPlannerData((prev) => {
         const updated = { ...prev };
-        const currentMeals = updated[targetDay][targetMealType];
-        if (!currentMeals.includes(data.meal)) {
-          updated[targetDay][targetMealType] = [...currentMeals, data.meal];
+        const meals = updated[targetDay][targetMealType];
+        if (!meals.includes(data.meal)) {
+          updated[targetDay][targetMealType] = [...meals, data.meal];
         }
         return updated;
       });
       return;
     }
 
+    // Move from one planner cell to another
     if (data.fromDay && data.fromMealType !== undefined && data.index !== undefined) {
       const draggedMeal = plannerData[data.fromDay][data.fromMealType][data.index];
       if (!draggedMeal) return;
 
       setPlannerData((prev) => {
         const updated = { ...prev };
-        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][
-          data.fromMealType
-        ].filter((_, i) => i !== data.index);
+        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][data.fromMealType].filter(
+          (_, i) => i !== data.index,
+        );
 
-        const current = updated[targetDay][targetMealType];
-        if (!current.includes(draggedMeal)) {
-          updated[targetDay][targetMealType] = [...current, draggedMeal];
+        const meals = updated[targetDay][targetMealType];
+        if (!meals.includes(draggedMeal)) {
+          updated[targetDay][targetMealType] = [...meals, draggedMeal];
         }
 
         return updated;
@@ -174,7 +173,7 @@ export default function Planner() {
                   <Table bordered className="text-center align-middle mb-0" style={{ borderCollapse: 'collapse' }}>
                     <thead>
                       <tr>
-                        <th>&nbsp;</th>
+                        <th aria-label="Day" />
                         {meals.map((meal) => (
                           <th
                             key={meal}
@@ -221,50 +220,54 @@ export default function Planner() {
                               }}
                             >
                               {plannerData[day][mealType].length > 0 ? (
-                                plannerData[day][mealType].map((mealName, i) => (
-                                  <div
-                                    key={`${day}-${mealType}-${mealName}`}
-                                    draggable
-                                    onDragStart={(e) =>
-                                      handleDragStart(e, {
-                                        meal: mealName,
-                                        fromDay: day,
-                                        fromMealType: mealType,
-                                        index: i,
-                                      })
-                                    }
-                                    style={{
-                                      backgroundColor: '#FFF7E6',
-                                      padding: '6px',
-                                      marginBottom: '4px',
-                                      borderRadius: '6px',
-                                      color: '#A8442A',
-                                      fontWeight: 500,
-                                      fontSize: '0.9rem',
-                                      display: 'flex',
-                                      justifyContent: 'space-between',
-                                      alignItems: 'center',
-                                    }}
-                                  >
-                                    <span>{mealName}</span>
-                                    <button
-                                      type="button"
-                                      aria-label="Delete meal"
-                                      onClick={() => handleDelete(day, mealType, i)}
+                                plannerData[day][mealType].map((mealName, idx, arr) => {
+                                  const occurrence = arr.slice(0, idx).filter((m) => m === mealName).length;
+                                  const uniqueKey = `${day}-${mealType}-${mealName}-${occurrence}`;
+
+                                  return (
+                                    <div
+                                      key={uniqueKey}
+                                      draggable
+                                      onDragStart={(e) =>
+                                        handleDragStart(e, {
+                                          meal: mealName,
+                                          fromDay: day,
+                                          fromMealType: mealType,
+                                          index: occurrence,
+                                        })
+                                      }
                                       style={{
-                                        background: 'none',
-                                        border: 'none',
+                                        backgroundColor: '#FFF7E6',
+                                        padding: '6px',
+                                        marginBottom: '4px',
+                                        borderRadius: '6px',
                                         color: '#A8442A',
-                                        fontWeight: 'bold',
-                                        fontSize: '1rem',
-                                        marginLeft: '8px',
-                                        cursor: 'pointer',
+                                        fontWeight: 500,
+                                        fontSize: '0.9rem',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
                                       }}
                                     >
-                                      <span aria-hidden="true">Delete</span>
-                                    </button>
-                                  </div>
-                                ))
+                                      <span>{mealName}</span>
+                                      <button
+                                        type="button"
+                                        onClick={() => handleDelete(day, mealType, occurrence)}
+                                        style={{
+                                          background: 'none',
+                                          border: 'none',
+                                          color: '#A8442A',
+                                          fontWeight: 'bold',
+                                          fontSize: '1rem',
+                                          marginLeft: '8px',
+                                          cursor: 'pointer',
+                                        }}
+                                      >
+                                        x
+                                      </button>
+                                    </div>
+                                  );
+                                })
                               ) : (
                                 <span style={{ color: '#ccc', fontSize: '0.85rem' }}>Empty</span>
                               )}
@@ -283,15 +286,7 @@ export default function Planner() {
                       return (
                         <div key={macro} style={{ marginBottom: '1.5rem' }}>
                           <strong style={{ textTransform: 'capitalize', fontSize: '1.1rem' }}>
-                            {macro}
-                            <br />
-                            {value}
-                            g
-                            <br />
-                            /
-                            <br />
-                            {goal}
-                            g
+                            {macro}: {value}g / {goal}g
                           </strong>
                           <div
                             style={{
@@ -333,29 +328,30 @@ export default function Planner() {
                   Points Remaining:
                   <strong> 45 </strong>
                 </p>
-
                 <hr />
-
                 <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.1rem', marginTop: '1rem' }}>
                   Macros Summary
                 </Card.Title>
                 <p className="mb-1">
                   Protein:
-                  <strong> 120g </strong>
+                  <br />
+                  <strong>120g</strong>
                 </p>
                 <p className="mb-1">
                   Carbs:
-                  <strong> 210g </strong>
+                  <br />
+                  <strong>210g</strong>
                 </p>
                 <p className="mb-1">
                   Fat:
-                  <strong> 65g </strong>
+                  <br />
+                  <strong>65g</strong>
                 </p>
                 <p className="mb-1">
                   Calories:
-                  <strong> 1,850 kcal </strong>
+                  <br />
+                  <strong>1,850 kcal</strong>
                 </p>
-
                 <hr />
               </Card.Body>
             </Card>
