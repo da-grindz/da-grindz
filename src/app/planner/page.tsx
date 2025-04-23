@@ -318,7 +318,7 @@ export default function Planner() {
             <Card className="h-100" style={{ backgroundColor: '#DCE7E2', border: 'none', borderRadius: '12px' }}>
               <Card.Body>
                 <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.2rem' }}>
-                  {view === 'weekly' ? 'Meal Tracker' : 'Tracker'}
+                  {view === 'weekly' ? 'Meal Tracker' : 'Meal Tracker'}
                 </Card.Title>
                 <p style={{ color: '#2D2A26', marginBottom: '0.5rem' }}>
                   Meals Remaining:
