@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
   // for local development
   /// url      = env("DATABASE_URL")
   // for Vercel
@@ -23,13 +23,13 @@ enum Role {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
-  role     Role   @default(USER)
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  password     String
+  role         Role      @default(USER)
   grindzMood   Mood?     @relation(fields: [grindzMoodId], references: [id])
   grindzMoodId Int?
-  allergies Allergy[] @relation("UserAllergies")
+  allergies    Allergy[] @relation("UserAllergies")
 }
 
 enum Condition {
@@ -47,28 +47,72 @@ model Stuff {
   owner     String
 }
 
+enum EateryType {
+  RETAIL_DINING
+  RESIDENTIAL_DINING
+  FOOD_TRUCK
+}
+
+enum EaterySubtype {
+  MEAL_POINTS_ACCEPTED
+  MEAL_POINTS_NOT_ACCEPTED
+}
+
+model Eatery {
+  id       Int           @id @default(autoincrement())
+  keywords String
+  type     EateryType
+  subtype  EaterySubtype
+  name     String        @unique
+  location String
+  room     String?
+  floor    String
+  hours    String
+  phone    String
+  email    String?
+  website  String
+  notes    String?
+  x        Float
+  y        Float
+}
+
+enum VendingType {
+  SNACK
+  BEVERAGE
+}
+
+model VendingMachine {
+  id       Int         @id @default(autoincrement())
+  type     VendingType
+  location String
+  hours    String
+  floor    String
+  x        Float
+  y        Float
+}
+
 model Allergy {
-  id    Int              @id @default(autoincrement())
-  name  String           @unique
-  users User[]           @relation("UserAllergies")
-  items DashboardItem[]  @relation("ItemAllergies")
+  id    Int             @id @default(autoincrement())
+  name  String          @unique
+  users User[]          @relation("UserAllergies")
+  items DashboardItem[] @relation("ItemAllergies")
 }
 
 model Mood {
-  id    Int              @id @default(autoincrement())
-  name  String           @unique
-  users User[]           // Users who selected this mood
-  items DashboardItem[]  // Meals/items associated with this mood
+  id    Int             @id @default(autoincrement())
+  name  String          @unique
+  users User[]          // Users who selected this mood
+  items DashboardItem[] // Meals/items associated with this mood
 }
 
 model DashboardItem {
-  id        Int     @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
   image     String
   alt       String
   source    String
   nutrition String
-  mood      Mood    @relation(fields: [moodId], references: [id])
+  mood      Mood      @relation(fields: [moodId], references: [id])
   moodId    Int
   allergies Allergy[] @relation("ItemAllergies")
 }
