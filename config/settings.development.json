@@ -1,13 +1,1147 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN" },
-    { "email": "john@foo.com", "password": "changeme" }
+    {
+      "email": "admin@foo.com",
+      "password": "changeme",
+      "role": "ADMIN"
+    },
+    {
+      "email": "john@foo.com",
+      "password": "changeme"
+    }
   ],
-
   "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+    {
+      "name": "Basket",
+      "quantity": 3,
+      "owner": "john@foo.com",
+      "condition": "excellent"
+    },
+    {
+      "name": "Bicycle",
+      "quantity": 2,
+      "owner": "john@foo.com",
+      "condition": "poor"
+    },
+    {
+      "name": "Banana",
+      "quantity": 2,
+      "owner": "admin@foo.com",
+      "condition": "good"
+    },
+    {
+      "name": "Boogie Board",
+      "quantity": 2,
+      "owner": "admin@foo.com",
+      "condition": "excellent"
+    }
+  ],
+  "defaultEateries": [
+    {
+      "keywords": "Holoholo Grill coffee",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Holoholo Grill",
+      "location": "Paradise Palms Cafe",
+      "room": null,
+      "floor": "01",
+      "hours": "Mon- Fri: 8 am- 3 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/holoholo-grill",
+      "notes": null,
+      "x": -157.815624631849,
+      "y": 21.3009693089605
+    },
+    {
+      "keywords": "Lasoon vegetarian vegan ",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Lasoon",
+      "location": "Paradise Palms Cafe",
+      "room": null,
+      "floor": "01",
+      "hours": "Mon- Fri: 10 am- 4:30 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/lasoon",
+      "notes": null,
+      "x": -157.815630291245,
+      "y": 21.3010317445515
+    },
+    {
+      "keywords": "L & L Hawaiian Barbecue L&L , L and L LL",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "L&L Hawaiian Barbecue",
+      "location": "Paradise Palms Cafe",
+      "room": null,
+      "floor": "01",
+      "hours": "Mon- Fri: 7 am- 4:30 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/ll-hawaiian-barbecue",
+      "notes": null,
+      "x": -157.815712852499,
+      "y": 21.3010267573219
+    },
+    {
+      "keywords": "Panda Express , vegetarian",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Panda Express",
+      "location": "Paradise Palms Cafe",
+      "room": null,
+      "floor": "01",
+      "hours": "Mon- Fri: 10 am- 4:30 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/panda-express",
+      "notes": null,
+      "x": -157.815561760994,
+      "y": 21.3010316694585
+    },
+    {
+      "keywords": "Dunkin Donuts  coffee  doughnuts",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Dunkin' Donuts",
+      "location": "Paradise Palms Cafe",
+      "room": null,
+      "floor": "01",
+      "hours": "Mon- Fri: 7 am- 4:30 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/dunkin",
+      "notes": null,
+      "x": -157.815725350737,
+      "y": 21.3009733020345
+    },
+    {
+      "keywords": "Bean Counter coffee",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "The Bean Counter",
+      "location": "Business Administration Building",
+      "room": null,
+      "floor": "01",
+      "hours": "Mon- Thu: 7:30 am- 6 pm,\nFri: 7:30 am- 4 pm",
+      "phone": "(808) 956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/the-bean-counter",
+      "notes": null,
+      "x": -157.820102449988,
+      "y": 21.3009289503399
+    },
+    {
+      "keywords": "Subway , vegetarian",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Subway",
+      "location": "Campus Center",
+      "room": "214",
+      "floor": "02",
+      "hours": "Mon- Thu: 8 am- 6 pm,\nFri: 8 am- 5 pm",
+      "phone": "808-942-7688",
+      "email": "\u003CNull\u003E",
+      "website": "https://restaurants.subway.com/united-states/hi/honolulu/2465-campus-rd",
+      "notes": null,
+      "x": -157.819044765102,
+      "y": 21.298835095409
+    },
+    {
+      "keywords": "Jamba Juice ",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_ACCEPTED",
+      "name": "Jamba Juice",
+      "location": "Campus Center",
+      "room": "220",
+      "floor": "02",
+      "hours": "Mon- Fri: 8 am- 4 pm",
+      "phone": "808-956-2188",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/jamba",
+      "notes": "Dining Dollars, Campus Cash, and Meal Plan accepted",
+      "x": -157.818983259431,
+      "y": 21.2984480241452
+    },
+    {
+      "keywords": "Starbucks , coffee",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_ACCEPTED",
+      "name": "Starbucks at Campus Center",
+      "location": "Campus Center",
+      "room": "276",
+      "floor": "02",
+      "hours": "Mon- Thu: 6 am- 10 pm,\nFri: 6 am- 5 pm",
+      "phone": "808-956-6827",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/starbucks-at-campus-center",
+      "notes": "Dining Dollars, Campus Cash, and Meal Plan accepted",
+      "x": -157.818934023448,
+      "y": 21.2986841122917
+    },
+    {
+      "keywords": "Campus Center Food Court , coffee, vegetarian",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_ACCEPTED",
+      "name": "Campus Center Food Court",
+      "location": "Campus Center",
+      "room": "224",
+      "floor": "02",
+      "hours": "Mon- Thu: 7 am- 3 pm,\nFri: 7 am- 2 pm",
+      "phone": "808-956-6557",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/",
+      "notes": "Dining Dollars, Campus Cash, and Meal Plan accepted",
+      "x": -157.81885758406,
+      "y": 21.298323664124
+    },
+    {
+      "keywords": "The Market , convenience store",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_ACCEPTED",
+      "name": "The Market",
+      "location": "Hale Noelani Tower D",
+      "room": "D101",
+      "floor": "01",
+      "hours": "Daily: 3- 11 pm",
+      "phone": "808-956-9667",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/the-market",
+      "notes": "Dining Dollars, Campus Cash, and Meal Plan accepted",
+      "x": -157.813625808045,
+      "y": 21.2936930934528
+    },
+    {
+      "keywords": "Ba-Le , BaLe coffee , vegetarian , vegan ",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_ACCEPTED",
+      "name": "Ba-Le",
+      "location": "Hemenway Hall",
+      "room": "119",
+      "floor": "01",
+      "hours": "Mon- Thu: 10 am- 8 pm,\nFri: 10 am- 9 pm",
+      "phone": "808-956-6462",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/ba-le",
+      "notes": "Dining Dollars, Campus Cash, and Meal Plan accepted",
+      "x": -157.819596263017,
+      "y": 21.2988493435067
+    },
+    {
+      "keywords": "Hale Aloha Cafe  coffee vegetarian vegan",
+      "type": "RESIDENTIAL_DINING",
+      "subtype": "MEAL_POINTS_ACCEPTED",
+      "name": "Hale Aloha Cafe",
+      "location": "Hale Aloha - Cafeteria",
+      "room": null,
+      "floor": "01",
+      "hours": "Mon- Fri: 5- 8 pm,\nSat- Sun: 10:30 am- 1:30 pm",
+      "phone": "808-956-7968",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/hale-aloha-cafe",
+      "notes": "Dining Dollars, Campus Cash, and Meal Plan accepted",
+      "x": -157.813034346041,
+      "y": 21.2943582049323
+    },
+    {
+      "keywords": "Gateway Cafe , coffee vegetarian vegan",
+      "type": "RESIDENTIAL_DINING",
+      "subtype": "MEAL_POINTS_ACCEPTED",
+      "name": "Gateway Cafe",
+      "location": "Gateway House",
+      "room": null,
+      "floor": "01",
+      "hours": "Mon- Thu: 7- 10 am / 11 am- 2 pm/ 5- 7:30 pm,\nFri: 7- 10 am / 11 am- 2 pm",
+      "phone": "808-956-6557",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/gateway-cafe",
+      "notes": "Dining Dollars, Campus Cash, and Meal Plan accepted",
+      "x": -157.814609802788,
+      "y": 21.2958945985468
+    },
+    {
+      "keywords": "Buns Hawaii coffee",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Buns Hawaii",
+      "location": "In front of Burns Hall",
+      "room": null,
+      "floor": "G",
+      "hours": "Mon- Fri: 7:30 am- 3 pm",
+      "phone": "808-990-3200",
+      "email": null,
+      "website": "https://bunshawaii.com/buns-manoa/",
+      "notes": null,
+      "x": -157.814778487019,
+      "y": 21.2968486623352
+    },
+    {
+      "keywords": "B'rito brito burrito Bowls",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_ACCEPTED",
+      "name": "B'rito Bowls",
+      "location": "Campus Center",
+      "room": "105",
+      "floor": "01",
+      "hours": "Mon- Fri: 10 am- 2 pm",
+      "phone": "808-956-6827",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/b'rito",
+      "notes": "Dining Dollars, Campus Cash, and Meal Plan accepted",
+      "x": -157.818627052351,
+      "y": 21.2980430759483
+    },
+    {
+      "keywords": "ding tea ",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_ACCEPTED",
+      "name": "Ding Tea",
+      "location": "Campus Center",
+      "room": "121",
+      "floor": "01",
+      "hours": "Mon- Fri: 10 am- 6 pm",
+      "phone": "808-956-6827",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/ding-tea",
+      "notes": "Dining Dollars, Campus Cash, and Meal Plan accepted",
+      "x": -157.818596157223,
+      "y": 21.2981179864962
+    },
+    {
+      "keywords": "Starbucks , coffee",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_ACCEPTED",
+      "name": "Starbucks at Gateway Cafe",
+      "location": "Gateway House",
+      "room": null,
+      "floor": "01",
+      "hours": "Mon- Fri: 7 am- 9 pm,\nSat- Sun: 9 am- 9 pm",
+      "phone": "808-956-6827",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/-starbucks-at-gateway-cafe",
+      "notes": "Dining Dollars, Campus Cash, and Meal Plan accepted",
+      "x": -157.814640068652,
+      "y": 21.2957570797715
+    },
+    {
+      "keywords": "Holoholo Okazuya Musubi ",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Holoholo Okazuya & Musubi",
+      "location": "Paradise Palms Cafe",
+      "room": null,
+      "floor": "01",
+      "hours": "Mon- Fri: 8 am- 3 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/holoholo-grill",
+      "notes": null,
+      "x": -157.815546112911,
+      "y": 21.3009740856217
+    },
+    {
+      "keywords": "Quick Bites, coffee",
+      "type": "RETAIL_DINING",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Quick Bites",
+      "location": "Campus Center",
+      "room": "220",
+      "floor": "02",
+      "hours": "Mon- Fri: 8 am- 4 pm",
+      "phone": "808-956-6827",
+      "email": "jim.halcombe@sodexo.com",
+      "website": "https://uhm.sodexomyway.com/en-us/locations/quick-bites",
+      "notes": null,
+      "x": -157.818939603427,
+      "y": 21.2985394473651
+    },
+    {
+      "keywords": "Krazy Dogs",
+      "type": "FOOD_TRUCK",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Krazy Dogs (TW)",
+      "location": "Diamond Head-side of Legacy Path",
+      "room": null,
+      "floor": "G",
+      "hours": "Tue, Wed: 10 am- 2 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/krazy-dogs/",
+      "notes": "Food Truck Row",
+      "x": -157.817922952282,
+      "y": 21.2974985424738
+    },
+    {
+      "keywords": "Middle Eats, middle eastern, kebab, hummus",
+      "type": "FOOD_TRUCK",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Middle Eats (TR)",
+      "location": "Diamond Head-side of Legacy Path",
+      "room": null,
+      "floor": "G",
+      "hours": "Tue, Thu: 10 am- 2 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/middle-eats/",
+      "notes": "Food Truck Row",
+      "x": -157.817860624267,
+      "y": 21.2974234625472
+    },
+    {
+      "keywords": "Olays Thai Lao Express coffee tea vegetarian",
+      "type": "FOOD_TRUCK",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Olay's Thai Lao Express (TR)",
+      "location": "Diamond Head-side of Legacy Path",
+      "room": null,
+      "floor": "G",
+      "hours": "Tue, Thu: 10 am- 2 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/olays-thai-lao-express/",
+      "notes": "Food Truck Row",
+      "x": -157.817890651916,
+      "y": 21.2973237923906
+    },
+    {
+      "keywords": "Walking Tacos",
+      "type": "FOOD_TRUCK",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Walking Tacos Hawaii (MTWRF)",
+      "location": "Diamond Head-side of Legacy Path",
+      "room": null,
+      "floor": "G",
+      "hours": "Mon- Fri: 10 am- 2 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/walking-tacos-hawaii/",
+      "notes": "Food Truck Row",
+      "x": -157.818050219348,
+      "y": 21.2973158824295
+    },
+    {
+      "keywords": "Veggi Dogs vegetarian",
+      "type": "FOOD_TRUCK",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Veggi Dogs (M)",
+      "location": "Diamond Head-side of Legacy Path",
+      "room": null,
+      "floor": "G",
+      "hours": "Mon: 10 am- 2 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/veggi-dogs/",
+      "notes": "Food Truck Row",
+      "x": -157.818092868689,
+      "y": 21.2973996720353
+    },
+    {
+      "keywords": "Saap Saap HI tea",
+      "type": "FOOD_TRUCK",
+      "subtype": "MEAL_POINTS_NOT_ACCEPTED",
+      "name": "Saap Saap HI (MW)",
+      "location": "Diamond Head-side of Legacy Path",
+      "room": null,
+      "floor": "G",
+      "hours": "Mon, Wed: 10 am- 2 pm",
+      "phone": "808-956-4798",
+      "email": "food@hawaii.edu",
+      "website": "https://manoa.hawaii.edu/food/saap-saap-hi/",
+      "notes": "Food Truck Row",
+      "x": -157.81802907614,
+      "y": 21.2974949388634
+    }
+  ],
+  "defaultVendingMachines": [
+    {
+      "type": "BEVERAGE",
+      "location": "Administrative Services Building 1",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.819340739033,
+      "y": 21.2980286701486
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Architecture Building",
+      "hours": "During building hours",
+      "floor": "03",
+      "x": -157.820533195504,
+      "y": 21.2997382189903
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Art Building",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817746148545,
+      "y": 21.2989498111202
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Bilger Addition",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.816592026384,
+      "y": 21.2990783430074
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Campus Center",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.818546016406,
+      "y": 21.2982405125679
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hemenway Hall",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.819840716279,
+      "y": 21.2986144261315
+    },
+    {
+      "type": "SNACK",
+      "location": "Hemenway Hall",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.819843046155,
+      "y": 21.2986780673988
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hemenway Hall",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.819842553683,
+      "y": 21.2986646221749
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hemenway Hall",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.819842050044,
+      "y": 21.2986508508921
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hemenway Hall",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.819841571557,
+      "y": 21.298637792243
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hemenway Hall",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.819841146241,
+      "y": 21.2986261805408
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Holmes Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.81587744044,
+      "y": 21.2970181426642
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Kuykendall Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817920120627,
+      "y": 21.2984148759716
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Kuykendall Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817907753404,
+      "y": 21.2984152211531
+    },
+    {
+      "type": "SNACK",
+      "location": "Kuykendall Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817877864183,
+      "y": 21.2984156620775
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Moore Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.815099205578,
+      "y": 21.3010007943623
+    },
+    {
+      "type": "SNACK",
+      "location": "Moore Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.815070611464,
+      "y": 21.3009994253382
+    },
+    {
+      "type": "SNACK",
+      "location": "Pacific Ocean Science & Technology",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.816449033418,
+      "y": 21.2974091346509
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Pacific Ocean Science & Technology",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.816448669468,
+      "y": 21.2973987684884
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Physical Science Building",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.815998469837,
+      "y": 21.2995030906124
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Physical Science Building",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.815998461955,
+      "y": 21.2995094227779
+    },
+    {
+      "type": "SNACK",
+      "location": "Queen Lili'Uokalani Center for Student Services",
+      "hours": "During building hours",
+      "floor": "0",
+      "x": -157.818383777351,
+      "y": 21.3005301598505
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Queen Lili'Uokalani Center for Student Services",
+      "hours": "During building hours",
+      "floor": "0",
+      "x": -157.818373169018,
+      "y": 21.3005303398754
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Saunders Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.819032838685,
+      "y": 21.3007832789665
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Business Administration Building - Shidler",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.820432525254,
+      "y": 21.3009488990938
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Business Administration Building - Shidler",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.820432993528,
+      "y": 21.3009600989887
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Business Administration Building - Shidler",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.820412937107,
+      "y": 21.3009454443125
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Business Administration Building - Shidler",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.820403017612,
+      "y": 21.3009458085452
+    },
+    {
+      "type": "SNACK",
+      "location": "Webster Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817606434853,
+      "y": 21.3008919365846
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Webster Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817606528164,
+      "y": 21.3008991061043
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Keller Kiosk",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.816180203233,
+      "y": 21.2997159738472
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Keller Kiosk",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.816161496736,
+      "y": 21.2997276043977
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Keller Kiosk",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.816204195948,
+      "y": 21.2997376501075
+    },
+    {
+      "type": "SNACK",
+      "location": "Keller Kiosk",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.816184743058,
+      "y": 21.2997558378136
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Pacific Ocean Science & Technology",
+      "hours": "During building hours",
+      "floor": "02",
+      "x": -157.81644784396,
+      "y": 21.2974240448105
+    },
+    {
+      "type": "SNACK",
+      "location": "Business Administration Building - Shidler",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.820366355911,
+      "y": 21.3009895382782
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Kuykendall Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817214987775,
+      "y": 21.2981030122582
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Physical Education/Athletic Complex",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.818271385181,
+      "y": 21.2947482613294
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Army ROTC Building",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.81651974114,
+      "y": 21.2920976055537
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Physical Education/Athletic Complex",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.818264126642,
+      "y": 21.2947410253623
+    },
+    {
+      "type": "SNACK",
+      "location": "Physical Education/Athletic Complex",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.818256932748,
+      "y": 21.2947337289518
+    },
+    {
+      "type": "SNACK",
+      "location": "Biomedical Sciences Building",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.81445512508,
+      "y": 21.3032225585504
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Biomedical Sciences Building",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.814454629163,
+      "y": 21.303211470608
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Biomedical Sciences Building",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.814454336609,
+      "y": 21.303201146074
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Frear Hall",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.813922170996,
+      "y": 21.2954679040436
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Gateway House",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.814707180967,
+      "y": 21.2959299748481
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Anuenue",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.818727286486,
+      "y": 21.2924517379291
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Aloha - `Ilima Tower",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.812686567248,
+      "y": 21.2946747649336
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Laulima",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.813315922839,
+      "y": 21.3009454099148
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Kahawai",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.813493008283,
+      "y": 21.3004980496423
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Aloha - Lehua Tower",
+      "hours": "During building hours",
+      "floor": "13",
+      "x": -157.813373775124,
+      "y": 21.2947299130744
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Aloha - Lokelani Tower",
+      "hours": "During building hours",
+      "floor": "13",
+      "x": -157.813313493555,
+      "y": 21.2939161375065
+    },
+    {
+      "type": "SNACK",
+      "location": "Hale Mānoa",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.814597334662,
+      "y": 21.2982707799999
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Mānoa",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.81456887391,
+      "y": 21.2982687770099
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Aloha - Mokihana Tower",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.812669697876,
+      "y": 21.2940688739512
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Wainani - F Tower",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.814396237182,
+      "y": 21.2928900497495
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Wainani - F Tower",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.814402656113,
+      "y": 21.2928949312765
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Wainani - G Tower",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.814287080381,
+      "y": 21.2924528599985
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Jefferson Hall",
+      "hours": "During building hours",
+      "floor": "0",
+      "x": -157.814116899664,
+      "y": 21.2991920099855
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Johnson Hall A",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.816465077155,
+      "y": 21.2962188854429
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Johnson Hall B",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.815770753149,
+      "y": 21.2960844431187
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Duke Kahanamoku Aquatic Complex",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817956511507,
+      "y": 21.293284147331
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Law School",
+      "hours": "24/7",
+      "floor": "02",
+      "x": -157.818989310468,
+      "y": 21.2965720111628
+    },
+    {
+      "type": "SNACK",
+      "location": "Law Library",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817864279754,
+      "y": 21.2963322873301
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Law Library",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.81787869741,
+      "y": 21.2963336829859
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Lincoln Hall",
+      "hours": "During building hours",
+      "floor": "0",
+      "x": -157.814258960201,
+      "y": 21.3004914012912
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Music Complex",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.82045472301,
+      "y": 21.2956532780102
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "John A. Burns Hall",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.814593184078,
+      "y": 21.2967384323591
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Hale Kuahine",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.813689569902,
+      "y": 21.3000394408743
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Warrior Recreation Center",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.81883893346,
+      "y": 21.2988648161071
+    },
+    {
+      "type": "SNACK",
+      "location": "Art Building",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817745224816,
+      "y": 21.2989228249928
+    },
+    {
+      "type": "SNACK",
+      "location": "Information Technology Center",
+      "hours": "During building hours",
+      "floor": "04",
+      "x": -157.81645115507,
+      "y": 21.2988647786168
+    },
+    {
+      "type": "SNACK",
+      "location": "Campus Services",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.814217532561,
+      "y": 21.3023187368444
+    },
+    {
+      "type": "SNACK",
+      "location": "Watanabe Hall",
+      "hours": "During building hours",
+      "floor": "04",
+      "x": -157.815913292505,
+      "y": 21.298284926776
+    },
+    {
+      "type": "SNACK",
+      "location": "John A. Burns Hall",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.814602454571,
+      "y": 21.2967381779397
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Campus Services",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.81420957733,
+      "y": 21.3023135745355
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Keller Kiosk",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.816173514755,
+      "y": 21.2997159873147
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Keller Kiosk",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.81620421301,
+      "y": 21.2997448547692
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Kau'Iokahaloa Nui - Manager's Office",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.807088587375,
+      "y": 21.3085195351025
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Paradise Palms Cafe",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.815574498449,
+      "y": 21.3009363874214
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Paradise Palms Cafe",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.815568369567,
+      "y": 21.3009428167431
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "St. John Plant Science Laboratory 1",
+      "hours": "During building hours",
+      "floor": "0",
+      "x": -157.815196687936,
+      "y": 21.3017942040702
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Wa`ahila Faculty Housing - Building D",
+      "hours": "During building hours",
+      "floor": "01",
+      "x": -157.811938077831,
+      "y": 21.2961014535947
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Watanabe Hall",
+      "hours": "During building hours",
+      "floor": "04",
+      "x": -157.815922602648,
+      "y": 21.2982846389104
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Kuykendall Hall",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.817896616176,
+      "y": 21.2984153590305
+    },
+    {
+      "type": "BEVERAGE",
+      "location": "Campus Center",
+      "hours": "24/7",
+      "floor": "01",
+      "x": -157.818537498624,
+      "y": 21.2982336085293
+    }
   ]
 }
