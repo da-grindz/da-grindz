@@ -132,6 +132,15 @@ footer, footer a {
   background: #BFD0C9;
 }
 
+#signin-page .card-body {
+  background: #DCE7E2;
+}
+
+#signin-page .card {
+  background: #DCE7E2;
+  outline: none;
+}
+
 #signin-page a {
   color: #00684A;
   text-decoration: underline;
