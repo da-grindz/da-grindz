@@ -1,4 +1,5 @@
-import { Col, Container, Row, Button } from 'react-bootstrap';
+import { Col, Container, Row, Button, Image } from 'react-bootstrap';
+import { ArrowRight } from 'react-bootstrap-icons';
 
 /** The Home page. */
 const Home = () => (
@@ -32,7 +33,7 @@ const Home = () => (
       <Container className="py-3 landingcontainer">
         <Row className="align-middle">
           <Col>
-            <h3 className="text-center">Key Features</h3>
+            <h2 className="text-center">Key Features</h2>
             <ul>
               <li>
                 Personalized meal recommendations based on allergies, dietary preferences, and nutritional goals.
@@ -54,11 +55,38 @@ const Home = () => (
       <Container className="pt-3 pb-5 landingcontainer">
         <Row className="align-middle text-center">
           <Col>
-            <h3 id="getstarted">Lets Get Started!</h3>
-            <p>
-              To get started, please sign up and create an account.
-            </p>
-            <Button href="/auth/signup" className="mx-2 landingbutton">Sign Up</Button>
+            <h2 id="getstarted">Lets Get Started!</h2>
+            <Container>
+              <p className="pr-3">
+                <ArrowRight size={25} className="mx-2" />
+                To get started, please sign up and create an account.
+              </p>
+              <Button href="/auth/signup" className="mx-2 landingbutton">Sign Up</Button>
+            </Container>
+            <Container className="pt-5">
+              <p className="pr-3">
+                <ArrowRight size={25} className="mx-2" />
+                Now go to your dashboard.
+              </p>
+              <Image
+                src="/dashboardpage.png"
+                sizes="(100vw)"
+                className="img-fluid py-3"
+              />
+            </Container>
+            <Container className="pt-5">
+              <p className="pr-3">
+                <ArrowRight size={25} className="mx-2" />
+                Then fill out your preferences for allergies and Grindz Mood:
+              </p>
+              <Button href="/allergies" className="mx-2 landingbutton">Allergies</Button>
+              <Image
+                src="/allergiespage.png"
+                sizes="(100vw)"
+                className="img-fluid py-3"
+              />
+              <Button href="/grindz-mood" className="mx-2 landingbutton">Gridz Mood</Button>
+            </Container>
           </Col>
         </Row>
       </Container>
