@@ -49,6 +49,9 @@ const NavBar: React.FC = () => {
               <NavDropdown.Item href="/preferences" active={pathName === '/preferences'}>
                 Preferences
               </NavDropdown.Item>
+              <NavDropdown.Item href="/vendormenu" active={pathName === '/vendormenu'}>
+                Vendor Menu
+              </NavDropdown.Item>
             </NavDropdown>
 
             {/* Conditional Auth Links */}
