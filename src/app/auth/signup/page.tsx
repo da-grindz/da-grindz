@@ -44,15 +44,17 @@ const SignUp = () => {
   };
 
   return (
-    <main>
+    <main id="signup-page">
       <Container>
         <Row className="justify-content-center">
           <Col xs={5}>
-            <h1 className="text-center">Sign Up</h1>
             <Card>
+              <Card.Header>
+                <h1 className="text-center">Sign Up</h1>
+              </Card.Header>
               <Card.Body>
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                  <Form.Group className="form-group">
+                  <Form.Group className="pt-2 form-group">
                     <Form.Label>Email</Form.Label>
                     <input
                       type="text"
@@ -62,7 +64,7 @@ const SignUp = () => {
                     <div className="invalid-feedback">{errors.email?.message}</div>
                   </Form.Group>
 
-                  <Form.Group className="form-group">
+                  <Form.Group className="pt-2 form-group">
                     <Form.Label>Password</Form.Label>
                     <input
                       type="password"
@@ -71,7 +73,7 @@ const SignUp = () => {
                     />
                     <div className="invalid-feedback">{errors.password?.message}</div>
                   </Form.Group>
-                  <Form.Group className="form-group">
+                  <Form.Group className="pt-2 form-group">
                     <Form.Label>Confirm Password</Form.Label>
                     <input
                       type="password"
@@ -88,7 +90,7 @@ const SignUp = () => {
                         </Button>
                       </Col>
                       <Col>
-                        <Button type="button" onClick={() => reset()} className="btn btn-warning float-right">
+                        <Button type="button" onClick={() => reset()} className="btn float-right">
                           Reset
                         </Button>
                       </Col>
@@ -97,8 +99,14 @@ const SignUp = () => {
                 </Form>
               </Card.Body>
               <Card.Footer>
-                Already have an account?
-                <a href="/auth/signin">Sign in</a>
+                <Row className="justify-content-center">
+                  <Col xs={6}>
+                    Don&apos;t have an account?
+                  </Col>
+                  <Col xs={6} className="text-end">
+                    <a href="/auth/signup">Sign up!</a>
+                  </Col>
+                </Row>
               </Card.Footer>
             </Card>
           </Col>

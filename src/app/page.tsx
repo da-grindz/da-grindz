@@ -1,26 +1,35 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 
 /** The Home page. */
 const Home = () => (
   <main className="home-page">
-    <Container id="landing-page" fluid className="py-3">
-      <Row className="align-middle text-center">
-        <Col>
-          <h1>Welcome to Da Grindz</h1>
-        </Col>
-      </Row>
-      <Container className="py-3">
+    <Container id="landing-page" fluid className="py-5">
+      <Container className="landingcontainer">
         <Row className="align-middle text-center">
           <Col>
-            <p>
-              Da Grindz is a nutrition-focused web application designed for the students and staff of UH Mānoa.
-              It combines local campus dining information with personalized meal planning and nutritional tracking
-              to support healthier eating habits and more mindful food choices.
-            </p>
+            <h1>Welcome to Da Grindz</h1>
           </Col>
         </Row>
+        <Container className="py-3">
+          <Row className="align-middle text-center">
+            <Col>
+              <p>
+                Da Grindz is a nutrition-focused web application designed for the students and staff of UH Mānoa.
+                It combines local campus dining information with personalized meal planning and nutritional tracking
+                to support healthier eating habits and more mindful food choices.
+              </p>
+            </Col>
+          </Row>
+          <Row className="align-middle text-center">
+            <Col>
+              <Button href="#getstarted" className="mx-2 landingbutton">Get Started</Button>
+              <Button href="/auth/signin" className="mx-2 landingbutton">Log In</Button>
+              <Button href="/dashboard" className="mx-2 landingbutton">Dashboard</Button>
+            </Col>
+          </Row>
+        </Container>
       </Container>
-      <Container className="py-3">
+      <Container className="py-3 landingcontainer">
         <Row className="align-middle">
           <Col>
             <h3 className="text-center">Key Features</h3>
@@ -41,12 +50,15 @@ const Home = () => (
             </ul>
           </Col>
         </Row>
+      </Container>
+      <Container className="pt-3 pb-5 landingcontainer">
         <Row className="align-middle text-center">
           <Col>
-            <h3 className="">Get Started!</h3>
+            <h3 id="getstarted">Lets Get Started!</h3>
             <p>
-              To get started, please sign up or log in to your account.
+              To get started, please sign up and create an account.
             </p>
+            <Button href="/auth/signup" className="mx-2 landingbutton">Sign Up</Button>
           </Col>
         </Row>
       </Container>

@@ -27,19 +27,41 @@ body {
   background: url("/bg.jpg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   color: #8a3d07;
+  display: flex;
+  flex-direction: column;
+  background-attachment: scroll;
 }
 
 #landing-page {
+  flex: 1;
   max-width: 700px;
   margin: 0 auto;
 }
 #landing-page h1 {
   color: #ff7c01;
+  font-size: 3.3rem;
+  font-weight: 600;
 }
 #landing-page h3 {
-  color: #de6b00;
+  color: #ff7c01;
+}
+
+.landingcontainer {
+  background-color: rgba(255, 255, 255, 0.712);
+  padding: 20px;
+  margin-bottom: 40px;
+  border-radius: 10px;
+}
+
+.landingbutton {
+  background-color: #2b6555 !important;
+  color: #FFF !important;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
 }
 
 footer, footer a {
@@ -59,6 +81,7 @@ footer, footer a {
 #grindz-block {
   background: #DCE7E2;
   color: #00684A;
+  border-radius: 10px;
 }
 
 #grindz-block button {
@@ -85,6 +108,7 @@ footer, footer a {
 
 #mood-block {
   min-height: 400px;
+  border-radius: 10px;
 }
 
 #vegetarian-vibes {
@@ -95,4 +119,43 @@ footer, footer a {
 #vegetarian-vibes-card-body {
   background: #DCE7E2;
   color: #00684A;
+}
+
+#signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
+  background-color: #2b6555 !important;
+  color: #FFF !important;
+  border: white !important;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+#signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
+  background: #BFD0C9;
+}
+
+#signin-page .card-body, #change-password-page .card-body, #signup-page .card-body {
+  background: #DCE7E2;
+}
+
+#signin-page .card, #change-password-page .card, #signup-page .card {
+  background: #DCE7E2;
+}
+
+#signin-page a, #change-password-page a, #signup-page a {
+  color: #00684A;
+  text-decoration: underline;
+}
+
+#login {
+  background: #DCE7E2;
+  border-radius: 10px;
+  padding-bottom: 50px;
+}
+
+#signin-page, #change-password-page, #signup-page, #signout-page {
+  padding: 20px;
+  background: white;
+  color: #00684A;
+  min-height: 75%;
 }

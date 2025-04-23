@@ -52,15 +52,17 @@ const ChangePassword = () => {
   }
 
   return (
-    <main>
+    <main id="change-password-page">
       <Container>
         <Row className="justify-content-center">
           <Col xs={5}>
-            <h1 className="text-center">Change Password</h1>
             <Card>
+              <Card.Header>
+                <h1 className="text-center pt-2">Change Password</h1>
+              </Card.Header>
               <Card.Body>
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                  <Form.Group className="form-group">
+                  <Form.Group className="pt-2 form-group">
                     <Form.Label>Old Passord</Form.Label>
                     <input
                       type="password"
@@ -70,7 +72,7 @@ const ChangePassword = () => {
                     <div className="invalid-feedback">{errors.oldpassword?.message}</div>
                   </Form.Group>
 
-                  <Form.Group className="form-group">
+                  <Form.Group className="pt-2 form-group">
                     <Form.Label>New Password</Form.Label>
                     <input
                       type="password"
@@ -79,7 +81,7 @@ const ChangePassword = () => {
                     />
                     <div className="invalid-feedback">{errors.password?.message}</div>
                   </Form.Group>
-                  <Form.Group className="form-group">
+                  <Form.Group className="pt-2 form-group">
                     <Form.Label>Confirm Password</Form.Label>
                     <input
                       type="password"
@@ -90,13 +92,13 @@ const ChangePassword = () => {
                   </Form.Group>
                   <Form.Group className="form-group py-3">
                     <Row>
-                      <Col>
-                        <Button type="submit" className="btn btn-primary">
+                      <Col xs={6}>
+                        <Button type="submit">
                           Change
                         </Button>
                       </Col>
-                      <Col>
-                        <Button type="button" onClick={() => reset()} className="btn btn-warning float-right">
+                      <Col xs={6}>
+                        <Button type="button" onClick={() => reset()} className="float-right">
                           Reset
                         </Button>
                       </Col>
