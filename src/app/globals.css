@@ -40,6 +40,8 @@ body {
 }
 #landing-page h1 {
   color: #ff7c01;
+  font-size: 3.3rem;
+  font-weight: 600;
 }
 #landing-page h3 {
   color: #de6b00;
