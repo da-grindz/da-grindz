@@ -32,7 +32,7 @@ const SignIn = () => {
             <Card>
               <CardHeader>
                 <h1 className="text-center pt-2">Sign In</h1>
-                <h3 className="text-center">Welcome back!</h3>
+                <h4 className="text-center">Welcome back!</h4>
               </CardHeader>
               <Card.Body>
                 <Form method="post" onSubmit={handleSubmit}>
