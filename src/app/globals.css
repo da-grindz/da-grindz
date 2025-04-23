@@ -128,6 +128,7 @@ footer, footer a {
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 5px;
+}
 
 #signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
   background: #BFD0C9;
