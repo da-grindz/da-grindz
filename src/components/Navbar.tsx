@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { BoxArrowRight, Lock, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
+import Image from 'next/image';
 
 const NavBar: React.FC = () => {
   const { data: session } = useSession();
@@ -15,11 +16,20 @@ const NavBar: React.FC = () => {
   const pathName = usePathname();
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className="fw-bold">
       <Container>
         {/* Logo & Brand */}
         <Navbar.Brand href="/" className="d-flex align-items-center">
-          Da-Grindz
+        <Image
+          src="/bone-apple-teeth.jpg"
+          alt="Logo"
+          width={30}
+          height={30}
+          className="me-2 rounded-circle"
+          style={{ height: 'auto' }}
+          priority
+        />
+          Da Grindz
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
