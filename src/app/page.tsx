@@ -4,6 +4,7 @@ import { ArrowRight } from 'react-bootstrap-icons';
 /** The Home page. */
 const Home = () => (
   <main className="home-page">
+    {/* Welcome Section */}
     <Container id="welcome">
       <Container id="landing-page" fluid className="py-5">
         <Container className="landingcontainer">
@@ -26,7 +27,7 @@ const Home = () => (
               <Col>
                 <Button href="#getstarted" className="mx-2 landingbutton">Get Started</Button>
                 <Button href="/auth/signin" className="mx-2 landingbutton">Log In</Button>
-                <Button href="/dashboard" className="mx-2 landingbutton">Dashboard</Button>
+                <Button href="/Dashboard" className="mx-2 landingbutton">Dashboard</Button>
               </Col>
             </Row>
           </Container>
@@ -56,8 +57,8 @@ const Home = () => (
       </Container>
     </Container>
 
+    {/* User Guide Section */}
     <Container id="landing-page" fluid className="py-5">
-
       <Container className="pt-3 pb-5 landingcontainer">
         <Row className="align-middle text-center">
           <Col>
@@ -74,10 +75,11 @@ const Home = () => (
                 <ArrowRight size={25} className="mx-2" />
                 Now go to your dashboard.
               </p>
+              <Button href="/dashboard" className="mx-2 landingbutton">Dashboard</Button>
               <Image
                 src="/dashboardpage.png"
                 sizes="(100vw)"
-                className="img-fluid pb-3"
+                className="img-fluid py-3"
               />
             </Container>
             <Container className="pt-5">
@@ -91,7 +93,7 @@ const Home = () => (
                 sizes="(100vw)"
                 className="img-fluid py-3"
               />
-              <Button href="/grindz-mood" className="mx-2 landingbutton">Gridz Mood</Button>
+              <Button href="/grindz-mood" className="mx-2 landingbutton">Grindz Mood</Button>
               <Image
                 src="/grindzmoodpage.png"
                 sizes="(100vw)"
@@ -103,11 +105,13 @@ const Home = () => (
                 <ArrowRight size={25} className="mx-2" />
                 Now you can start filling out your planner and looking at the vendor menus!
               </p>
+              <Button href="/planner" className="mx-2 landingbutton">Planner</Button>
               <Image
-                src="/home.png"
+                src="/plannerpage.png"
                 sizes="(100vw)"
                 className="img-fluid py-3"
               />
+              <Button href="/vendormenu" className="mx-2 landingbutton">Vendor Menu</Button>
             </Container>
           </Col>
         </Row>
