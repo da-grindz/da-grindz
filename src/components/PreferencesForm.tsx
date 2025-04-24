@@ -6,13 +6,28 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import swal from 'sweetalert';
 import { redirect } from 'next/navigation';
-import { addStuff } from '@/lib/dbActions';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { AddStuffSchema } from '@/lib/validationSchemas';
+import { PreferencesSchema } from '@/lib/validationSchemas';
+import { addPreferences } from '@/lib/dbActions';
 
-const onSubmit = async (data: { name: string; quantity: number; owner: string; condition: string }) => {
-  // console.log(`onSubmit data: ${JSON.stringify(data, null, 2)}`);
-  await addStuff(data);
+const allergiesList = [
+  'Peanuts',
+  'Tree Nuts',
+  'Milk',
+  'Fish',
+  'Shellfish',
+  'Wheat',
+  'Gluten',
+  'Sesame',
+  'Mustard',
+];
+
+const onSubmit = async (data: { allergies?: (string | undefined)[]; mood: string; owner: string }) => {
+  const sanitizedData = {
+    ...data,
+    allergies: (data.allergies || []).filter((allergy): allergy is string => !!allergy),
+  };
+  await addPreferences(sanitizedData);
   swal('Success', 'Your item has been added', 'success', {
     timer: 2000,
   });
@@ -20,7 +35,6 @@ const onSubmit = async (data: { name: string; quantity: number; owner: string; c
 
 const PreferencesForm: React.FC = () => {
   const { data: session, status } = useSession();
-  // console.log('AddStuffForm', status, session);
   const currentUser = session?.user?.email || '';
   const {
     register,
@@ -28,7 +42,7 @@ const PreferencesForm: React.FC = () => {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(AddStuffSchema),
+    resolver: yupResolver(PreferencesSchema),
   });
   if (status === 'loading') {
     return <LoadingSpinner />;
@@ -49,15 +63,16 @@ const PreferencesForm: React.FC = () => {
             </Card.Header>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
+                {/* Allergies */}
                 <Form.Group>
                   <Form.Label>Allergies</Form.Label>
                   <div>
-                    {['peanuts', 'shellfish', 'dairy', 'gluten', 'soy'].map((item) => (
+                    {allergiesList.map((allergy) => (
                       <Form.Check
-                        key={item}
+                        key={allergy}
                         type="checkbox"
-                        label={item.charAt(0).toUpperCase() + item.slice(1)}
-                        value={item}
+                        label={allergy}
+                        value={allergy}
                         {...register('allergies')}
                       />
                     ))}
@@ -65,12 +80,12 @@ const PreferencesForm: React.FC = () => {
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Grindz Mood</Form.Label>
-                  <select {...register('')} className={`form-control ${errors. ? 'is-invalid' : ''}`}>
+                  <select {...register('mood')} className={`form-control ${errors.mood ? 'is-invalid' : ''}`}>
                     <option id="">Vegetarian Vibes</option>
                     <option id="">Quick Bento Run</option>
                     <option id="">Grindz For Gainz</option>
                   </select>
-                  <div className="invalid-feedback">{errors.condition?.message}</div>
+                  <div className="invalid-feedback">{errors.mood?.message}</div>
                 </Form.Group>
                 <input type="hidden" {...register('owner')} value={currentUser} />
                 <Form.Group className="form-group">
