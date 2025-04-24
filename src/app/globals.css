@@ -74,6 +74,10 @@ body {
   border-radius: 5px;
 }
 
+#landing-page a {
+  color: #2b6555;
+}
+
 footer, footer a {
   color: var(--nat-navbar-text-color);
 }
