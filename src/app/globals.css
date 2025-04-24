@@ -126,13 +126,18 @@ footer, footer a {
 }
 
 #vegetarian-vibes {
-  background: #BFD0C9;
+  background: #DCE7E2;
   color: #00684A;
 }
 
-#vegetarian-vibes-card-body {
-  background: #DCE7E2;
-  color: #00684A;
+#quick-bento-run {
+  background: #FFF9E5;
+  color: #B03A00;
+}
+
+#grindz-for-gains {
+  background: #F5EEE6;
+  color: #6B3E26;
 }
 
 #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
