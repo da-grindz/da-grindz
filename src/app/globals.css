@@ -24,14 +24,10 @@ body {
 }
 
 .home-page {
-  background: url("/bg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: repeat-y;
+  background: #BFD0C9;
   color: #8a3d07;
   display: flex;
   flex-direction: column;
-  background-attachment: scroll;
 }
 
 #landing-page {
@@ -39,17 +35,31 @@ body {
   max-width: 700px;
   margin: 0 auto;
 }
+
+#welcome {
+  background: url("/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 100%;
+  margin: 0;
+  padding: 50px 0;
+  position: relative;
+}
+
 #landing-page h1 {
   color: #ff7c01;
   font-size: 3.3rem;
   font-weight: 600;
 }
-#landing-page h3 {
+#landing-page h2 {
   color: #ff7c01;
+  font-size: 2.3rem;
+  padding-bottom: 10px;
 }
 
 .landingcontainer {
-  background-color: rgba(255, 255, 255, 0.712);
+  background-color: rgba(255, 255, 255, 0.778);
   padding: 20px;
   margin-bottom: 40px;
   border-radius: 10px;
