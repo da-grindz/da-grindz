@@ -92,3 +92,35 @@ export async function changePassword(credentials: { email: string; password: str
     },
   });
 }
+
+/**
+ * Adds or updates a user's preferences: allergies (many-to-many) and grindz mood (one-to-many).
+ * @param preferences, an object with the following properties: owner (email), allergies array of names, and mood name.
+ */
+export async function addPreferences(preferences: { owner: string; allergies: string[]; mood: string }) {
+  const { owner, allergies, mood } = preferences;
+
+  try {
+    // Update the user's preferences
+    await prisma.user.update({
+      where: { email: owner },
+      data: {
+        allergies: {
+          connectOrCreate: allergies.map((name) => ({
+            where: { name }, // Check if the allergy exists
+            create: { name }, // Create the allergy if it doesn't exist
+          })),
+        },
+        grindzMood: {
+          connect: { name: mood }, // Connect the mood by name
+        },
+      },
+    });
+
+    // Redirect to the dashboard after successful update
+    redirect('/dashboard');
+  } catch (error) {
+    console.error('Error updating preferences:', error);
+    throw new Error('Failed to update preferences. Please try again.');
+  }
+}

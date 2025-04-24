@@ -7,7 +7,7 @@ import { TbBottleFilled } from 'react-icons/tb';
 import { FaShrimp } from 'react-icons/fa6';
 
 /** The Allergy page. */
-const Allergy = () => (
+const AllergyPage = () => (
   <Container id="allergy-page" fluid className="py-3">
     <Container id="allergy-banner" className="p-4">
       <Row className="align-middle text-center">
@@ -106,4 +106,4 @@ const Allergy = () => (
   </Container>
 );
 
-export default Allergy;
+export default AllergyPage;

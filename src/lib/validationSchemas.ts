@@ -14,3 +14,9 @@ export const EditStuffSchema = Yup.object({
   condition: Yup.string().oneOf(['excellent', 'good', 'fair', 'poor']).required(),
   owner: Yup.string().required(),
 });
+
+export const PreferencesSchema = Yup.object({
+  allergies: Yup.array().of(Yup.string()).min(0, 'Select your allergies.'),
+  mood: Yup.string().required('Choose your mood'),
+  owner: Yup.string().email().required('Owner email is required'),
+});
