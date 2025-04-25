@@ -65,20 +65,20 @@ const PreferencesForm: React.FC = () => {
   }
 
   return (
-    <Container className="py-3">
+    <Container id="preference-page" className="mt-5 py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Card>
             <Card.Header>
               <Col className="text-center">
-                <h2>TESTING</h2>
+                <h1 className="pt-2">Preferences Editor</h1>
               </Col>
             </Card.Header>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
                 {/* Allergies */}
                 <Form.Group>
-                  <Form.Label>Allergies</Form.Label>
+                  <Form.Label className="pt-1">Allergies</Form.Label>
                   <div>
                     {allergiesList.map((allergy) => (
                       <Form.Check
@@ -92,7 +92,7 @@ const PreferencesForm: React.FC = () => {
                   </div>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Grindz Mood</Form.Label>
+                  <Form.Label className="pt-2">Grindz Mood</Form.Label>
                   <select {...register('mood')} className={`form-control ${errors.mood ? 'is-invalid' : ''}`}>
                     <option value="">Select a mood</option>
                     <option value="Vegetarian Vibes">Vegetarian Vibes</option>

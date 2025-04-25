@@ -5,7 +5,8 @@ import { loggedInProtectedPage } from '@/lib/page-protection';
 import { prisma } from '@/lib/prisma';
 import PreferencesForm from '@/components/PreferencesForm';
 
-export default async function EditAllergiesPage() {
+/* This page is for editing the user's allergies and grindz mood. */
+export default async function EditPreferencesPage() {
   // Protect the page, only logged-in users can access it.
   const session = await getServerSession(authOptions);
   loggedInProtectedPage(
