@@ -23,14 +23,25 @@ const allergiesList = [
 ];
 
 const onSubmit = async (data: { allergies?: (string | undefined)[]; mood: string; owner: string }) => {
-  const sanitizedData = {
-    ...data,
-    allergies: (data.allergies || []).filter((allergy): allergy is string => !!allergy),
-  };
-  await addPreferences(sanitizedData);
-  swal('Success', 'Your item has been added', 'success', {
-    timer: 2000,
-  });
+  try {
+    console.log('Raw form data:', data);
+
+    const sanitizedData = {
+      ...data,
+      allergies: (data.allergies || []).filter((allergy): allergy is string => !!allergy),
+    };
+
+    console.log('Sanitized data:', sanitizedData);
+
+    await addPreferences(sanitizedData);
+
+    swal('Success', 'Your preferences have been updated', 'success', {
+      timer: 2000,
+    });
+  } catch (error) {
+    console.error('Error during form submission:', error);
+    swal('Error', 'Failed to update preferences. Please try again.', 'error');
+  }
 };
 
 const PreferencesForm: React.FC = () => {
@@ -44,9 +55,11 @@ const PreferencesForm: React.FC = () => {
   } = useForm({
     resolver: yupResolver(PreferencesSchema),
   });
+
   if (status === 'loading') {
     return <LoadingSpinner />;
   }
+
   if (status === 'unauthenticated') {
     redirect('/auth/signin');
   }
@@ -81,9 +94,10 @@ const PreferencesForm: React.FC = () => {
                 <Form.Group>
                   <Form.Label>Grindz Mood</Form.Label>
                   <select {...register('mood')} className={`form-control ${errors.mood ? 'is-invalid' : ''}`}>
-                    <option id="">Vegetarian Vibes</option>
-                    <option id="">Quick Bento Run</option>
-                    <option id="">Grindz For Gainz</option>
+                    <option value="">Select a mood</option>
+                    <option value="Vegetarian Vibes">Vegetarian Vibes</option>
+                    <option value="Quick Bento Run">Quick Bento Run</option>
+                    <option value="Grindz For Gainz">Grindz For Gainz</option>
                   </select>
                   <div className="invalid-feedback">{errors.mood?.message}</div>
                 </Form.Group>
