@@ -43,6 +43,7 @@ async function main() {
     });
   }
 
+  // Eateries
   for (const eatery of config.defaultEateries) {
     console.log(`  Adding eatery: ${eatery.name}`);
     // eslint-disable-next-line no-await-in-loop

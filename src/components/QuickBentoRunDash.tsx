@@ -1,11 +1,11 @@
 import { prisma } from '@/lib/prisma';
-import VegetarianVibesGrid from '@/components/VegetarianVibesGrid';
+import QuickBentoRunGrid from '@/components/QuickBentoRunGrid';
 
-const VegetarianVibesDash = async () => {
+const QuickBentoRunDash = async () => {
   const items = await prisma.dashboardItem.findMany({
     where: {
       mood: {
-        name: 'Vegetarian Vibes',
+        name: 'Quick Bento Run',
       },
     },
   });
@@ -18,7 +18,7 @@ const VegetarianVibesDash = async () => {
     nutrition: item.nutrition,
   }));
 
-  return <VegetarianVibesGrid items={serializedItems} />;
+  return <QuickBentoRunGrid items={serializedItems} />;
 };
 
-export default VegetarianVibesDash;
+export default QuickBentoRunDash;
