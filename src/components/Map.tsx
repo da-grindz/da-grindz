@@ -3,11 +3,25 @@
 'use client';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { LatLngExpression, LatLngBounds } from 'leaflet';
+import { LatLngExpression, LatLngBounds, icon } from 'leaflet';
 import { Eatery, VendingMachine } from '@prisma/client';
 
 const center: LatLngExpression = [21.299, -157.816];
 const bounds: LatLngBounds = new LatLngBounds([21.289, -157.824], [21.309, -157.808]);
+
+const eateryIcon = icon({
+  iconUrl: 'https://cdn-icons-png.flaticon.com/512/3448/3448609.png',
+  iconSize: [32, 32], // Size of the icon
+  iconAnchor: [16, 32], // Anchor point of the icon
+  popupAnchor: [0, -32], // Position of the popup relative to the icon
+});
+
+const vendingMachineIcon = icon({
+  iconUrl: 'https://cdn-icons-png.flaticon.com/512/5853/5853892.png',
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
+});
 
 type Props = {
   eateries: Eatery[];
@@ -24,12 +38,13 @@ const Map = ({ eateries, vendingMachines }: Props) => (
   >
     <TileLayer
       minZoom={16}
+      maxZoom={21}
       attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
 
     {eateries.map((eatery) => (
-      <Marker key={`eatery-${eatery.id}`} position={[eatery.y, eatery.x]}>
+      <Marker key={`eatery-${eatery.id}`} position={[eatery.y, eatery.x]} icon={eateryIcon}>
         <Popup>
           <strong>{eatery.name}</strong>
           <br />
@@ -41,7 +56,7 @@ const Map = ({ eateries, vendingMachines }: Props) => (
     ))}
 
     {vendingMachines.map((vm) => (
-      <Marker key={`vm-${vm.id}`} position={[vm.y, vm.x]}>
+      <Marker key={`vm-${vm.id}`} position={[vm.y, vm.x]} icon={vendingMachineIcon}>
         <Popup>
           <strong>{`Vending (${vm.type})`}</strong>
           <br />
