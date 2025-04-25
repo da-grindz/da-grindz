@@ -27,7 +27,7 @@ const Home = () => (
               <Col>
                 <Button href="#getstarted" className="mx-2 landingbutton">Get Started</Button>
                 <Button href="/auth/signin" className="mx-2 landingbutton">Log In</Button>
-                <Button href="/Dashboard" className="mx-2 landingbutton">Dashboard</Button>
+                <Button href="/vendormenu" className="mx-2 landingbutton">Vendor Menu</Button>
               </Col>
             </Row>
           </Container>
@@ -73,18 +73,6 @@ const Home = () => (
             <Container className="pt-5">
               <p className="pr-3">
                 <ArrowRight size={25} className="mx-2" />
-                Now go to your dashboard.
-              </p>
-              <Button href="/dashboard" className="mx-2 landingbutton">Dashboard</Button>
-              <Image
-                src="/dashboardpage.png"
-                sizes="(100vw)"
-                className="img-fluid py-3"
-              />
-            </Container>
-            <Container className="pt-5">
-              <p className="pr-3">
-                <ArrowRight size={25} className="mx-2" />
                 Then fill out your preferences for allergies and Grindz Mood:
               </p>
               <Button href="/allergies" className="mx-2 landingbutton">Allergies</Button>
@@ -96,6 +84,18 @@ const Home = () => (
               <Button href="/grindz-mood" className="mx-2 landingbutton">Grindz Mood</Button>
               <Image
                 src="/grindzmoodpage.png"
+                sizes="(100vw)"
+                className="img-fluid py-3"
+              />
+            </Container>
+            <Container className="pt-5">
+              <p className="pr-3">
+                <ArrowRight size={25} className="mx-2" />
+                Now go to your dashboard.
+              </p>
+              <Button href="/dashboard" className="mx-2 landingbutton">Dashboard</Button>
+              <Image
+                src="/dashboardpage.png"
                 sizes="(100vw)"
                 className="img-fluid py-3"
               />
