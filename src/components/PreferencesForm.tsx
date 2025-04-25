@@ -72,6 +72,14 @@ const PreferencesForm: React.FC = () => {
             <Card.Header>
               <Col className="text-center">
                 <h1 className="pt-2">Preferences Editor</h1>
+                <p className="pt-2">
+                  Please fill out the form below to let us know about your allergies and mood.
+                  <br />
+                  <br />
+                  <strong className="pt-1">
+                    Note: You can edit this at any time!
+                  </strong>
+                </p>
               </Col>
             </Card.Header>
             <Card.Body>
@@ -118,6 +126,15 @@ const PreferencesForm: React.FC = () => {
                 </Form.Group>
               </Form>
             </Card.Body>
+            <Card.Footer className="text-muted">
+              <p className="text-center">
+                Not sure what to pick? Check out our
+                {' '}
+                <a href="/grindz-mood">mood page</a>
+                {' '}
+                for some suggestions!
+              </p>
+            </Card.Footer>
           </Card>
         </Col>
       </Row>
