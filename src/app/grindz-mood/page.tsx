@@ -38,9 +38,9 @@ const grindzMood = () => (
             From crunchy, colorful salads to creamy soups and flavorful stir-fries,
             we’ve got you covered.
           </p>
-          <Button variant="primary" className="me-3">Choose Me!</Button>
+          <Button onClick={() => window.location.href = '/preferences'} className="me-3">Choose Me!</Button>
           <h6>Here are some popular options!</h6>
-          <ul>
+          <ul className="text-start">
             <li>Garden Salad - HALE ALOHA</li>
             <li>Weekly Salads - CAMPUS CENTER</li>
             <li>Mix-Plate - PANDA EXPRESS</li>
@@ -75,9 +75,9 @@ const grindzMood = () => (
             We offer a variety of bento boxes and grab-and-go meals that are both delicious and convenient.
             Perfect for busy days when you need something tasty and satisfying in a hurry!
           </p>
-          <Button variant="primary" className="me-3">Choose Me!</Button>
+          <Button onClick={() => window.location.href = '/preferences'} className="me-3">Choose Me!</Button>
           <h6>Here are some popular options!</h6>
-          <ul>
+          <ul className="text-start">
             <li>Misc Bentos - CAMPUS CENTER</li>
             <li>Misc Bentos & Musubis- HOLOHOLO BISTRO</li>
             <li>Mini Plates - L&L</li>
@@ -94,9 +94,9 @@ const grindzMood = () => (
             From hearty grain bowls to protein-rich salads and wraps,
             we’ve got the perfect meals to help you crush your fitness goals.
           </p>
-          <Button variant="primary" className="me-3">Choose Me!</Button>
+          <Button onClick={() => window.location.href = '/preferences'} className="me-3">Choose Me!</Button>
           <h6>Here are some popular options!</h6>
-          <ul>
+          <ul className="text-start">
             <li>Burgers & Tenders - THE BURGER SHOP</li>
             <li>Simple Servings - HALE ALOHA</li>
             <li>Chicken Katsu - L&L</li>
@@ -111,6 +111,16 @@ const grindzMood = () => (
             height={400}
             className="img-fluid"
           />
+        </Col>
+      </Row>
+      <Row id="mood-block" className="align-middle text-center p-4">
+        <Col xs={12} md={12}>
+          <h4>More Options Coming Soon!</h4>
+          <hr />
+          <p>
+            We are always working to improve our Grindz Mood feature and add new options.
+            If you have any suggestions or feedback, please let us know!
+          </p>
         </Col>
       </Row>
     </Container>

@@ -1,14 +1,14 @@
 'use client';
 
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Image } from 'react-bootstrap';
 import { GiPeanut, GiWheat, GiSesame, GiMilkCarton } from 'react-icons/gi';
-import { FaSeedling, FaEgg, FaFish, FaBreadSlice } from 'react-icons/fa';
+import { FaSeedling, FaFish, FaBreadSlice } from 'react-icons/fa';
 import { TbBottleFilled } from 'react-icons/tb';
 import { FaShrimp } from 'react-icons/fa6';
 
 /** The Allergy page. */
-const Allergy = () => (
-  <Container id="allergy-page" fluid className="py-3">
+const AllergyPage = () => (
+  <Container id="allergy-page" fluid className="mt-4 py-3">
     <Container id="allergy-banner" className="p-4">
       <Row className="align-middle text-center">
         <Col className="text-center px-5">
@@ -48,35 +48,31 @@ const Allergy = () => (
             <p>Milk</p>
           </div>
           <div>
-            <FaEgg size={32} />
-            <p>Eggs</p>
-          </div>
-        </Col>
-        <Col xs={2}>
-          <div>
             <FaFish size={32} />
             <p>Fish</p>
           </div>
+        </Col>
+        <Col xs={2}>
           <div>
             <FaShrimp size={32} />
             <p>Shellfish</p>
           </div>
-        </Col>
-        <Col xs={2}>
           <div>
             <GiWheat size={32} />
             <p>Wheat</p>
           </div>
+        </Col>
+        <Col xs={2}>
           <div>
             <FaBreadSlice size={32} />
             <p>Gluten</p>
           </div>
-        </Col>
-        <Col xs={2}>
           <div>
             <GiSesame size={32} />
             <p>Sesame</p>
           </div>
+        </Col>
+        <Col xs={2}>
           <div>
             <TbBottleFilled size={32} />
             <p>Mustard</p>
@@ -95,15 +91,15 @@ const Allergy = () => (
         </Col>
       </Row>
       <Row className="align-middle text-center">
-        <Col className="text-center px-5">
-          <h2>Form goes here</h2>
-          <p>
-            This is where the allergy form will be embedded.
-          </p>
-        </Col>
+        <a href="/preferences">
+          <Image
+            src="/preferences-editor.png"
+            className="img-fluid py-3"
+          />
+        </a>
       </Row>
     </Container>
   </Container>
 );
 
-export default Allergy;
+export default AllergyPage;

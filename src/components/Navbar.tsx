@@ -46,8 +46,14 @@ const NavBar: React.FC = () => {
               <NavDropdown.Item href="/planner" active={pathName === '/planner'}>
                 Planner
               </NavDropdown.Item>
+              <NavDropdown.Item href="/grindz-mood" active={pathName === '/grindz-mood'}>
+                What&apos;s Your Grindz Mood?
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/allergies" active={pathName === '/allergies'}>
+                Got Allergies?
+              </NavDropdown.Item>
               <NavDropdown.Item href="/preferences" active={pathName === '/preferences'}>
-                Preferences
+                Preferences Editor
               </NavDropdown.Item>
               <NavDropdown.Item href="/vendormenu" active={pathName === '/vendormenu'}>
                 Vendor Menu

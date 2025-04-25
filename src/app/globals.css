@@ -90,6 +90,8 @@ footer, footer a {
 #allergy-form {
   background: #FFF7E6;
   color: #de6b00;
+  border-radius: 10px;
+  padding-bottom: 50px;
 }
 
 #grindz-block {
@@ -99,12 +101,12 @@ footer, footer a {
 }
 
 #grindz-block button {
-  background: #FFF7E6;
-  color: #de6b00;
-  border: 1px solid #de6b00;
-  padding: 15px 30px;
+  background-color: #2b6555 !important;
+  color: #FFF !important;
+  border: white !important;
+  padding: 10px 20px;
   font-size: 1rem;
-  border-radius: 0px;
+  border-radius: 5px;
   margin-bottom: 15px;
 }
 
@@ -140,7 +142,7 @@ footer, footer a {
   color: #6B3E26;
 }
 
-#signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
+#preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
   background-color: #2b6555 !important;
   color: #FFF !important;
   border: white !important;
@@ -149,32 +151,48 @@ footer, footer a {
   border-radius: 5px;
 }
 
-#signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
+#preference-page .card-footer, #signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
   background: #BFD0C9;
 }
 
-#signin-page .card-body, #change-password-page .card-body, #signup-page .card-body {
+#preference-page .card-body, #signin-page .card-body, #change-password-page .card-body, #signup-page .card-body {
   background: #DCE7E2;
 }
 
-#signin-page .card, #change-password-page .card, #signup-page .card {
+#preference-page .card, #signin-page .card, #change-password-page .card, #signup-page .card {
   background: #DCE7E2;
+  min-width: 400px;
 }
 
-#signin-page a, #change-password-page a, #signup-page a {
+#preference-page a, #signin-page a, #change-password-page a, #signup-page a {
   color: #00684A;
   text-decoration: underline;
 }
 
-#login {
+#login, #allergy-banner {
   background: #DCE7E2;
   border-radius: 10px;
   padding-bottom: 50px;
 }
 
-#signin-page, #change-password-page, #signup-page, #signout-page {
+#preference-page, #signin-page, #change-password-page, #signup-page, #signout-page {
   padding: 20px;
   background: white;
   color: #00684A;
   min-height: 75%;
+}
+
+#preference-page .form-label, #preference-page .form-label, #signin-page .form-label, #change-password-page .form-label, #signup-page .form-label {
+  color: #00684A;
+  font-weight: bold;
+}
+
+/* #preference-page .form-check label {
+  color: #00684A;
+} */
+
+
+.form-check-input:checked {
+  background-color: #00684A !important;
+  border-color: #00684A !important;
 }
