@@ -20,6 +20,7 @@ datasource db {
 enum Role {
   USER
   ADMIN
+  VENDOR
 }
 
 model User {
@@ -30,6 +31,7 @@ model User {
   grindzMood   Mood?     @relation(fields: [grindzMoodId], references: [id])
   grindzMoodId Int?
   allergies    Allergy[] @relation("UserAllergies")
+  eatery   Eatery?
 }
 
 enum Condition {
@@ -74,6 +76,21 @@ model Eatery {
   notes    String?
   x        Float
   y        Float
+  user     User?         @relation(fields: [userId], references: [id])
+  userId   Int?          @unique
+  items    VendorItem[]  // New: menu items for this eatery
+}
+
+model VendorItem {
+  id          Int     @id @default(autoincrement())
+  name        String
+  image       String
+  alt         String
+  price       Float
+  description String?
+  nutrition   String?
+  eatery      Eatery  @relation(fields: [eateryId], references: [id])
+  eateryId    Int
 }
 
 enum VendingType {
