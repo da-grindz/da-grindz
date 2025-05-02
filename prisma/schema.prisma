@@ -31,7 +31,7 @@ model User {
   grindzMood   Mood?     @relation(fields: [grindzMoodId], references: [id])
   grindzMoodId Int?
   allergies    Allergy[] @relation("UserAllergies")
-  eatery   Eatery?
+  eatery       Eatery? 
 }
 
 enum Condition {
@@ -86,9 +86,10 @@ model VendorItem {
   name        String
   image       String
   alt         String
-  price       Float
-  description String?
-  nutrition   String?
+  calories    Int
+  fat         Int
+  carbs       Int
+  protein     Int 
   eatery      Eatery  @relation(fields: [eateryId], references: [id])
   eateryId    Int
   allergies   Allergy[] @relation("VendorItemAllergies")
