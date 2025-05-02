@@ -91,6 +91,7 @@ model VendorItem {
   nutrition   String?
   eatery      Eatery  @relation(fields: [eateryId], references: [id])
   eateryId    Int
+  allergies   Allergy[] @relation("VendorItemAllergies")
 }
 
 enum VendingType {
@@ -112,7 +113,8 @@ model Allergy {
   id    Int             @id @default(autoincrement())
   name  String          @unique
   users User[]          @relation("UserAllergies")
-  items DashboardItem[] @relation("ItemAllergies")
+  dashboardItems DashboardItem[] @relation("DashboardItemAllergies")
+  vendorItems    VendorItem[]    @relation("VendorItemAllergies")
 }
 
 model Mood {
@@ -131,5 +133,5 @@ model DashboardItem {
   nutrition String
   mood      Mood      @relation(fields: [moodId], references: [id])
   moodId    Int
-  allergies Allergy[] @relation("ItemAllergies")
+  allergies Allergy[] @relation("DashboardItemAllergies")
 }
