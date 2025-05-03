@@ -10,20 +10,22 @@ type Props = {
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const mealTypes = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
+const vendorList = [
+  'Starbucks',
+  'Jamba Juice',
+  'Subway',
+  'Panda Express',
+  'Campus Center Food Court',
+  'Holo Holo Bistro',
+  'L&L',
+  "B'rito Bowl",
+];
+
 type MealData = { [day: string]: { [meal: string]: string[] } };
 
 const initialPlannerData: MealData = Object.fromEntries(
   days.map((day) => [day, Object.fromEntries(mealTypes.map((meal) => [meal, []]))]),
 );
-
-const mealBankMock = [
-  'Garlic Roasted Red Bliss Potatoes',
-  'Pork Breakfast Sausage',
-  'Rigatoni Pasta',
-  'Beef Pho',
-  'Texas-style Grilled Cheese Sandwich',
-  'Garden Vegetable Soup',
-];
 
 function getMoodMessage(mood: string | null) {
   switch (mood) {
@@ -43,6 +45,7 @@ export default function PlannerClient({ mood }: Props) {
   const [view, setView] = useState<'weekly' | 'macros'>('weekly');
   const [macroGoals] = useState({ protein: 150, carbs: 250, fats: 70 });
   const [currentMacros] = useState({ protein: 120, carbs: 210, fats: 65 });
+  const [selectedVendor, setSelectedVendor] = useState<string | null>(null);
 
   const handleDragStart = (
     e: React.DragEvent,
@@ -114,7 +117,13 @@ export default function PlannerClient({ mood }: Props) {
           }}
         >
           <p style={{ margin: 0 }}>
-            {`You’re in ${mood || 'No Mood Selected'} mode — ${getMoodMessage(mood)}`}
+            You’re in
+            {' '}
+            {mood || 'No Mood Selected'}
+            {' '}
+            mode —
+            {' '}
+            {getMoodMessage(mood)}
           </p>
         </div>
 
@@ -145,25 +154,32 @@ export default function PlannerClient({ mood }: Props) {
                 <Card.Title style={{ color: '#00684A', fontSize: '1.1rem', fontWeight: 'bold' }}>
                   Grindz Vault
                 </Card.Title>
-                {mealBankMock.map((meal) => (
-                  <div
-                    key={meal}
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, { meal })}
-                    style={{
-                      backgroundColor: '#FFF7E6',
-                      padding: '6px 8px',
-                      marginBottom: '6px',
-                      borderRadius: '6px',
-                      fontSize: '0.9rem',
-                      color: '#A8442A',
-                      fontWeight: 500,
-                      cursor: 'grab',
-                    }}
-                  >
-                    {meal}
-                  </div>
-                ))}
+
+                <select
+                  className="form-select mb-3"
+                  value={selectedVendor ?? ''}
+                  onChange={(e) => setSelectedVendor(e.target.value || null)}
+                >
+                  <option value="">Select a Vendor</option>
+                  {vendorList.map((vendor) => (
+                    <option key={vendor} value={vendor}>
+                      {vendor}
+                    </option>
+                  ))}
+                </select>
+
+                {selectedVendor ? (
+                  <p className="text-muted" style={{ fontSize: '0.9rem' }}>
+                    No menu available yet for
+                    {' '}
+                    <strong>{selectedVendor}</strong>
+                    .
+                  </p>
+                ) : (
+                  <p className="text-muted" style={{ fontSize: '0.9rem' }}>
+                    Select a vendor to view their meals.
+                  </p>
+                )}
               </Card.Body>
             </Card>
           </Col>
