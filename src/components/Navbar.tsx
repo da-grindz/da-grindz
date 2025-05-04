@@ -55,22 +55,12 @@ const NavBar: React.FC = () => {
               <NavDropdown.Item href="/preferences" active={pathName === '/preferences'}>
                 Preferences Editor
               </NavDropdown.Item>
-              <NavDropdown.Item href="/vendormenu" active={pathName === '/vendormenu'}>
+              <NavDropdown.Item href="/vendors" active={pathName === '/vendormenu'}>
                 Vendor Menu
               </NavDropdown.Item>
             </NavDropdown>
 
             {/* Conditional Auth Links */}
-            {currentUser && (
-              <>
-                <Nav.Link id="add-stuff-nav" href="/add" active={pathName === '/add'}>
-                  Add Stuff
-                </Nav.Link>
-                <Nav.Link id="list-stuff-nav" href="/list" active={pathName === '/list'}>
-                  List Stuff
-                </Nav.Link>
-              </>
-            )}
             {currentUser && role === 'ADMIN' && (
               <Nav.Link id="admin-stuff-nav" href="/admin" active={pathName === '/admin'}>
                 Admin
