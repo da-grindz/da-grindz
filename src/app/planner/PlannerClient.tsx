@@ -97,7 +97,13 @@ export default function PlannerClient({ mood }: Props) {
   };
 
   const handleClearAll = () => {
-    setPlannerData(initialPlannerData);
+    const freshPlannerData: MealData = Object.fromEntries(
+      days.map((day) => [
+        day,
+        Object.fromEntries(mealTypes.map((meal) => [meal, []])),
+      ]),
+    );
+    setPlannerData(freshPlannerData);
   };
 
   const allowDrop = (e: React.DragEvent) => {
@@ -232,6 +238,7 @@ export default function PlannerClient({ mood }: Props) {
                   {view === 'weekly' ? 'Weekly Meal Plan' : 'Macros Goal Overview'}
                 </Card.Title>
 
+                {/* weekly or macros */}
                 {view === 'weekly' ? (
                   <Table bordered className="text-center align-middle mb-0">
                     <thead>
