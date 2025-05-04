@@ -84,8 +84,56 @@ const VendorsPage = () => (
         <Col className="text-center px-5">
           <h1>Vendors Page</h1>
           <p>
-            Look at lists of vendors and their menus. You can also check if they are currently opened or closed!
+            Here you can look at lists of vendors and their menus.
+            You can also check if they are currently opened or closed!
           </p>
+          {/* Improved Button Dropdown for Vendors */}
+          <div className="text-center mb-4">
+            <div className="dropdown">
+              <button
+                className="btn landingbutton dropdown-toggle"
+                id="vendorDropdown"
+                aria-expanded="false"
+                onClick={(e) => {
+                  const dropdownMenu = e.currentTarget.nextElementSibling;
+                  if (dropdownMenu) {
+                    dropdownMenu.classList.toggle('show');
+                  }
+                }}
+                type="button"
+              >
+                Jump to Vendor
+              </button>
+              <ul
+                className="dropdown-menu custom-dropdown-menu"
+                style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  zIndex: 1000,
+                }}
+                aria-labelledby="vendorDropdown"
+              >
+                {vendors.map((vendor) => (
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        const vendorElement = document.getElementById(vendor.name);
+                        if (vendorElement) {
+                          vendorElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      type="button"
+                    >
+                      {vendor.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </Col>
       </Row>
     </Container>
@@ -95,10 +143,9 @@ const VendorsPage = () => (
           const status = isOpen(vendor.hours) ? 'Open' : 'Closed';
 
           return (
-            <section key={vendor.name} style={{ marginBottom: '20px' }}>
-              <h2 className="text-center">
-                {vendor.name}
-                {' '}
+            <section key={vendor.name} id={vendor.name} style={{ marginBottom: '20px' }}>
+              <h2 className="text-center d-flex justify-content-center align-items-center">
+                <span>{vendor.name}</span>
                 <Badge
                   bg={status === 'Open' ? 'success' : 'danger'}
                   className="ms-2"
