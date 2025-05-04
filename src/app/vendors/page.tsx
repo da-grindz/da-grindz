@@ -85,10 +85,37 @@ const VendorsPage = () => (
           <h1>Vendors Page</h1>
           <p>
             Here you can look at lists of vendors and their menus.
-            You can also check if they are currently opened or closed!
+            {' '}
+            You can also check if they are currently
+            {' '}
+            <Badge
+              bg="success"
+              className="me-2"
+              style={{
+                fontSize: '0.8rem',
+                padding: '',
+                verticalAlign: 'middle',
+              }}
+            >
+              Open
+            </Badge>
+            or
+            {' '}
+            <Badge
+              bg="danger"
+              className="me-2"
+              style={{
+                fontSize: '0.8rem',
+                padding: '',
+                verticalAlign: 'middle',
+              }}
+            >
+              Closed
+            </Badge>
+            !
           </p>
           {/* Improved Button Dropdown for Vendors */}
-          <div className="text-center mb-4">
+          <div className="text-center mb-4 pt-3">
             <div className="dropdown">
               <button
                 className="btn landingbutton dropdown-toggle"
@@ -102,7 +129,7 @@ const VendorsPage = () => (
                 }}
                 type="button"
               >
-                Jump to Vendor
+                Jump to vendor
               </button>
               <ul
                 className="dropdown-menu custom-dropdown-menu"
@@ -137,7 +164,7 @@ const VendorsPage = () => (
         </Col>
       </Row>
     </Container>
-    <Container id="allergy-banner" className="p-4 mt-5 mb-5">
+    <Container id="allergy-form" className="p-4 mt-5 mb-5">
       <Container>
         {vendors.map((vendor) => {
           const status = isOpen(vendor.hours) ? 'Open' : 'Closed';
