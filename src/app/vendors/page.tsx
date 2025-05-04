@@ -1,6 +1,6 @@
 'use client';
 
-import { Col, Container, Row, Badge } from 'react-bootstrap';
+import { Col, Container, Row, Badge, Image } from 'react-bootstrap';
 
 const vendors = [
   {
@@ -41,7 +41,7 @@ const vendors = [
     name: 'L&L',
     hours: { open: '07:00', close: '16:30' },
     menu: ['Chicken Katsu', 'Loco Moco', 'Spam Musubi'],
-    logo: 'https://play-lh.googleusercontent.com/z9Uwiol7PLYIRII-TdhOCnZ7CgM3wHNhYa3EagYUP5bJ8ky1AseBtDBe5Brn95rXgJ0',
+    logo: '/L&L_logo.png',
   },
   {
     name: "B'rito Bowl",
@@ -61,29 +61,19 @@ const vendors = [
 
 const isOpen = (hours: { open: string; close: string }) => {
   const now = new Date();
-  const day = now.getDay(); // 0 = Sunday, 6 = Saturday
-
-  // Closed all day on Saturday (6) and Sunday (0)
-  if (day === 0 || day === 6) {
-    return 'Closed All Day';
-  }
-
+  const day = now.getDay(); // 0 (Sunday) to 6 (Saturday)
   const currentTime = now.getHours() * 60 + now.getMinutes(); // Current time in minutes
   const [openHour, openMinute] = hours.open.split(':').map(Number);
   const [closeHour, closeMinute] = hours.close.split(':').map(Number);
   const openTime = openHour * 60 + openMinute;
   const closeTime = closeHour * 60 + closeMinute;
 
-  // Handle overnight hours (e.g., open at 10 PM, close at 6 AM)
-  if (closeTime < openTime) {
-    if (day === 1 && currentTime < closeTime) {
-      // If it's early Sunday morning and the vendor closed after midnight
-      return 'Closed All Day';
-    }
-    return currentTime >= openTime || currentTime < closeTime ? 'Open' : 'Closed';
+  // Check if the vendor is open on the current day
+  if (day === 0 || day === 6) {
+    // Assuming vendors are closed on weekends
+    return false;
   }
-
-  return currentTime >= openTime && currentTime < closeTime ? 'Open' : 'Closed';
+  return currentTime >= openTime && currentTime < closeTime;
 };
 
 const VendorsPage = () => (
@@ -123,7 +113,7 @@ const VendorsPage = () => (
               </h2>
               {/* Vendor Logo */}
               <div className="text-center">
-                <img
+                <Image
                   src={vendor.logo}
                   alt={`${vendor.name} logo`}
                   style={{ maxWidth: '150px', margin: '10px 0' }}
