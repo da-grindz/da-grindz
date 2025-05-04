@@ -27,7 +27,7 @@ const Home = () => (
               <Col>
                 <Button href="#getstarted" className="mx-2 landingbutton">Get Started</Button>
                 <Button href="/auth/signin" className="mx-2 landingbutton">Log In</Button>
-                <Button href="/vendormenu" className="mx-2 landingbutton">Vendor Menu</Button>
+                <Button href="/vendors" className="mx-2 landingbutton">Vendor Menu</Button>
               </Col>
             </Row>
           </Container>
@@ -111,7 +111,7 @@ const Home = () => (
                 sizes="(100vw)"
                 className="img-fluid py-3"
               />
-              <Button href="/vendormenu" className="mx-2 landingbutton">Vendor Menu</Button>
+              <Button href="/vendors" className="mx-2 landingbutton">Vendor Menu</Button>
             </Container>
           </Col>
         </Row>
