@@ -191,8 +191,17 @@ footer, footer a {
   color: #00684A;
 } */
 
-
 .form-check-input:checked {
   background-color: #00684A !important;
   border-color: #00684A !important;
+}
+
+.planner-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.planner-content {
+  flex: 1;
 }

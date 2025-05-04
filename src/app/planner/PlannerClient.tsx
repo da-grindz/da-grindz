@@ -76,15 +76,13 @@ export default function PlannerClient({ mood }: Props) {
 
       setPlannerData((prev) => {
         const updated = { ...prev };
-        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][data.fromMealType].filter(
-          (_, i) => i !== data.index,
-        );
-
+        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][
+          data.fromMealType
+        ].filter((_, i) => i !== data.index);
         const targetMeals = updated[targetDay][targetMealType];
         if (!targetMeals.includes(draggedMeal)) {
           updated[targetDay][targetMealType] = [...targetMeals, draggedMeal];
         }
-
         return updated;
       });
     }
@@ -98,37 +96,41 @@ export default function PlannerClient({ mood }: Props) {
     });
   };
 
-  const allowDrop = (e: React.DragEvent) => e.preventDefault();
+  const handleClearAll = () => {
+    setPlannerData(initialPlannerData);
+  };
+
+  const allowDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
 
   return (
-    <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh', padding: '2rem' }}>
-      <Container>
-        {/* Mood banner */}
-        <div
-          style={{
-            backgroundColor: '#FFF7E6',
-            padding: '1rem',
-            marginBottom: '1.5rem',
-            borderRadius: '12px',
-            textAlign: 'center',
-            fontStyle: 'italic',
-            color: '#A8442A',
-            fontWeight: 500,
-          }}
-        >
-          <p style={{ margin: 0 }}>
-            You’re in
-            {' '}
-            {mood || 'No Mood Selected'}
-            {' '}
-            mode —
-            {' '}
-            {getMoodMessage(mood)}
-          </p>
+    <div className="content" style={{ backgroundColor: '#FFFFFF', paddingBottom: '2rem' }}>
+      <Container fluid className="p-0 m-0">
+        <div className="d-flex justify-content-center" style={{ marginTop: '2rem' }}>
+          <div
+            style={{
+              backgroundColor: '#FFF7E6',
+              padding: '1rem',
+              textAlign: 'center',
+              fontStyle: 'italic',
+              color: '#A8442A',
+              fontWeight: 500,
+              borderRadius: '12px',
+              width: '75%',
+              maxWidth: '1200px',
+            }}
+          >
+            <p style={{ margin: 0 }}>
+              <span>You’re in a </span>
+              <strong>{mood || 'No Mood Selected'}</strong>
+              <span> mode — </span>
+              <span>{getMoodMessage(mood)}</span>
+            </p>
+          </div>
         </div>
 
-        {/* Toggle button */}
-        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+        <div style={{ textAlign: 'center', padding: '1rem' }}>
           <button
             type="button"
             onClick={() => setView(view === 'weekly' ? 'macros' : 'weekly')}
@@ -140,21 +142,35 @@ export default function PlannerClient({ mood }: Props) {
               padding: '0.5rem 1rem',
               fontWeight: 600,
               cursor: 'pointer',
+              marginRight: '1rem',
             }}
           >
             {view === 'weekly' ? 'Switch to Macros Overview' : 'Back to Weekly Plan'}
           </button>
+          <button
+            type="button"
+            onClick={handleClearAll}
+            style={{
+              backgroundColor: '#A8442A',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '0.5rem 1rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+            }}
+          >
+            Clear All
+          </button>
         </div>
 
-        <Row className="align-items-stretch">
-          {/* Vault */}
+        <Row className="gx-3 gy-4 px-3 pb-5">
           <Col lg={3}>
-            <Card className="h-100 mb-4">
+            <Card className="h-100">
               <Card.Body>
                 <Card.Title style={{ color: '#00684A', fontSize: '1.1rem', fontWeight: 'bold' }}>
                   Grindz Vault
                 </Card.Title>
-
                 <select
                   className="form-select mb-3"
                   value={selectedVendor ?? ''}
@@ -167,11 +183,10 @@ export default function PlannerClient({ mood }: Props) {
                     </option>
                   ))}
                 </select>
-
                 {selectedVendor ? (
                   <p className="text-muted" style={{ fontSize: '0.9rem' }}>
                     No menu available yet for
-                    {' '}
+                    <br />
                     <strong>{selectedVendor}</strong>
                     .
                   </p>
@@ -180,13 +195,30 @@ export default function PlannerClient({ mood }: Props) {
                     Select a vendor to view their meals.
                   </p>
                 )}
+                <div
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, { meal: 'Test Meal' })}
+                  style={{
+                    backgroundColor: '#FFF7E6',
+                    padding: '8px',
+                    borderRadius: '6px',
+                    marginTop: '12px',
+                    fontWeight: 500,
+                    fontSize: '0.95rem',
+                    color: '#A8442A',
+                    textAlign: 'center',
+                    cursor: 'grab',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                  }}
+                >
+                  🥗 Test Meal
+                </div>
               </Card.Body>
             </Card>
           </Col>
 
-          {/* Main planner */}
           <Col lg={6}>
-            <Card className="h-100" style={{ backgroundColor: '#FFF7E6', border: 'none', borderRadius: '12px' }}>
+            <Card className="h-100" style={{ backgroundColor: '#FFF7E6', borderRadius: '12px' }}>
               <Card.Body>
                 <Card.Title
                   style={{
@@ -201,42 +233,19 @@ export default function PlannerClient({ mood }: Props) {
                 </Card.Title>
 
                 {view === 'weekly' ? (
-                  <Table bordered className="text-center align-middle mb-0" style={{ borderCollapse: 'collapse' }}>
+                  <Table bordered className="text-center align-middle mb-0">
                     <thead>
                       <tr>
-                        <th aria-label="Day" />
+                        <th scope="col">Day</th>
                         {mealTypes.map((mealHeader) => (
-                          <th
-                            key={mealHeader}
-                            style={{
-                              backgroundColor: '#FFE7B3',
-                              color: '#2D2A26',
-                              fontWeight: 600,
-                              fontSize: '1rem',
-                              border: 'none',
-                              padding: '12px',
-                            }}
-                          >
-                            {mealHeader}
-                          </th>
+                          <th key={mealHeader}>{mealHeader}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody>
                       {days.map((day) => (
                         <tr key={day}>
-                          <th
-                            style={{
-                              backgroundColor: '#DCE7E2',
-                              color: '#00684A',
-                              fontWeight: 'bold',
-                              fontSize: '0.9rem',
-                              border: 'none',
-                              padding: '12px',
-                            }}
-                          >
-                            {day}
-                          </th>
+                          <th style={{ backgroundColor: '#DCE7E2' }}>{day}</th>
                           {mealTypes.map((mealType) => (
                             <td
                               key={`${day}-${mealType}`}
@@ -281,6 +290,7 @@ export default function PlannerClient({ mood }: Props) {
                                       <span>{mealName}</span>
                                       <button
                                         type="button"
+                                        aria-label={`Delete ${mealName} from ${mealType} on ${day}`}
                                         onClick={() => handleDelete(day, mealType, occurrence)}
                                         style={{
                                           background: 'none',
@@ -312,6 +322,7 @@ export default function PlannerClient({ mood }: Props) {
                       const value = currentMacros[macro as keyof typeof currentMacros];
                       const goal = macroGoals[macro as keyof typeof macroGoals];
                       const percent = Math.min((value / goal) * 100, 100);
+
                       return (
                         <div key={macro} style={{ marginBottom: '1.5rem' }}>
                           <strong style={{ textTransform: 'capitalize', fontSize: '1.1rem' }}>
@@ -343,9 +354,8 @@ export default function PlannerClient({ mood }: Props) {
             </Card>
           </Col>
 
-          {/* Meal Tracker */}
           <Col lg={3}>
-            <Card className="h-100" style={{ backgroundColor: '#DCE7E2', border: 'none', borderRadius: '12px' }}>
+            <Card className="h-100" style={{ backgroundColor: '#DCE7E2', borderRadius: '12px' }}>
               <Card.Body>
                 <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.2rem' }}>
                   Meal Tracker
