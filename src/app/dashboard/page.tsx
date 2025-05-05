@@ -8,6 +8,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import VegetarianVibesDash from '@/components/VegetarianVibesDash';
 import QuickBentoRunDash from '@/components/QuickBentoRunDash';
 import GrindzForGainsDash from '@/components/GrindzForGainsDash';
+import SatisfyingSipsDash from '@/components/SatisfyingSipsDash';
+import SugarRushDash from '@/components/SugarRushDash';
 import DashboardButtons from '@/components/DashboardButtons';
 
 const DashboardPage = async () => {
@@ -36,9 +38,13 @@ const DashboardPage = async () => {
         return <QuickBentoRunDash />;
       case 'Grindz for Gains':
         return <GrindzForGainsDash />;
+      case 'Satisfying Sips':
+        return <SatisfyingSipsDash />;
+      case 'Sugar Rush':
+        return <SugarRushDash />;
       default:
         return (
-          <Container className="text-center p-5">
+          <Container id="allergy-banner" className="text-center p-5">
             <h2>Set your Grindz Mood in Preferences</h2>
             <p>Your dashboard will show personalized recommendations once you’ve selected a mood.</p>
           </Container>

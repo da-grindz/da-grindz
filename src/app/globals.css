@@ -128,18 +128,27 @@ footer, footer a {
 }
 
 #vegetarian-vibes {
-  background: #DCE7E2;
-  color: #00684A;
+  background: linear-gradient(to right, #A8D08D, #D4F1D7); /* Soft mint green to light pastel green */
+  color: #3D6B3C; /* Darker sage green for readability */
 }
 
 #quick-bento-run {
-  background: #FFF9E5;
-  color: #B03A00;
+  background: linear-gradient(to right, #FFF9E5, #F3E4B1); /* Light yellow to soft cream */
+  color: #E5823E; /* Soft orange for readability */
 }
 
 #grindz-for-gains {
-  background: #F5EEE6;
-  color: #6B3E26;
+  background: linear-gradient(to right, #C48E56, #F1E3B4); /* Pastel meat brown to soft gold */
+  color: #5A3E1D; /* Soft, dark brown text for contrast */
+}
+
+#satisfying-sips {
+  background: linear-gradient(to right, #B3D9FF, #D0CFFF); /* Baby blue to light periwinkle */
+  color: #3A4F6B; /* Slate blue text for contrast */
+}
+#sugar-rush {
+  background: linear-gradient(to right, #F8BBD0, #FFF9C4);
+  color: #FF6347;
 }
 
 #preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
