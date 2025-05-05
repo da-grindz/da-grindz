@@ -32,6 +32,7 @@ model User {
   grindzMoodId Int?
   allergies    Allergy[] @relation("UserAllergies")
   eatery       Eatery? 
+  waterLogs  WaterLog[]
 }
 
 enum Condition {
@@ -136,3 +137,15 @@ model DashboardItem {
   moodId    Int
   allergies Allergy[] @relation("DashboardItemAllergies")
 }
+
+model WaterLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  date      DateTime
+  count     Int      @default(0)
+
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date]) // 1 log per user per day
+}
+
