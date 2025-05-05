@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import NavBar from '@/components/Navbar';
 import Providers from './providers';
 import 'leaflet/dist/leaflet.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

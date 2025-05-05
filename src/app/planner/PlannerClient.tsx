@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Container, Row, Col, Table, Card } from 'react-bootstrap';
+import WaterTracker from '@/components/WaterTracker';
 
 type Props = {
   mood: string | null;
@@ -23,9 +24,10 @@ const vendorList = [
 
 type MealData = { [day: string]: { [meal: string]: string[] } };
 
-const initialPlannerData: MealData = Object.fromEntries(
-  days.map((day) => [day, Object.fromEntries(mealTypes.map((meal) => [meal, []]))]),
-);
+const createInitialPlannerData = (): MealData =>
+  Object.fromEntries(
+    days.map((day) => [day, Object.fromEntries(mealTypes.map((meal) => [meal, []]))]),
+  );
 
 function getMoodMessage(mood: string | null) {
   switch (mood) {
@@ -41,7 +43,7 @@ function getMoodMessage(mood: string | null) {
 }
 
 export default function PlannerClient({ mood }: Props) {
-  const [plannerData, setPlannerData] = useState<MealData>(initialPlannerData);
+  const [plannerData, setPlannerData] = useState<MealData>(createInitialPlannerData);
   const [view, setView] = useState<'weekly' | 'macros'>('weekly');
   const [macroGoals] = useState({ protein: 150, carbs: 250, fats: 70 });
   const [currentMacros] = useState({ protein: 120, carbs: 210, fats: 65 });
@@ -97,13 +99,7 @@ export default function PlannerClient({ mood }: Props) {
   };
 
   const handleClearAll = () => {
-    const freshPlannerData: MealData = Object.fromEntries(
-      days.map((day) => [
-        day,
-        Object.fromEntries(mealTypes.map((meal) => [meal, []])),
-      ]),
-    );
-    setPlannerData(freshPlannerData);
+    setPlannerData(createInitialPlannerData());
   };
 
   const allowDrop = (e: React.DragEvent) => {
@@ -372,6 +368,7 @@ export default function PlannerClient({ mood }: Props) {
                 <p className="mb-1"><strong>Fat: 65g</strong></p>
                 <p className="mb-1"><strong>Calories: 1,850 kcal</strong></p>
                 <hr />
+                <WaterTracker />
               </Card.Body>
             </Card>
           </Col>
