@@ -205,3 +205,7 @@ footer, footer a {
 .planner-content {
   flex: 1;
 }
+
+.custom-dropdown-menu .dropdown-item {
+  color: #2b6555 !important;
+}
