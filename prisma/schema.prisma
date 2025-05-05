@@ -136,3 +136,10 @@ model DashboardItem {
   moodId    Int
   allergies Allergy[] @relation("DashboardItemAllergies")
 }
+  date      DateTime
+  count     Int      @default(0)
+
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date]) // 1 log per user per day
+}
