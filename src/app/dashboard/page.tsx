@@ -38,7 +38,7 @@ const DashboardPage = async () => {
         return <GrindzForGainsDash />;
       default:
         return (
-          <Container className="text-center p-5">
+          <Container className="allergy-banner text-center p-5">
             <h2>Set your Grindz Mood in Preferences</h2>
             <p>Your dashboard will show personalized recommendations once you’ve selected a mood.</p>
           </Container>
