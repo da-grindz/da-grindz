@@ -170,6 +170,7 @@ export default function PlannerClient({ mood }: Props) {
                 >
                   {view === 'weekly' ? 'Weekly Meal Plan' : 'Macros Goal Overview'}
                 </Card.Title>
+                {/* weekly or macros */}
                 {view === 'weekly' ? (
                   <MealPlannerTable
                     days={days}

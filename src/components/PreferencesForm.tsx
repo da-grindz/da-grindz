@@ -106,6 +106,8 @@ const PreferencesForm: React.FC = () => {
                     <option value="Vegetarian Vibes">Vegetarian Vibes</option>
                     <option value="Quick Bento Run">Quick Bento Run</option>
                     <option value="Grindz for Gains">Grindz for Gains</option>
+                    <option value="Satisfying Sips">Satisfying Sips</option>
+                    <option value="Sugar Rush">Sugar Rush</option>
                   </select>
                   <div className="invalid-feedback">{errors.mood?.message}</div>
                 </Form.Group>
