@@ -131,3 +131,148 @@ export async function addPreferences(preferences: { owner: string; allergies: st
     throw new Error('Failed to update preferences. Please try again.');
   }
 }
+
+/**
+ * Adds a new menu item to the database.
+ * @param VendorItem, an object with the following properties: id, name, image, alt,
+ * calories, fat, carbs, protein, eatery, eateryId, allergies.
+ */
+export async function addVendorItem(item: {
+  owner: string;
+  eateryName: string;
+  name: string;
+  image: string;
+  alt: string;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+  allergies: string[]; // allergy names
+}) {
+  const {
+    owner,
+    eateryName,
+    name,
+    image,
+    alt,
+    calories,
+    fat,
+    carbs,
+    protein,
+    allergies,
+  } = item;
+
+  console.log('Adding vendor item:', item);
+
+  try {
+    // Find the user
+    const user = await prisma.user.findUnique({
+      where: { email: owner },
+      include: { eatery: true },
+    });
+
+    if (!user || !user.eatery) {
+      throw new Error('User or associated eatery not found.');
+    }
+
+    // Optional: verify the eatery matches the vendor’s own eatery name
+    if (user.eatery.name !== eateryName) {
+      throw new Error('User is not authorized to add items to this eatery.');
+    }
+
+    // Create the VendorItem
+    const newItem = await prisma.vendorItem.create({
+      data: {
+        name,
+        image,
+        alt,
+        calories,
+        fat,
+        carbs,
+        protein,
+        eatery: {
+          connect: { id: user.eatery.id },
+        },
+        allergies: {
+          connectOrCreate: allergies.map((allergyName) => ({
+            where: { name: allergyName }, // This must be the field that is unique in your Allergy model
+            create: { name: allergyName },
+          })),
+        },
+      },
+      include: {
+        allergies: true,
+      },
+    });
+
+    console.log('Created item:', newItem.name);
+    return newItem;
+  } catch (error) {
+    console.error('Error adding vendor item:', error);
+    throw new Error('Failed to add vendor item. Please try again.');
+  }
+}
+
+/**
+ * Edits an existing menu item in the database.
+ * @param VendorItem, an object with the following properties: id, name, image, alt,
+ * calories, fat, carbs, protein, eatery, eateryId, allergies.
+ */
+export async function editVendorItem(item: {
+  id: number;
+  name: string;
+  image: string;
+  alt: string;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+  allergies: string[]; // allergy names
+}) {
+  const {
+    id,
+    name,
+    image,
+    alt,
+    calories,
+    fat,
+    carbs,
+    protein,
+    allergies,
+  } = item;
+
+  console.log('Editing vendor item:', item);
+
+  try {
+    // Update the VendorItem
+    const updatedItem = await prisma.vendorItem.update({
+      where: { id }, // Locate the item by its id
+      data: {
+        name,
+        image,
+        alt,
+        calories,
+        fat,
+        carbs,
+        protein,
+        allergies: {
+          // Connect or create allergies, similar to how we did for addVendorItem
+          connectOrCreate: allergies.map((allergyName) => ({
+            // set: [], // Clear all existing allergies
+            where: { name: allergyName }, // Unique field in Allergy model
+            create: { name: allergyName }, // Create allergy if it doesn't exist
+          })),
+        },
+      },
+      include: {
+        allergies: true, // Optionally include allergies for the response
+      },
+    });
+
+    console.log('Updated item:', updatedItem.name);
+    return updatedItem;
+  } catch (error) {
+    console.error('Error editing vendor item:', error);
+    throw new Error('Failed to edit vendor item. Please try again.');
+  }
+}
