@@ -25,7 +25,7 @@ const SugarRushGrid = ({ items }: { items: Item[] }) => (
 
       <Row className="text-center mb-3">
         <Col className="px-5">
-          <h2>Availble Sweet Treats</h2>
+          <h2>Available Sweet Treats</h2>
           <p>
             Discover student favorites that hit the spot! These indulgent picks are always a crowd-pleaser on campus.
           </p>
