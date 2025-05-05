@@ -44,6 +44,7 @@ const WaterTracker: React.FC = () => {
       {days.map((day) => {
         const drops = Array.from({ length: MAX_DROPS }).map((_, i) => (
           <i
+          // eslint-disable-next-line react/no-array-index-key
             key={`${day}-drop-${i}`}
             className={`bi ${i < waterLogs[day] ? 'bi-droplet-fill' : 'bi-droplet'}`}
             onClick={() => handleDropClick(day, i)}

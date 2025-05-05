@@ -24,10 +24,9 @@ const vendorList = [
 
 type MealData = { [day: string]: { [meal: string]: string[] } };
 
-const createInitialPlannerData = (): MealData =>
-  Object.fromEntries(
-    days.map((day) => [day, Object.fromEntries(mealTypes.map((meal) => [meal, []]))]),
-  );
+const createInitialPlannerData = (): MealData => Object.fromEntries(
+  days.map((day) => [day, Object.fromEntries(mealTypes.map((meal) => [meal, []]))]),
+);
 
 function getMoodMessage(mood: string | null) {
   switch (mood) {
