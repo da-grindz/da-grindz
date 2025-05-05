@@ -1,11 +1,11 @@
 import { prisma } from '@/lib/prisma';
-import VegetarianVibesGrid from '@/components/VegetarianVibesGrid';
+import SatisfyingSipsGrid from '@/components/SatisfyingSipsGrid';
 
-const VegetarianVibesDash = async () => {
+const SatisfyingSipsDash = async () => {
   const items = await prisma.dashboardItem.findMany({
     where: {
       mood: {
-        name: 'Vegetarian Vibes',
+        name: 'Satisfying Sips',
       },
     },
   });
@@ -18,7 +18,7 @@ const VegetarianVibesDash = async () => {
     nutrition: item.nutrition,
   }));
 
-  return <VegetarianVibesGrid items={serializedItems} />;
+  return <SatisfyingSipsGrid items={serializedItems} />;
 };
 
-export default VegetarianVibesDash;
+export default SatisfyingSipsDash;

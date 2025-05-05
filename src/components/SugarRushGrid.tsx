@@ -10,24 +10,25 @@ type Item = {
   nutrition: string;
 };
 
-const VegetarianVibesGrid = ({ items }: { items: Item[] }) => (
+const SugarRushGrid = ({ items }: { items: Item[] }) => (
   <Container className="py-4">
-    <Container id="vegetarian-vibes" className="p-4 mb-5">
+    <Container id="sugar-rush" className="p-4 mb-5">
       <Row className="text-center mb-4">
         <Col className="px-5">
-          <h1>Grindz Mood - Vegetarian Vibes</h1>
+          <h1>Grindz Mood - Sugar Rush</h1>
           <p>
-            Discover a variety of vegetarian meal options across campus vendors.
-            Whether you&apos;re eating for health, the environment, or personal choice,
-            we&apos;re here to support your lifestyle with delicious and nutritious food.
+            Craving something sweet? From rich pastries to chewy cookies, you’ll find
+            a variety of desserts all across campus to satisfy your sweet tooth.
           </p>
         </Col>
       </Row>
 
       <Row className="text-center mb-3">
         <Col className="px-5">
-          <h2>Available Vegetarian Items</h2>
-          <p>Explore some of the top vegetarian picks available from our campus dining partners.</p>
+          <h2>Availble Sweet Treats</h2>
+          <p>
+            Discover student favorites that hit the spot! These indulgent picks are always a crowd-pleaser on campus.
+          </p>
         </Col>
       </Row>
     </Container>
@@ -42,7 +43,7 @@ const VegetarianVibesGrid = ({ items }: { items: Item[] }) => (
               alt={item.alt}
               style={{ height: '300px', objectFit: 'cover' }}
             />
-            <Card.Body id="vegetarian-vibes">
+            <Card.Body id="sugar-rush">
               <Card.Title>{item.source}</Card.Title>
               <Card.Text>{item.nutrition}</Card.Text>
             </Card.Body>
@@ -53,4 +54,4 @@ const VegetarianVibesGrid = ({ items }: { items: Item[] }) => (
   </Container>
 );
 
-export default VegetarianVibesGrid;
+export default SugarRushGrid;
