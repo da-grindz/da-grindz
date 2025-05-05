@@ -1,3 +1,5 @@
+'use client';
+
 import { Col, Container, Row, Badge, Card } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
 
