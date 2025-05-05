@@ -32,6 +32,7 @@ model User {
   grindzMoodId Int?
   allergies    Allergy[] @relation("UserAllergies")
   eatery       Eatery? 
+  waterLogs  WaterLog[]
 }
 
 enum Condition {
