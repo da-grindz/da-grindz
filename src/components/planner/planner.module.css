@@ -1,0 +1,94 @@
+/* MoodBanner */
+.moodBanner {
+    background-color: #FFF7E6;
+    padding: 1rem;
+    text-align: center;
+    font-style: italic;
+    color: #A8442A;
+    font-weight: 500;
+    border-radius: 12px;
+    width: 75%;
+    max-width: 1200px;
+  }
+  
+  /* ViewToggleButtons */
+  .toggleButton {
+    background-color: #00684A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+  
+  .clearButton {
+    background-color: #A8442A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  /* GrindzVault */
+  .vendorMeal {
+    background-color: #FFF7E6;
+    padding: 8px;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #A8442A;
+    text-align: center;
+    cursor: grab;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* MealPlannerTable */
+  .droppableCell {
+    min-height: 80px;
+    background-color: #ffffffc9;
+    border: 1px dotted #aaa;
+    border-radius: 8px;
+    padding: 6px;
+  }
+  
+  .draggableMeal {
+    background-color: #FFF7E6;
+    padding: 6px;
+    margin-bottom: 4px;
+    border-radius: 6px;
+    color: #A8442A;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* MacrosOverview */
+  .macroBarContainer {
+    margin-bottom: 1.5rem;
+  }
+  
+  .macroLabel {
+    text-transform: capitalize;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  .macroBar {
+    background-color: #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    height: 20px;
+    margin-top: 0.25rem;
+  }
+  
+  .macroFill {
+    height: 100%;
+    background-color: #00684A;
+  }
