@@ -116,14 +116,25 @@ footer, footer a {
   border: none;
 }
 
+#break {
+  height: 1px !important;
+}
+
 #grindz-block a {
   color: inherit;
   text-decoration: underline;
 }
 
 #mood-block {
-  min-height: 400px;
+  min-height: 500px;
   border-radius: 10px;
+}
+
+.equal-height-card {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
 }
 
 #mini-moodz {
