@@ -24,7 +24,10 @@ const WaterTracker: React.FC = () => {
   return (
     <div style={{ marginTop: '1.5rem' }}>
       <div className="d-flex justify-content-between align-items-center mb-2">
-        <h6 style={{ color: '#00684A', fontWeight: 'bold', margin: 0 }}>Water Tracker</h6>
+        <div>
+          <h6 style={{ color: '#00684A', fontWeight: 'bold', margin: 0 }}>Water Tracker</h6>
+          <small style={{ fontSize: '0.75rem', color: '#00684A' }}>1 drop = 1 glass of water</small>
+        </div>
         <button
           type="button"
           onClick={handleClearAll}
