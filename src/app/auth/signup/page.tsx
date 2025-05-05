@@ -39,7 +39,7 @@ const SignUp = () => {
   const onSubmit = async (data: SignUpForm) => {
     // console.log(JSON.stringify(data, null, 2));
     await createUser(data);
-    // After creating, signIn with redirect to the add page
+    // After creating, signIn with redirect to the dashboard page
     await signIn('credentials', { callbackUrl: '/dashboard', ...data });
   };
 
