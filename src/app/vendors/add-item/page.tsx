@@ -5,6 +5,8 @@ import AddVendorItemForm from '@/components/AddVendorItemForm';
 import { prisma } from '@/lib/prisma'; // Adjust if you import prisma differently
 import { Container } from 'react-bootstrap';
 
+// This page is for adding a new vendor item.
+// It is protected and requires the user to be logged in and the user must have a vendor associated with their account.
 const AddVendorItemPage = async () => {
   const session = await getServerSession(authOptions);
 
