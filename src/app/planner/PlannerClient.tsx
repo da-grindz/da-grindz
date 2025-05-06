@@ -1,8 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Container, Row, Col, Table, Card } from 'react-bootstrap';
-import WaterTracker from '@/components/WaterTracker';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import swal from 'sweetalert';
+import MoodBanner from '@/components/planner/MoodBanner';
+import ViewToggleButtons from '@/components/planner/ViewToggleButtons';
+import GrindzVault from '@/components/planner/GrindzVault';
+import MealPlannerTable from '@/components/planner/MealPlannerTable';
+import MacrosOverview from '@/components/planner/MacrosOverview';
+import WaterTracker from '@/components/planner/WaterTracker';
 
 type Props = {
   mood: string | null;
@@ -11,42 +17,67 @@ type Props = {
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const mealTypes = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
-const vendorList = [
-  'Starbucks',
-  'Jamba Juice',
-  'Subway',
-  'Panda Express',
-  'Campus Center Food Court',
-  'Holo Holo Bistro',
-  'L&L',
-  "B'rito Bowl",
-];
-
 type MealData = { [day: string]: { [meal: string]: string[] } };
+type WaterLog = { [day: string]: number };
 
 const createInitialPlannerData = (): MealData => Object.fromEntries(
-  days.map((day) => [day, Object.fromEntries(mealTypes.map((meal) => [meal, []]))]),
+  days.map((day) => [
+    day,
+    Object.fromEntries(mealTypes.map((meal) => [meal, []])),
+  ]),
 );
 
-function getMoodMessage(mood: string | null) {
-  switch (mood) {
-    case 'Grindz for Gains':
-      return 'high protein recommended today.';
-    case 'Quick Bento Run':
-      return 'grab-and-go meals recommended today.';
-    case 'Vegetarian Vibes':
-      return 'veggie-packed meals recommended today.';
-    default:
-      return 'Set your mood in preferences to personalize this page.';
-  }
-}
+const createInitialWaterLogs = (): WaterLog => Object.fromEntries(days.map((day) => [day, 0]));
 
 export default function PlannerClient({ mood }: Props) {
   const [plannerData, setPlannerData] = useState<MealData>(createInitialPlannerData);
+  const [waterLogs, setWaterLogs] = useState<WaterLog>(createInitialWaterLogs());
+  const [hasMounted, setHasMounted] = useState(false);
   const [view, setView] = useState<'weekly' | 'macros'>('weekly');
   const [macroGoals] = useState({ protein: 150, carbs: 250, fats: 70 });
   const [currentMacros] = useState({ protein: 120, carbs: 210, fats: 65 });
   const [selectedVendor, setSelectedVendor] = useState<string | null>(null);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasMounted) return;
+
+    const savedPlanner = localStorage.getItem('plannerData');
+    const savedWater = localStorage.getItem('waterLogs');
+
+    if (savedPlanner) {
+      try {
+        setPlannerData(JSON.parse(savedPlanner));
+      } catch (e) {
+        console.error('Failed to parse plannerData:', e);
+      }
+    }
+
+    if (savedWater) {
+      try {
+        setWaterLogs(JSON.parse(savedWater));
+      } catch (e) {
+        console.error('Failed to parse waterLogs:', e);
+      }
+    }
+  }, [hasMounted]);
+
+  const handleManualSave = () => {
+    try {
+      localStorage.setItem('plannerData', JSON.stringify(plannerData));
+      localStorage.setItem('waterLogs', JSON.stringify(waterLogs));
+
+      swal('Success', 'Your planner has been saved', 'success', {
+        timer: 2000,
+      });
+    } catch (error) {
+      console.error('Save failed:', error);
+      swal('Error', 'Failed to save planner. Please try again.', 'error');
+    }
+  };
 
   const handleDragStart = (
     e: React.DragEvent,
@@ -99,258 +130,59 @@ export default function PlannerClient({ mood }: Props) {
 
   const handleClearAll = () => {
     setPlannerData(createInitialPlannerData());
+    setWaterLogs(createInitialWaterLogs());
   };
 
-  const allowDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
+  if (!hasMounted) return null;
 
   return (
     <div className="content" style={{ backgroundColor: '#FFFFFF', paddingBottom: '2rem' }}>
       <Container fluid className="p-0 m-0">
-        <div className="d-flex justify-content-center" style={{ marginTop: '2rem' }}>
-          <div
-            style={{
-              backgroundColor: '#FFF7E6',
-              padding: '1rem',
-              textAlign: 'center',
-              fontStyle: 'italic',
-              color: '#A8442A',
-              fontWeight: 500,
-              borderRadius: '12px',
-              width: '75%',
-              maxWidth: '1200px',
-            }}
-          >
-            <p style={{ margin: 0 }}>
-              <span>You’re in a </span>
-              <strong>{mood || 'No Mood Selected'}</strong>
-              <span> mode — </span>
-              <span>{getMoodMessage(mood)}</span>
-            </p>
-          </div>
-        </div>
+        <MoodBanner mood={mood} />
+        <ViewToggleButtons view={view} setView={setView} handleClearAll={handleClearAll} />
 
-        <div style={{ textAlign: 'center', padding: '1rem' }}>
+        <div className="text-center mb-3">
           <button
             type="button"
-            onClick={() => setView(view === 'weekly' ? 'macros' : 'weekly')}
-            style={{
-              backgroundColor: '#00684A',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '0.5rem 1rem',
-              fontWeight: 600,
-              cursor: 'pointer',
-              marginRight: '1rem',
-            }}
+            onClick={handleManualSave}
+            className="btn btn-success"
+            style={{ fontWeight: 600, padding: '0.5rem 1rem' }}
           >
-            {view === 'weekly' ? 'Switch to Macros Overview' : 'Back to Weekly Plan'}
-          </button>
-          <button
-            type="button"
-            onClick={handleClearAll}
-            style={{
-              backgroundColor: '#A8442A',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '0.5rem 1rem',
-              fontWeight: 600,
-              cursor: 'pointer',
-            }}
-          >
-            Clear All
+            Save Planner
           </button>
         </div>
 
         <Row className="gx-3 gy-4 px-3 pb-5">
           <Col lg={3}>
-            <Card className="h-100">
-              <Card.Body>
-                <Card.Title style={{ color: '#00684A', fontSize: '1.1rem', fontWeight: 'bold' }}>
-                  Grindz Vault
-                </Card.Title>
-                <select
-                  className="form-select mb-3"
-                  value={selectedVendor ?? ''}
-                  onChange={(e) => setSelectedVendor(e.target.value || null)}
-                >
-                  <option value="">Select a Vendor</option>
-                  {vendorList.map((vendor) => (
-                    <option key={vendor} value={vendor}>
-                      {vendor}
-                    </option>
-                  ))}
-                </select>
-                {selectedVendor ? (
-                  <p className="text-muted" style={{ fontSize: '0.9rem' }}>
-                    No menu available yet for
-                    <br />
-                    <strong>{selectedVendor}</strong>
-                    .
-                  </p>
-                ) : (
-                  <p className="text-muted" style={{ fontSize: '0.9rem' }}>
-                    Select a vendor to view their meals.
-                  </p>
-                )}
-                <div
-                  draggable
-                  onDragStart={(e) => handleDragStart(e, { meal: 'Test Meal' })}
-                  style={{
-                    backgroundColor: '#FFF7E6',
-                    padding: '8px',
-                    borderRadius: '6px',
-                    marginTop: '12px',
-                    fontWeight: 500,
-                    fontSize: '0.95rem',
-                    color: '#A8442A',
-                    textAlign: 'center',
-                    cursor: 'grab',
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-                  }}
-                >
-                  🥗 Test Meal
-                </div>
-              </Card.Body>
-            </Card>
+            <GrindzVault
+              selectedVendor={selectedVendor}
+              setSelectedVendor={setSelectedVendor}
+              handleDragStart={handleDragStart}
+            />
           </Col>
 
           <Col lg={6}>
             <Card className="h-100" style={{ backgroundColor: '#FFF7E6', borderRadius: '12px' }}>
               <Card.Body>
                 <Card.Title
-                  style={{
-                    color: '#00684A',
-                    fontWeight: 'bold',
-                    fontSize: '1.5rem',
-                    textAlign: 'center',
-                    marginBottom: '1.5rem',
-                  }}
+                  className="text-center mb-4"
+                  style={{ color: '#00684A', fontWeight: 'bold' }}
                 >
                   {view === 'weekly' ? 'Weekly Meal Plan' : 'Macros Goal Overview'}
                 </Card.Title>
-
                 {/* weekly or macros */}
                 {view === 'weekly' ? (
-                  <Table bordered className="text-center align-middle mb-0">
-                    <thead>
-                      <tr>
-                        <th scope="col">Day</th>
-                        {mealTypes.map((mealHeader) => (
-                          <th key={mealHeader}>{mealHeader}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {days.map((day) => (
-                        <tr key={day}>
-                          <th style={{ backgroundColor: '#DCE7E2' }}>{day}</th>
-                          {mealTypes.map((mealType) => (
-                            <td
-                              key={`${day}-${mealType}`}
-                              onDrop={(e) => handleDrop(e, day, mealType)}
-                              onDragOver={allowDrop}
-                              style={{
-                                minHeight: '80px',
-                                backgroundColor: '#ffffffc9',
-                                border: '1px dotted #aaa',
-                                borderRadius: '8px',
-                                padding: '6px',
-                              }}
-                            >
-                              {plannerData[day][mealType].length > 0 ? (
-                                plannerData[day][mealType].map((mealName, idx, arr) => {
-                                  const occurrence = arr.slice(0, idx).filter((m) => m === mealName).length;
-                                  const uniqueKey = `${day}-${mealType}-${mealName}-${occurrence}`;
-
-                                  return (
-                                    <div
-                                      key={uniqueKey}
-                                      draggable
-                                      onDragStart={(e) => handleDragStart(e, {
-                                        meal: mealName,
-                                        fromDay: day,
-                                        fromMealType: mealType,
-                                        index: occurrence,
-                                      })}
-                                      style={{
-                                        backgroundColor: '#FFF7E6',
-                                        padding: '6px',
-                                        marginBottom: '4px',
-                                        borderRadius: '6px',
-                                        color: '#A8442A',
-                                        fontWeight: 500,
-                                        fontSize: '0.9rem',
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'center',
-                                      }}
-                                    >
-                                      <span>{mealName}</span>
-                                      <button
-                                        type="button"
-                                        aria-label={`Delete ${mealName} from ${mealType} on ${day}`}
-                                        onClick={() => handleDelete(day, mealType, occurrence)}
-                                        style={{
-                                          background: 'none',
-                                          border: 'none',
-                                          color: '#A8442A',
-                                          fontWeight: 'bold',
-                                          fontSize: '1rem',
-                                          marginLeft: '8px',
-                                          cursor: 'pointer',
-                                        }}
-                                      >
-                                        x
-                                      </button>
-                                    </div>
-                                  );
-                                })
-                              ) : (
-                                <span style={{ color: '#ccc', fontSize: '0.85rem' }}>Empty</span>
-                              )}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                  <MealPlannerTable
+                    days={days}
+                    mealTypes={mealTypes}
+                    plannerData={plannerData}
+                    handleDrop={handleDrop}
+                    allowDrop={(e) => e.preventDefault()}
+                    handleDragStart={handleDragStart}
+                    handleDelete={handleDelete}
+                  />
                 ) : (
-                  <>
-                    {['protein', 'carbs', 'fats'].map((macro) => {
-                      const value = currentMacros[macro as keyof typeof currentMacros];
-                      const goal = macroGoals[macro as keyof typeof macroGoals];
-                      const percent = Math.min((value / goal) * 100, 100);
-
-                      return (
-                        <div key={macro} style={{ marginBottom: '1.5rem' }}>
-                          <strong style={{ textTransform: 'capitalize', fontSize: '1.1rem' }}>
-                            {`${macro}: ${value}g / ${goal}g`}
-                          </strong>
-                          <div
-                            style={{
-                              backgroundColor: '#ddd',
-                              borderRadius: '6px',
-                              overflow: 'hidden',
-                              height: '20px',
-                              marginTop: '0.25rem',
-                            }}
-                          >
-                            <div
-                              style={{
-                                width: `${percent}%`,
-                                height: '100%',
-                                backgroundColor: '#00684A',
-                              }}
-                            />
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </>
+                  <MacrosOverview macroGoals={macroGoals} currentMacros={currentMacros} />
                 )}
               </Card.Body>
             </Card>
@@ -367,7 +199,10 @@ export default function PlannerClient({ mood }: Props) {
                 <p className="mb-1"><strong>Fat: 65g</strong></p>
                 <p className="mb-1"><strong>Calories: 1,850 kcal</strong></p>
                 <hr />
-                <WaterTracker />
+                <WaterTracker
+                  waterLogs={waterLogs}
+                  setWaterLogs={setWaterLogs}
+                />
               </Card.Body>
             </Card>
           </Col>

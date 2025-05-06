@@ -116,16 +116,38 @@ footer, footer a {
   border: none;
 }
 
+#break {
+  height: 1px !important;
+}
+
 #grindz-block a {
-  pointer-events: none;
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 #mood-block {
-  min-height: 400px;
+  min-height: 500px;
   border-radius: 10px;
 }
+
+.equal-height-card {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+}
+
+#mini-moodz {
+  color: #00684A;
+}
+
+#mini-moodz .card-body {
+  background: white;
+  color: #00684A;
+  border-radius: 10px;
+  border-color: #f1faf6;
+}
+
 
 #vegetarian-vibes {
   background: linear-gradient(to right, #A8D08D, #D4F1D7); /* Soft mint green to light pastel green */
