@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import VendorsList from '@/components/VendorsList';
+import VendorsClient from '@/components/VendorsClient';
 import { Container, Row, Col, Badge } from 'react-bootstrap';
 
 const VendorsPage = async () => {
@@ -23,20 +23,22 @@ const VendorsPage = async () => {
   return (
     <Container fluid className="py-3">
       {/* Banner */}
-      <Container id="allergy-banner" className="p-4 mt-5 mb-5">
+      <Container id="allergy-banner" className="p-4 mt-5 mb-3">
         <Row>
           <Col className="text-center px-5">
             <h1>Vendors Page</h1>
             <p>
-              Here you can look at lists of vendors and their menus. You can also check if they are currently
+              Here you can look at lists of vendors and their menus.
+              <br />
+              You can also check if they are currently
               {' '}
-              <Badge bg="success" className="me-2" style={{ fontSize: '0.8rem', verticalAlign: 'middle' }}>
+              <Badge bg="success" className="" style={{ fontSize: '0.6rem', verticalAlign: 'middle' }}>
                 Open
               </Badge>
               {' '}
               or
               {' '}
-              <Badge bg="danger" className="me-2" style={{ fontSize: '0.8rem', verticalAlign: 'middle' }}>
+              <Badge bg="danger" className="me-1" style={{ fontSize: '0.6rem', verticalAlign: 'middle' }}>
                 Closed
               </Badge>
               !
@@ -46,7 +48,7 @@ const VendorsPage = async () => {
       </Container>
 
       {/* Render Vendors List */}
-      <VendorsList vendors={vendors} />
+      <VendorsClient vendors={vendors} />
     </Container>
   );
 };

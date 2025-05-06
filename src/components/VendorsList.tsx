@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Col, Container, Row, Badge, Card } from 'react-bootstrap';
 
 type Vendor = {
@@ -64,7 +65,19 @@ const isOpen = (hours: string) => {
   return false;
 };
 
-const VendorsList = ({ vendors }: { vendors: Vendor[] }) => {
+const VendorsList = ({
+  vendors,
+  saveVendorList,
+}: {
+  vendors: Vendor[];
+  saveVendorList: (list: { id: number; name: string }[]) => void;
+}) => {
+  useEffect(() => {
+    // Save the list of vendors (name and ID)
+    const vendorList = vendors.map((vendor) => ({ id: vendor.id, name: vendor.name }));
+    saveVendorList(vendorList);
+  }, [vendors, saveVendorList]);
+
   // Sort vendors by open status and alphabetically within each group
   const sortedVendors = [...vendors].sort((a, b) => {
     const aIsOpen = isOpen(a.hours);
@@ -88,14 +101,14 @@ const VendorsList = ({ vendors }: { vendors: Vendor[] }) => {
           const status = isOpen(vendor.hours) ? 'Open' : 'Closed';
 
           return (
-            <Col key={vendor.id} md={4} className="mb-4">
+            <Col key={vendor.id} md={4} className="mb-4" id={`vendor-${vendor.id}`}>
               <Card>
-                <Card.Body>
+                <Card.Body id="quick-bento-run">
                   <Card.Title className="d-flex justify-content-between align-items-center">
-                    {vendor.name}
+                    <h2>{vendor.name}</h2>
                     <Badge
                       bg={status === 'Open' ? 'success' : 'danger'}
-                      style={{ fontSize: '0.8rem', verticalAlign: 'middle' }}
+                      style={{ fontSize: '0.8rem', verticalAlign: 'top' }}
                     >
                       {status}
                     </Badge>
