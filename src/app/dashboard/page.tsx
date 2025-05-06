@@ -55,7 +55,7 @@ const DashboardPage = async () => {
   return (
     <Container fluid className="py-3">
       {/* Banner */}
-      <Container id="allergy-banner" className="p-4 mt-5 mb-5">
+      <Container id="allergy-banner" className="pt-4 pb-1 mt-3 mb-3">
         <Row>
           <Col className="text-center px-5">
             <h1>Your Grindz Mood</h1>
