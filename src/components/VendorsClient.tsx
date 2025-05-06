@@ -48,10 +48,10 @@ const VendorsClient = ({ vendors }: { vendors: Vendor[] }) => {
                 <InputGroup>
                   <InputGroup.Text
                     style={{
-                      backgroundColor: 'white',
-                      color: 'black',
+                      backgroundColor: '#2b6555',
+                      color: 'white',
                       borderColor: '#2b6555',
-                      borderWidth: '1px',
+                      borderWidth: '1.5px',
                     }}
                   >
                     <Search />
@@ -62,7 +62,7 @@ const VendorsClient = ({ vendors }: { vendors: Vendor[] }) => {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     style={{
-                      borderWidth: '1px',
+                      borderWidth: '1.5px',
                       borderColor: '#2b6555',
                     }}
                   />

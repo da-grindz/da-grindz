@@ -32,13 +32,13 @@ const VendorsPage = async () => {
               <br />
               You can also check if they are currently
               {' '}
-              <Badge bg="success" className="" style={{ fontSize: '0.8rem', verticalAlign: 'top' }}>
+              <Badge bg="success" className="" style={{ fontSize: '0.6rem', verticalAlign: 'middle' }}>
                 Open
               </Badge>
               {' '}
               or
               {' '}
-              <Badge bg="danger" className="me-1" style={{ fontSize: '0.8rem', verticalAlign: 'top' }}>
+              <Badge bg="danger" className="me-1" style={{ fontSize: '0.6rem', verticalAlign: 'middle' }}>
                 Closed
               </Badge>
               !
