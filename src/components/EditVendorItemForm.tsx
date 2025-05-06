@@ -23,8 +23,14 @@ type EditVendorItemFormProps = {
   item: {
     id: string;
     name: string;
-    price: number;
-    description: string;
+    image: string;
+    alt: string;
+    // price: number;
+    // description: string;
+    calories: number;
+    protein: number;
+    fat: number;
+    carbs: number;
     allergies: string[]; // assume these are just names of existing allergies
     vendorId: string;
   };
@@ -41,8 +47,8 @@ const EditVendorItemForm = ({ item }: EditVendorItemFormProps) => {
     resolver: yupResolver(EditVendorItemSchema),
     defaultValues: {
       name: item.name,
-      price: item.price,
-      description: item.description,
+      // price: item.price,
+      // description: item.description,
       allergies: item.allergies,
       vendorId: item.vendorId,
       itemId: item.id,
@@ -78,12 +84,6 @@ const EditVendorItemForm = ({ item }: EditVendorItemFormProps) => {
                   <Form.Label>Item Name</Form.Label>
                   <Form.Control type="text" {...register('name')} isInvalid={!!errors.name} />
                   <Form.Control.Feedback type="invalid">{errors.name?.message}</Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>Price</Form.Label>
-                  <Form.Control type="number" step="0.01" {...register('price')} isInvalid={!!errors.price} />
-                  <Form.Control.Feedback type="invalid">{errors.price?.message}</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">

@@ -131,11 +131,10 @@ export async function addPreferences(preferences: { owner: string; allergies: st
     throw new Error('Failed to update preferences. Please try again.');
   }
 }
-
 /**
  * Adds a new menu item to the database.
  * @param VendorItem, an object with the following properties: id, name, image, alt,
- * calories, fat, carbs, protein, eatery, eateryId, allergies.
+ * calories, fat, carbs, protein, price, description, eatery, eateryId, allergies.
  */
 export async function addVendorItem(item: {
   owner: string;
@@ -143,13 +142,15 @@ export async function addVendorItem(item: {
   name: string;
   image: string;
   alt: string;
+  price: number;
+  description: string;
   calories: number;
   fat: number;
   carbs: number;
   protein: number;
   allergies: string[];
 }) {
-  const { owner, vendorId, name, image, alt, calories, fat, carbs, protein, allergies } = item;
+  const { owner, vendorId, name, image, alt, price, description, calories, fat, carbs, protein, allergies } = item;
 
   if (!owner) {
     throw new Error('Missing owner email.');
@@ -173,6 +174,8 @@ export async function addVendorItem(item: {
         name,
         image,
         alt,
+        price,
+        description,
         calories,
         fat,
         carbs,
@@ -203,13 +206,16 @@ export async function addVendorItem(item: {
 /**
  * Edits an existing menu item in the database.
  * @param VendorItem, an object with the following properties: id, name, image, alt,
- * calories, fat, carbs, protein, eatery, eateryId, allergies.
+ * calories, fat, carbs, protein, price, description, eatery, eateryId, allergies.
  */
 export async function editVendorItem(item: {
   id: number;
   name: string;
   image: string;
   alt: string;
+  vendorId: string;
+  price: number;
+  description: string;
   calories: number;
   fat: number;
   carbs: number;
@@ -221,6 +227,8 @@ export async function editVendorItem(item: {
     name,
     image,
     alt,
+    price,
+    description,
     calories,
     fat,
     carbs,
@@ -238,6 +246,8 @@ export async function editVendorItem(item: {
         name,
         image,
         alt,
+        price,
+        description,
         calories,
         fat,
         carbs,
@@ -245,7 +255,6 @@ export async function editVendorItem(item: {
         allergies: {
           // Connect or create allergies, similar to how we did for addVendorItem
           connectOrCreate: allergies.map((allergyName) => ({
-            // set: [], // Clear all existing allergies
             where: { name: allergyName }, // Unique field in Allergy model
             create: { name: allergyName }, // Create allergy if it doesn't exist
           })),

@@ -9,15 +9,16 @@ datasource db {
 }
 
 model User {
-  id           Int        @id @default(autoincrement())
-  email        String     @unique
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
   password     String
-  role         Role       @default(USER)
+  role         Role           @default(USER)
   grindzMoodId Int?
   eatery       Eatery?
-  grindzMood   Mood?      @relation(fields: [grindzMoodId], references: [id])
+  PlannerEntry PlannerEntry[]
+  grindzMood   Mood?          @relation(fields: [grindzMoodId], references: [id])
   waterLogs    WaterLog[]
-  allergies    Allergy[]  @relation("UserAllergies")
+  allergies    Allergy[]      @relation("UserAllergies")
 }
 
 model Stuff {
@@ -50,17 +51,19 @@ model Eatery {
 }
 
 model VendorItem {
-  id        Int       @id @default(autoincrement())
-  name      String
-  image     String
-  alt       String
-  eateryId  Int
-  calories  Int
-  carbs     Int
-  fat       Int
-  protein   Int
-  eatery    Eatery    @relation(fields: [eateryId], references: [id])
-  allergies Allergy[] @relation("VendorItemAllergies")
+  id          Int       @id @default(autoincrement())
+  name        String
+  image       String
+  alt         String
+  eateryId    Int
+  calories    Int
+  carbs       Int
+  fat         Int
+  protein     Int
+  description String    @default("No description provided")
+  price       Float     @default(0.0)
+  eatery      Eatery    @relation(fields: [eateryId], references: [id])
+  allergies   Allergy[] @relation("VendorItemAllergies")
 }
 
 model VendingMachine {
@@ -108,6 +111,16 @@ model WaterLog {
   user   User     @relation(fields: [userId], references: [id])
 
   @@unique([userId, date])
+}
+
+model PlannerEntry {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  day       String
+  mealType  String
+  meal      String
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id])
 }
 
 enum Role {
