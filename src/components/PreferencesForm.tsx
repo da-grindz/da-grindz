@@ -94,7 +94,6 @@ const PreferencesForm: React.FC = () => {
                         type="checkbox"
                         label={allergy}
                         value={allergy}
-                        defaultChecked={false} // Replace with logic to set default checked state if needed
                         {...register('allergies')}
                       />
                     ))}
