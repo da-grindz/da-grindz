@@ -9,16 +9,16 @@ datasource db {
 }
 
 model User {
-  id           Int            @id @default(autoincrement())
-  email        String         @unique
-  password     String
-  role         Role           @default(USER)
-  grindzMoodId Int?
-  eatery       Eatery?
-  PlannerEntry PlannerEntry[]
-  grindzMood   Mood?          @relation(fields: [grindzMoodId], references: [id])
-  waterLogs    WaterLog[]
-  allergies    Allergy[]      @relation("UserAllergies")
+  id             Int            @id @default(autoincrement())
+  email          String         @unique
+  password       String
+  role           Role           @default(USER)
+  grindzMoodId   Int?
+  eatery         Eatery?
+  plannerEntries PlannerEntry[]
+  grindzMood     Mood?          @relation(fields: [grindzMoodId], references: [id])
+  waterLogs      WaterLog[]
+  allergies      Allergy[]      @relation("UserAllergies")
 }
 
 model Stuff {
@@ -57,13 +57,12 @@ model VendorItem {
   alt         String
   eateryId    Int
   calories    Int
-  description String  @default("No description provided")
-  fat         Int
   carbs       Int
-  protein     Int 
-  price       Float   @default(0.0)
-  eatery      Eatery  @relation(fields: [eateryId], references: [id])
-  eateryId    Int
+  fat         Int
+  protein     Int
+  description String    @default("No description provided")
+  price       Float     @default(0.0)
+  eatery      Eatery    @relation(fields: [eateryId], references: [id])
   allergies   Allergy[] @relation("VendorItemAllergies")
 }
 
@@ -121,7 +120,7 @@ model PlannerEntry {
   mealType  String
   meal      String
   createdAt DateTime @default(now())
-  User      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 enum Role {
