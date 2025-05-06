@@ -90,12 +90,12 @@ const VendorsList = ({ vendors }: { vendors: Vendor[] }) => {
           return (
             <Col key={vendor.id} md={4} className="mb-4">
               <Card>
-                <Card.Body>
+                <Card.Body id="quick-bento-run">
                   <Card.Title className="d-flex justify-content-between align-items-center">
-                    {vendor.name}
+                    <h2>{vendor.name}</h2>
                     <Badge
                       bg={status === 'Open' ? 'success' : 'danger'}
-                      style={{ fontSize: '0.8rem', verticalAlign: 'middle' }}
+                      style={{ fontSize: '0.8rem', verticalAlign: 'top' }}
                     >
                       {status}
                     </Badge>

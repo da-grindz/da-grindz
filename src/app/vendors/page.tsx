@@ -28,15 +28,17 @@ const VendorsPage = async () => {
           <Col className="text-center px-5">
             <h1>Vendors Page</h1>
             <p>
-              Here you can look at lists of vendors and their menus. You can also check if they are currently
+              Here you can look at lists of vendors and their menus.
+              <br />
+              You can also check if they are currently
               {' '}
-              <Badge bg="success" className="me-2" style={{ fontSize: '0.8rem', verticalAlign: 'middle' }}>
+              <Badge bg="success" className="" style={{ fontSize: '0.8rem', verticalAlign: 'top' }}>
                 Open
               </Badge>
               {' '}
               or
               {' '}
-              <Badge bg="danger" className="me-2" style={{ fontSize: '0.8rem', verticalAlign: 'middle' }}>
+              <Badge bg="danger" className="me-1" style={{ fontSize: '0.8rem', verticalAlign: 'top' }}>
                 Closed
               </Badge>
               !
