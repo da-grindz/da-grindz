@@ -182,7 +182,7 @@ footer, footer a {
   border-radius: 5px;
 }
 
-#preference-page .card-footer, #signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
+#vendor-item-form .card-footer, #preference-page .card-footer, #signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
   background: #BFD0C9;
 }
 
