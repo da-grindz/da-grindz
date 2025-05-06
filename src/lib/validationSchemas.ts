@@ -21,7 +21,7 @@ export const PreferencesSchema = Yup.object({
   owner: Yup.string().required(),
 });
 
-const allowedAllergies = [
+export const allowedAllergies = [
   'Peanuts',
   'Tree Nuts',
   'Milk',
