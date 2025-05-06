@@ -320,14 +320,16 @@ async function main() {
       items: [
         {
           name: 'Orange Dream Machine',
-          image: 'http://devjj.jambajuice.ph/wp-content/uploads/ODM.jpg',
+          image: 'https://tb-static.uber.com/prod/image-proc/processed_images/26442f12f17030'
+          + '126de3721d6fb13253/0fb376d1da56c05644450062d25c5c84.jpeg',
           alt: 'Orange Dream Machine from Jamba Juice',
           source: 'Jamba Juice - Orange Dream Machine',
           nutrition: 'Calories: 400 | Protein: 6g | Fat: 0g | Carbs: 93g',
         },
         {
           name: 'Aloha Pineapple',
-          image: 'http://devjj.jambajuice.ph/wp-content/uploads/Aloha-Pineapple.jpg',
+          image: 'https://img.cdn4dd.com/p/fit=cover,width=1200,height=1200,format=auto,qual'
+          + 'ity=90/media/photosV2/3fea9618-001e-4a05-8725-85bab234bb95-retina-large.png',
           alt: 'Aloha Pineapple from Jamba Juice',
           source: 'Jamba Juice - Aloha Pineapple',
           nutrition: 'Calories: 390 | Protein: 7g | Fat: 0g | Carbs: 92g',
@@ -451,7 +453,7 @@ async function main() {
 
   // Loop through each mood and add items if they don't already exist
   for (const mood of moods) {
-    console.log(`  Adding items to mood: ${mood.name}`);
+    console.log(`  Adding/Updating items to mood: ${mood.name}`);
 
     // Check if mood exists
     const existingMood = await prisma.mood.findUnique({
@@ -459,12 +461,14 @@ async function main() {
       include: { items: true }, // Include items of the mood
     });
 
-    // If the mood exists, add new items
+    // If the mood exists, add new items or update existing ones
     if (existingMood) {
       for (const item of mood.items) {
         // Check if the item already exists in the mood
         const existingItem = existingMood.items.find(i => i.name === item.name);
+
         if (!existingItem) {
+          // Create new item if it doesn't exist
           await prisma.dashboardItem.create({
             data: {
               name: item.name,
@@ -473,6 +477,15 @@ async function main() {
               source: item.source,
               nutrition: item.nutrition,
               moodId: existingMood.id, // Link item to the existing mood
+            },
+          });
+        } else {
+          // Update existing item if it already exists
+          await prisma.dashboardItem.update({
+            where: { id: existingItem.id },
+            data: {
+              image: item.image, // Update the image URL
+              nutrition: item.nutrition, // Update nutrition (or any other field)
             },
           });
         }
