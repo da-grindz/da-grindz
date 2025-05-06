@@ -65,15 +65,20 @@ const isOpen = (hours: string) => {
 };
 
 const VendorsList = ({ vendors }: { vendors: Vendor[] }) => {
-  // Sort vendors by open status
+  // Sort vendors by open status and alphabetically within each group
   const sortedVendors = [...vendors].sort((a, b) => {
     const aIsOpen = isOpen(a.hours);
     const bIsOpen = isOpen(b.hours);
 
-    if (aIsOpen === bIsOpen) {
-      return a.name.localeCompare(b.name); // Secondary sort alphabetically
+    if (aIsOpen && bIsOpen) {
+      // Both are open, sort alphabetically
+      return a.name.localeCompare(b.name);
+    } if (!aIsOpen && !bIsOpen) {
+      // Both are closed, sort alphabetically
+      return a.name.localeCompare(b.name);
     }
-    return aIsOpen ? -1 : 1; // Open vendors come first
+    // One is open and the other is closed, open comes first
+    return aIsOpen ? -1 : 1;
   });
 
   return (
