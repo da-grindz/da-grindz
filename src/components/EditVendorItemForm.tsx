@@ -7,31 +7,31 @@ import swal from 'sweetalert';
 import { EditVendorItemSchema } from '@/lib/validationSchemas';
 import { editVendorItem } from '@/lib/dbActions';
 
-const allergiesList = [
-  'Peanuts',
-  'Tree Nuts',
-  'Milk',
-  'Fish',
-  'Shellfish',
-  'Wheat',
-  'Gluten',
-  'Sesame',
-  'Mustard',
-];
+// const allergiesList = [
+//   'Peanuts',
+//   'Tree Nuts',
+//   'Milk',
+//   'Fish',
+//   'Shellfish',
+//   'Wheat',
+//   'Gluten',
+//   'Sesame',
+//   'Mustard',
+// ];
 
 type EditVendorItemFormProps = {
   item: {
-    id: string;
+    id: number;
     name: string;
     image: string;
     alt: string;
-    // price: number;
-    // description: string;
+    price: number;
+    description: string;
     calories: number;
     protein: number;
     fat: number;
     carbs: number;
-    allergies: string[]; // assume these are just names of existing allergies
+    allergies: string[];
     vendorId: string;
   };
 };
@@ -41,23 +41,31 @@ const EditVendorItemForm = ({ item }: EditVendorItemFormProps) => {
     register,
     handleSubmit,
     reset,
-    // setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(EditVendorItemSchema),
     defaultValues: {
+      id: item.id, // Include the id field
       name: item.name,
-      // price: item.price,
-      // description: item.description,
+      image: item.image,
+      alt: item.alt,
+      price: item.price,
+      description: item.description,
+      calories: item.calories,
+      protein: item.protein,
+      fat: item.fat,
+      carbs: item.carbs,
       allergies: item.allergies,
       vendorId: item.vendorId,
-      itemId: item.id,
     },
   });
 
   const onSubmit = async (data: any) => {
+    console.log('Submitted data:', data); // Debugging log
+
     const sanitizedData = {
       ...data,
+      id: parseInt(data.id, 10), // Ensure id is a number
       allergies: (data.allergies || []).filter((a: unknown): a is string => !!a),
     };
 
@@ -65,13 +73,13 @@ const EditVendorItemForm = ({ item }: EditVendorItemFormProps) => {
       await editVendorItem(sanitizedData);
       swal('Success', 'Item updated successfully', 'success');
     } catch (err) {
-      console.error(err);
+      console.error('Error editing vendor item:', err);
       swal('Error', 'Failed to update item', 'error');
     }
   };
 
   return (
-    <Container className="mt-5 py-3">
+    <Container id="vendor-item-form" className="mt-5 py-3">
       <Row className="justify-content-center">
         <Col xs={6}>
           <Card>
@@ -87,29 +95,24 @@ const EditVendorItemForm = ({ item }: EditVendorItemFormProps) => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control as="textarea" rows={3} {...register('description')} isInvalid={!!errors.description} />
-                  <Form.Control.Feedback type="invalid">{errors.description?.message}</Form.Control.Feedback>
+                  <Form.Label>Image Link</Form.Label>
+                  <Form.Control type="text" {...register('image')} isInvalid={!!errors.image} />
+                  <Form.Control.Feedback type="invalid">{errors.image?.message}</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Allergies</Form.Label>
-                  <div>
-                    {allergiesList.map((allergy) => (
-                      <Form.Check
-                        key={allergy}
-                        type="checkbox"
-                        label={allergy}
-                        value={allergy}
-                        defaultChecked={item.allergies.includes(allergy)}
-                        {...register('allergies')}
-                      />
-                    ))}
-                  </div>
+                  <Form.Label>Alt Text</Form.Label>
+                  <Form.Control type="text" {...register('alt')} isInvalid={!!errors.alt} />
+                  <Form.Control.Feedback type="invalid">{errors.alt?.message}</Form.Control.Feedback>
                 </Form.Group>
 
-                <input type="hidden" value={item.vendorId} {...register('vendorId')} />
-                <input type="hidden" value={item.id} {...register('itemId')} />
+                <Form.Group className="mb-3">
+                  <Form.Label>Price</Form.Label>
+                  <Form.Control type="number" step="0.01" {...register('price')} isInvalid={!!errors.price} />
+                  <Form.Control.Feedback type="invalid">{errors.price?.message}</Form.Control.Feedback>
+                </Form.Group>
+
+                <input type="hidden" value={item.id} {...register('id')} />
 
                 <Row>
                   <Col>

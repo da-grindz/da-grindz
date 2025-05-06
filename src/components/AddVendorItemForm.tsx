@@ -48,7 +48,7 @@ const AddVendorItemForm = ({ vendorId, owner }: { vendorId: string; owner: strin
   };
 
   return (
-    <Container id="add-vendor-item-form" className="mt-5 py-3">
+    <Container id="vendor-item-form" className="mt-5 py-3">
       <Row className="justify-content-center mb-5">
         <Col xs={6}>
           <Card>

@@ -72,6 +72,7 @@ export const AddVendorItemSchema = Yup.object({
 });
 
 export const EditVendorItemSchema = Yup.object({
+  id: Yup.number().required('Item ID is required'),
   image: Yup.string().url('Image must be a valid URL').required('Image URL is required'),
   alt: Yup.string().required('Alt text is required'),
   calories: Yup.number().min(0, 'Calories must be 0 or more').required('Calories are required'),
@@ -85,5 +86,4 @@ export const EditVendorItemSchema = Yup.object({
     .of(Yup.string().oneOf(allowedAllergies))
     .default([]),
   vendorId: Yup.string().required('Vendor ID is required'),
-  itemId: Yup.string().required('Item ID is required'), // for identifying the item being edited
 });
