@@ -89,9 +89,11 @@ model VendorItem {
   image       String
   alt         String
   calories    Int
+  description String  @default("No description provided")
   fat         Int
   carbs       Int
   protein     Int 
+  price       Float   @default(0.0)
   eatery      Eatery  @relation(fields: [eateryId], references: [id])
   eateryId    Int
   allergies   Allergy[] @relation("VendorItemAllergies")
