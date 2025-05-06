@@ -139,7 +139,7 @@ export async function addPreferences(preferences: { owner: string; allergies: st
  */
 export async function addVendorItem(item: {
   owner: string;
-  eateryName: string;
+  vendorId: string;
   name: string;
   image: string;
   alt: string;
@@ -147,40 +147,27 @@ export async function addVendorItem(item: {
   fat: number;
   carbs: number;
   protein: number;
-  allergies: string[]; // allergy names
+  allergies: string[];
 }) {
-  const {
-    owner,
-    eateryName,
-    name,
-    image,
-    alt,
-    calories,
-    fat,
-    carbs,
-    protein,
-    allergies,
-  } = item;
+  const { owner, vendorId, name, image, alt, calories, fat, carbs, protein, allergies } = item;
+
+  if (!owner) {
+    throw new Error('Missing owner email.');
+  }
 
   console.log('Adding vendor item:', item);
 
   try {
-    // Find the user
-    const user = await prisma.user.findUnique({
-      where: { email: owner },
-      include: { eatery: true },
+    // Ensure the vendorId is valid
+    const eatery = await prisma.eatery.findUnique({
+      where: { id: parseInt(vendorId, 10) },
     });
 
-    if (!user || !user.eatery) {
-      throw new Error('User or associated eatery not found.');
+    if (!eatery) {
+      throw new Error('Eatery not found.');
     }
 
-    // Optional: verify the eatery matches the vendor’s own eatery name
-    if (user.eatery.name !== eateryName) {
-      throw new Error('User is not authorized to add items to this eatery.');
-    }
-
-    // Create the VendorItem
+    // Add the vendor item to the database
     const newItem = await prisma.vendorItem.create({
       data: {
         name,
@@ -191,11 +178,11 @@ export async function addVendorItem(item: {
         carbs,
         protein,
         eatery: {
-          connect: { id: user.eatery.id },
+          connect: { id: parseInt(vendorId, 10) },
         },
         allergies: {
           connectOrCreate: allergies.map((allergyName) => ({
-            where: { name: allergyName }, // This must be the field that is unique in your Allergy model
+            where: { name: allergyName },
             create: { name: allergyName },
           })),
         },
