@@ -22,6 +22,10 @@
     cursor: pointer;
     margin-right: 1rem;
   }
+
+  .toggleButton:hover {
+    background-color: #004d38;
+  }
   
   .clearButton {
     background-color: #A8442A;
@@ -31,6 +35,10 @@
     padding: 0.5rem 1rem;
     font-weight: 600;
     cursor: pointer;
+  }
+
+  .clearButton:hover {
+    background-color: #872f1c;
   }
   
   /* GrindzVault */
@@ -92,3 +100,52 @@
     height: 100%;
     background-color: #00684A;
   }
+
+  /* Set Macro Goals Form */
+.macroForm {
+    margin: 0 auto 2rem auto;
+    padding: 1rem;
+    background-color: #F8F9FA;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .macroInputGroup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+  
+  .macroInputGroup label {
+    flex: 1;
+    font-weight: 600;
+    color: #00684A;
+    margin-right: 1rem;
+  }
+  
+  .macroInput {
+    flex: 1;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+  }
+  
+  .saveButton {
+    background-color: #00684A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+
+  .saveButton:hover {
+    background-color: #004d38;
+  }
+  
