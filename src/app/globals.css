@@ -240,3 +240,10 @@ footer, footer a {
 .custom-dropdown-menu .dropdown-item {
   color: #2b6555 !important;
 }
+
+.colorlink:hover {
+  color: #2b6555 !important;
+}
+.colorlink::cue{
+  color: #2b6555 !important;
+}

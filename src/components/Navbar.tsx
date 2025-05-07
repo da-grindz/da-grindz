@@ -36,27 +36,25 @@ const NavBar: React.FC = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
             {/* Home Link */}
-            <Nav.Link href="/" active={pathName === '/'}>Home</Nav.Link>
+            <Nav.Link href="/" active={pathName === '/'} className="colorlink">Home</Nav.Link>
+
+            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+            <Nav.Link href="/planner">Planner</Nav.Link>
+            <Nav.Link href="/preferences">Preferences</Nav.Link>
 
             {/* Links Dropdown */}
-            <NavDropdown title="Links" id="links-dropdown">
-              <NavDropdown.Item href="/dashboard" active={pathName === '/dashboard'}>
-                Dashboard
+            <NavDropdown title="More" id="links-dropdown">
+              <NavDropdown.Item href="/vendors" active={pathName === '/vendors'}>
+                Vendors List
               </NavDropdown.Item>
-              <NavDropdown.Item href="/planner" active={pathName === '/planner'}>
-                Planner
+              <NavDropdown.Item href="/map" active={pathName === '/map'}>
+                Map
               </NavDropdown.Item>
               <NavDropdown.Item href="/grindz-mood" active={pathName === '/grindz-mood'}>
                 What&apos;s Your Grindz Mood?
               </NavDropdown.Item>
               <NavDropdown.Item href="/allergies" active={pathName === '/allergies'}>
                 Got Allergies?
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/preferences" active={pathName === '/preferences'}>
-                Preferences Editor
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/vendors" active={pathName === '/vendormenu'}>
-                Vendor Menu
               </NavDropdown.Item>
             </NavDropdown>
 
