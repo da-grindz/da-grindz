@@ -17,7 +17,7 @@ const EditUserRoleAndEateryForm = ({
   email,
   currentRole,
   currentEateryName,
-  onUserUpdated = undefined, // Default parameter
+  onUserUpdated,
 }: EditUserRoleAndEateryFormProps) => {
   const [showModal, setShowModal] = useState(false);
   const [newRole, setNewRole] = useState(currentRole);

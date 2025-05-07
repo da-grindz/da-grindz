@@ -1,9 +1,6 @@
+/* eslint-disable import/prefer-default-export */
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-
-export default function helperFunction() {
-  return 'This is a helper function';
-}
 
 export async function GET() {
   try {
@@ -11,6 +8,9 @@ export async function GET() {
       select: {
         id: true,
         name: true,
+      },
+      orderBy: {
+        name: 'asc', // Sort by name in ascending order
       },
     });
     return NextResponse.json(eateries);

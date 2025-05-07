@@ -326,7 +326,7 @@ export async function updateUserRoleAndEatery(userId: number, role: string, eate
 }
 
 /**
- * Fetches all eateries from the database.
+ * Fetches all eateries from the database, sorted by name.
  */
 export async function getAllEateries() {
   try {
@@ -334,6 +334,9 @@ export async function getAllEateries() {
       select: {
         id: true,
         name: true,
+      },
+      orderBy: {
+        name: 'asc',
       },
     });
     return eateries;

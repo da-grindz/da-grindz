@@ -1,27 +1,30 @@
-import { getServerSession } from 'next-auth';
+'use client';
+
+import { useEffect, useState } from 'react';
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import { prisma } from '@/lib/prisma';
-import { adminProtectedPage } from '@/lib/page-protection';
-import authOptions from '@/lib/authOptions';
 import EditUserAdmin from '@/components/EditUserAdmin';
 
-const AdminPage = async () => {
-  const session = await getServerSession(authOptions);
-  adminProtectedPage(
-    session as {
-      user: { email: string; id: string; randomKey: string };
-    } | null,
-  );
+const AdminPage = () => {
+  interface User {
+    id: number;
+    email: string;
+    role: string;
+    eatery?: {
+      name: string;
+    };
+  }
 
-  const users = await prisma.user.findMany({
-    include: {
-      eatery: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
+  const [users, setUsers] = useState<User[]>([]);
+
+  const fetchUsers = async () => {
+    const response = await fetch('/api/admin/users'); // Create an API route to fetch users
+    const data = await response.json();
+    setUsers(data);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   return (
     <main>
@@ -52,6 +55,7 @@ const AdminPage = async () => {
                         email={user.email}
                         currentRole={user.role}
                         currentEateryName={user.eatery?.name || ''}
+                        onUserUpdated={fetchUsers} // Pass the callback
                       />
                     </td>
                   </tr>
