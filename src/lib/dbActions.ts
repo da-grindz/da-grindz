@@ -1,6 +1,6 @@
 'use server';
 
-import { Stuff, Condition } from '@prisma/client';
+import { Stuff, Condition, Role } from '@prisma/client';
 import { hash } from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { prisma } from './prisma';
@@ -287,3 +287,61 @@ export const deleteVendorItem = async (id: number) => {
     throw error;
   }
 };
+
+/**
+ * Updates a user's role and associated eatery name.
+ * @param userId, the ID of the user to update.
+ * @param role, the new role to assign to the user.
+ * @param eateryName, the new eatery name to associate with the user.
+ */
+export async function updateUserRoleAndEatery(userId: number, role: string, eateryName: string) {
+  console.log(`Updating user ID ${userId} with role ${role} and eatery name ${eateryName}`);
+
+  try {
+    const eatery = await prisma.eatery.findUnique({
+      where: { name: eateryName },
+    });
+
+    if (!eatery) {
+      throw new Error(`Eatery with name "${eateryName}" does not exist.`);
+    }
+
+    // Update the user's role and associate the eatery
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        role: role as Role,
+        eatery: {
+          connect: { id: eatery.id }, // Connect the user to the eatery
+        },
+      },
+    });
+
+    console.log('Updated user:', updatedUser);
+    return updatedUser;
+  } catch (error) {
+    console.error('Error updating user role and eatery:', error);
+    throw new Error('Failed to update user role and eatery. Please try again.');
+  }
+}
+
+/**
+ * Fetches all eateries from the database, sorted by name.
+ */
+export async function getAllEateries() {
+  try {
+    const eateries = await prisma.eatery.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+      orderBy: {
+        name: 'asc',
+      },
+    });
+    return eateries;
+  } catch (error) {
+    console.error('Error fetching eateries:', error);
+    throw new Error('Failed to fetch eateries. Please try again.');
+  }
+}
