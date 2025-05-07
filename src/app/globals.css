@@ -58,11 +58,18 @@ body {
   padding-bottom: 10px;
 }
 
+.landingimage {
+  border: 4px solid white;
+  margin: 10px 0 20px 0;
+  box-shadow: 0 8px 15px rgba(156, 159, 164, 0.6);
+}
+
 .landingcontainer {
   background-color: rgba(255, 255, 255, 0.778);
   padding: 20px;
   margin-bottom: 40px;
   border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(156, 159, 164, 0.6);
 }
 
 .landingbutton {
@@ -72,6 +79,32 @@ body {
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(94, 138, 112, 0.6);
+}
+
+.landingbutton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(132, 209, 164, 0.6);
+  color: white;
+}
+
+/*newbutton on landing page*/
+.cool-button {
+  background: linear-gradient(45deg, #b4e7d9, #2b6555);
+  color: white !important;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(132, 209, 164, 0.6);
+}
+
+.cool-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(132, 209, 164, 0.6);
 }
 
 #landing-page a {
@@ -173,7 +206,7 @@ footer, footer a {
   color: #FF6347;
 }
 
-#modalButton, #adminpage button, #vendor-item-form button, #preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
+#vendor-item-form button, #preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
   background-color: #2b6555 !important;
   color: #FFF !important;
   border: white !important;
@@ -182,13 +215,14 @@ footer, footer a {
   border-radius: 5px;
 }
 
-#adminpage .card-footer, #vendor-item-form .card-footer, #preference-page .card-footer, #signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
+#vendor-item-form .card-footer, #preference-page .card-footer, #signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
   background: #BFD0C9;
 }
 
-#adminpage .card-body, #vendor-item-form .card-body, #preference-page .card-body, #signin-page .card-body, #change-password-page .card-body, #signup-page .card-body {
+#vendor-item-form .card-body, #preference-page .card-body, #signin-page .card-body, #change-password-page .card-body, #signup-page .card-body {
   background: #DCE7E2;
 }
+
 
 #adminpage .card, #vendor-item-form .card, #signin-page .card, #change-password-page .card, #signup-page .card {
   background: #DCE7E2;
@@ -210,14 +244,14 @@ footer, footer a {
   padding-bottom: 50px;
 }
 
-#adminpage, #vendor-item-form, #preference-page, #signin-page, #change-password-page, #signup-page, #signout-page {
+#vendor-item-form, #preference-page, #signin-page, #change-password-page, #signup-page, #signout-page {
   padding: 20px;
   background: white;
   color: #00684A;
   min-height: 75%;
 }
 
-#adminpage .form-label, #vendor-item-form .form-label, #preference-page .form-label, #preference-page .form-label, #signin-page .form-label, #change-password-page .form-label, #signup-page .form-label {
+#vendor-item-form .form-label, #preference-page .form-label, #preference-page .form-label, #signin-page .form-label, #change-password-page .form-label, #signup-page .form-label {
   color: #00684A;
   font-weight: bold;
 }
@@ -276,10 +310,18 @@ footer, footer a {
   color: #ff7c01 !important;
 }
 
-#links-dropdown .text:hover {
+/*#login-dropdown #text:hover {
+  color: #ff7c01;
+}*/
+
+#login-dropdown:hover {
   color: #ff7c01;
 }
 
+.navbar .dropdown-item.active {
+  background-color: #fdebc2 !important;
+  color: #ff7c01 !important;
+}
 
 .colorlink:hover::after {
   transform: translateX(-50%) scaleX(1);
@@ -296,7 +338,8 @@ footer, footer a {
   align-items: center !important;
   display: flex !important;
 }
-.login-dropdown #text{
+
+#login-dropdown .dropdown-toggle:hover {
   color: #ff7c01 !important;
 }
 
@@ -315,12 +358,12 @@ footer, footer a {
 }
 
 .custom-toggler{
-  border: transparent !important;
-  text-decoration: none !important;
+  border: transparent;
+  text-decoration: none;
 }
 
 .custom-toggler:active{
-  color: #ff7c01 !important;
+  color: #ff7c01;
 }
 
 .login-button {

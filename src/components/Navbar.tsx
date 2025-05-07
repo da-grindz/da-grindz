@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { BoxArrowRight, Lock } from 'react-bootstrap-icons';
+import { BoxArrowRight, Lock, Geo } from 'react-bootstrap-icons';
 import Image from 'next/image';
 
 const NavBar: React.FC = () => {
@@ -41,11 +41,12 @@ const NavBar: React.FC = () => {
 
             {/* Links Dropdown */}
             <NavDropdown title="More" id="links-dropdown" className="colorlink custom-dropdown">
+              <NavDropdown.Item href="/map" active={pathName === '/map'}>
+                <Geo className="me-2 align-items-center" />
+                Map
+              </NavDropdown.Item>
               <NavDropdown.Item href="/vendors" active={pathName === '/vendors'}>
                 Vendors List
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/map" active={pathName === '/map'}>
-                Map
               </NavDropdown.Item>
               <NavDropdown.Item href="/grindz-mood" active={pathName === '/grindz-mood'}>
                 What&apos;s Your Grindz Mood?
