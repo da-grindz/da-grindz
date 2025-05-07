@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { BoxArrowRight, Lock, PersonFill, PersonPlusFill, PersonCircle } from 'react-bootstrap-icons';
+import { BoxArrowRight, Lock } from 'react-bootstrap-icons';
 import Image from 'next/image';
 
 const NavBar: React.FC = () => {
@@ -15,7 +15,7 @@ const NavBar: React.FC = () => {
 
   return (
     <Navbar bg="light" expand="lg" className="fw-bold">
-      <Container className="position-relative mr-1">
+      <Container className="position-relative">
         {/* Logo & Brand */}
         <Navbar.Brand href="/" className="d-flex align-items-center justify-content-start">
           <Image
@@ -40,7 +40,7 @@ const NavBar: React.FC = () => {
             <Nav.Link href="/preferences" className="colorlink">Preferences</Nav.Link>
 
             {/* Links Dropdown */}
-            <NavDropdown title="More" id="links-dropdown" className="colorlink">
+            <NavDropdown title="More" id="links-dropdown" className="colorlink custom-dropdown">
               <NavDropdown.Item href="/vendors" active={pathName === '/vendors'}>
                 Vendors List
               </NavDropdown.Item>
@@ -70,7 +70,7 @@ const NavBar: React.FC = () => {
                 <NavDropdown.Item
                   id="login-dropdown-sign-out"
                   href="/api/auth/signout"
-                  className="login-button"
+                  className="login-button align-items-center"
                 >
                   <BoxArrowRight className="me-2" />
                   Sign Out
@@ -78,7 +78,7 @@ const NavBar: React.FC = () => {
                 <NavDropdown.Item
                   id="login-dropdown-change-password"
                   href="/auth/change-password"
-                  className="login-button"
+                  className="login-button align-items-center"
                 >
                   <Lock className="me-2" />
                   Change Password
@@ -86,7 +86,7 @@ const NavBar: React.FC = () => {
               </NavDropdown>
             ) : (
               <div className="d-flex gap-2">
-                <a href="/auth/signin" className="login-button">Loin</a>
+                <a href="/auth/signin" className="login-button">Login</a>
                 <a href="/auth/signup" className="join-button">Join</a>
               </div>
             )}

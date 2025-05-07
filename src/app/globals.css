@@ -285,18 +285,21 @@ footer, footer a {
   width: 100%;
 }
 
-/*.login-dropdown{
+.login-dropdown{
   align-items: center !important;
   display: flex !important;
-}*/
+}
+.login-dropdown .title{
+  color: #ff7c01 !important;
+}
 
 .navbar .dropdown-menu{
-  background-color: #FFF7E6 !important;
-  border: none !important;
+  background-color: #fff7e6ee !important;
+  border-color: #fff7e6 !important;
 }
 
 .navbar .dropdown-item:hover {
-  background-color: #FFF7E6;
+  background-color: #fdebc2;
   color: #ff7c01;
 }
 
