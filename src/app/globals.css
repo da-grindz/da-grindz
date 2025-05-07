@@ -272,7 +272,7 @@ footer, footer a {
   color: #ff7c01 !important;
 }
 
-#links-dropdown .title::hover {
+#links-dropdown .text:hover {
   color: #ff7c01;
 }
 
@@ -320,7 +320,7 @@ footer, footer a {
 }
 
 .login-button {
-  background-color: #d1dbd6;
+  background-color: #c7d1cc;
   border: 2.5px solid white;
   border-radius: 2em;
   padding: 0.5rem 1rem;
@@ -348,7 +348,7 @@ footer, footer a {
 }
 
 .join-button:hover {
-  background-color: #d1dbd6;
+  background-color: #c7d1cc;
   color: white;
   border-color: white;
 }
