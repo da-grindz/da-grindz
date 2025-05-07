@@ -267,10 +267,5 @@ footer, footer a {
   transform: translateX(-50%) scaleX(1);
 }
 
-.nav-links-wrapper{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
+
 
