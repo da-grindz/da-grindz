@@ -17,9 +17,9 @@ const NavBar: React.FC = () => {
 
   return (
     <Navbar bg="light" expand="lg" className="fw-bold">
-      <Container>
+      <Container className="position-relative mr-1">
         {/* Logo & Brand */}
-        <Navbar.Brand href="/" className="d-flex align-items-center">
+        <Navbar.Brand href="/" className="d-flex align-items-center justify-content-start">
         <Image
           src="/bone-apple-teeth.jpg"
           alt="Logo"
@@ -34,16 +34,15 @@ const NavBar: React.FC = () => {
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto justify-content-start">
+          <Nav className="mx-auto d-flex nav-links-wrapper">
             {/* Home Link */}
-            <Nav.Link href="/" active={pathName === '/'} className="colorlink">Home</Nav.Link>
-
-            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-            <Nav.Link href="/planner">Planner</Nav.Link>
-            <Nav.Link href="/preferences">Preferences</Nav.Link>
+            <Nav.Link href="/" className="colorlink">Home</Nav.Link>
+            <Nav.Link href="/dashboard" className="colorlink">Dashboard</Nav.Link>
+            <Nav.Link href="/planner" className="colorlink">Planner</Nav.Link>
+            <Nav.Link href="/preferences" className="colorlink">Preferences</Nav.Link>
 
             {/* Links Dropdown */}
-            <NavDropdown title="More" id="links-dropdown">
+            <NavDropdown title="More" id="links-dropdown" className="colorlink">
               <NavDropdown.Item href="/vendors" active={pathName === '/vendors'}>
                 Vendors List
               </NavDropdown.Item>
@@ -67,7 +66,7 @@ const NavBar: React.FC = () => {
           </Nav>
 
           {/* Sign In / Sign Out */}
-          <Nav>
+          <Nav className="justify-content-end colorlink">
             {session ? (
               <NavDropdown id="login-dropdown" title={currentUser}>
                 <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
