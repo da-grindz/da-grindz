@@ -276,6 +276,7 @@ footer, footer a {
   color: #ff7c01;
 }
 
+
 .colorlink:hover::after {
   transform: translateX(-50%) scaleX(1);
 }
@@ -291,7 +292,7 @@ footer, footer a {
   align-items: center !important;
   display: flex !important;
 }
-.login-dropdown .title{
+.login-dropdown #text{
   color: #ff7c01 !important;
 }
 
