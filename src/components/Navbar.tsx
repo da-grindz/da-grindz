@@ -1,11 +1,9 @@
-/* eslint-disable react/jsx-indent, @typescript-eslint/indent */
-
 'use client';
 
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { BoxArrowRight, Lock, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
+import { BoxArrowRight, Lock } from 'react-bootstrap-icons';
 import Image from 'next/image';
 
 const NavBar: React.FC = () => {
@@ -17,46 +15,43 @@ const NavBar: React.FC = () => {
 
   return (
     <Navbar bg="light" expand="lg" className="fw-bold">
-      <Container>
+      <Container className="position-relative">
         {/* Logo & Brand */}
-        <Navbar.Brand href="/" className="d-flex align-items-center">
-        <Image
-          src="/bone-apple-teeth.jpg"
-          alt="Logo"
-          width={30}
-          height={30}
-          className="me-2 rounded-circle"
-          style={{ height: 'auto' }}
-          priority
-        />
+        <Navbar.Brand href="/" className="d-flex align-items-center justify-content-start">
+          <Image
+            src="/bone-apple-teeth.jpg"
+            alt="Logo"
+            width={30}
+            height={30}
+            className="me-2 rounded-circle"
+            style={{ height: 'auto' }}
+            priority
+          />
           Da Grindz
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className="custom-toggler" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto justify-content-start">
+          <Nav className="mx-auto d-flex nav-links-wrapper">
             {/* Home Link */}
-            <Nav.Link href="/" active={pathName === '/'}>Home</Nav.Link>
+            <Nav.Link href="/" className="colorlink">Home</Nav.Link>
+            <Nav.Link href="/dashboard" className="colorlink">Dashboard</Nav.Link>
+            <Nav.Link href="/planner" className="colorlink">Planner</Nav.Link>
+            <Nav.Link href="/preferences" className="colorlink">Preferences</Nav.Link>
 
             {/* Links Dropdown */}
-            <NavDropdown title="Links" id="links-dropdown">
-              <NavDropdown.Item href="/dashboard" active={pathName === '/dashboard'}>
-                Dashboard
+            <NavDropdown title="More" id="links-dropdown" className="colorlink custom-dropdown">
+              <NavDropdown.Item href="/vendors" active={pathName === '/vendors'}>
+                Vendors List
               </NavDropdown.Item>
-              <NavDropdown.Item href="/planner" active={pathName === '/planner'}>
-                Planner
+              <NavDropdown.Item href="/map" active={pathName === '/map'}>
+                Map
               </NavDropdown.Item>
               <NavDropdown.Item href="/grindz-mood" active={pathName === '/grindz-mood'}>
                 What&apos;s Your Grindz Mood?
               </NavDropdown.Item>
               <NavDropdown.Item href="/allergies" active={pathName === '/allergies'}>
                 Got Allergies?
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/preferences" active={pathName === '/preferences'}>
-                Preferences Editor
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/vendors" active={pathName === '/vendormenu'}>
-                Vendor Menu
               </NavDropdown.Item>
             </NavDropdown>
 
@@ -69,29 +64,31 @@ const NavBar: React.FC = () => {
           </Nav>
 
           {/* Sign In / Sign Out */}
-          <Nav>
+          <Nav className="login-dropdown justify-content-end auth-buttons">
             {session ? (
               <NavDropdown id="login-dropdown" title={currentUser}>
-                <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
+                <NavDropdown.Item
+                  id="login-dropdown-sign-out"
+                  href="/api/auth/signout"
+                  className="login-button align-items-center"
+                >
                   <BoxArrowRight className="me-2" />
                   Sign Out
                 </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-change-password" href="/auth/change-password">
+                <NavDropdown.Item
+                  id="login-dropdown-change-password"
+                  href="/auth/change-password"
+                  className="login-button align-items-center"
+                >
                   <Lock className="me-2" />
                   Change Password
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <NavDropdown id="login-dropdown" title="Login">
-                <NavDropdown.Item id="login-dropdown-sign-in" href="/auth/signin">
-                  <PersonFill className="me-2" />
-                  Sign in
-                </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-sign-up" href="/auth/signup">
-                  <PersonPlusFill className="me-2" />
-                  Sign up
-                </NavDropdown.Item>
-              </NavDropdown>
+              <div className="d-flex gap-2">
+                <a href="/auth/signin" className="login-button">Login</a>
+                <a href="/auth/signup" className="join-button">Join</a>
+              </div>
             )}
           </Nav>
         </Navbar.Collapse>
