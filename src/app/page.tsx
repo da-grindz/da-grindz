@@ -25,7 +25,7 @@ const Home = () => (
             </Row>
             <Row className="align-middle text-center">
               <Col>
-                <Button href="#getstarted" className="mx-2 landingbutton">Lets Get Started!</Button>
+                <Button href="#getstarted" className="mx-2 landingbutton">Lets Get Started</Button>
               </Col>
             </Row>
           </Container>
@@ -67,7 +67,7 @@ const Home = () => (
                 To get started, please sign up and create an account, or login if you already have an account.
               </p>
               <Button href="/auth/signup" className="mx-2 landingbutton">Sign Up</Button>
-              <Button href="/auth/signin" className="mx-2 landingbutton">Log In</Button>
+              <Button href="/auth/signin" className="mx-2 landingbutton">Logn</Button>
             </Container>
             <Container className="pt-5">
               <p className="pr-3">
