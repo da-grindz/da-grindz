@@ -5,7 +5,7 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import swal from 'sweetalert';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Import useRouter for redirection
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { PreferencesSchema } from '@/lib/validationSchemas';
 import { addPreferences } from '@/lib/dbActions';
@@ -22,30 +22,9 @@ const allergiesList = [
   'Mustard',
 ];
 
-const onSubmit = async (data: { allergies?: (string | undefined)[]; mood: string; owner: string }) => {
-  try {
-    console.log('Raw form data:', data);
-
-    const sanitizedData = {
-      ...data,
-      allergies: (data.allergies || []).filter((allergy): allergy is string => !!allergy),
-    };
-
-    console.log('Sanitized data:', sanitizedData);
-
-    await addPreferences(sanitizedData);
-
-    swal('Success', 'Your preferences have been updated', 'success', {
-      timer: 2000,
-    });
-  } catch (error) {
-    console.error('Error during form submission:', error);
-    swal('Error', 'Failed to update preferences. Please try again.', 'error');
-  }
-};
-
 const PreferencesForm: React.FC = () => {
   const { data: session, status } = useSession();
+  const router = useRouter(); // Initialize the router for navigation
   const currentUser = session?.user?.email || '';
   const {
     register,
@@ -56,12 +35,37 @@ const PreferencesForm: React.FC = () => {
     resolver: yupResolver(PreferencesSchema),
   });
 
+  const onSubmit = async (data: { allergies?: (string | undefined)[]; mood: string; owner: string }) => {
+    try {
+      console.log('Raw form data:', data);
+
+      const sanitizedData = {
+        ...data,
+        allergies: (data.allergies || []).filter((allergy): allergy is string => !!allergy),
+      };
+
+      console.log('Sanitized data:', sanitizedData);
+
+      await addPreferences(sanitizedData);
+
+      swal('Success', 'Your preferences have been updated', 'success', {
+        timer: 2000,
+      });
+
+      // Redirect to the dashboard after successful submission
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('Error during form submission:', error);
+      swal('Error', 'Failed to update preferences. Please try again.', 'error');
+    }
+  };
+
   if (status === 'loading') {
     return <LoadingSpinner />;
   }
 
   if (status === 'unauthenticated') {
-    redirect('/auth/signin');
+    router.push('/auth/signin');
   }
 
   return (
