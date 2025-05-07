@@ -47,14 +47,16 @@ const MacrosOverview: React.FC<Props> = ({
     <>
       <form onSubmit={handleSubmit} className={styles.macroForm}>
         <h5 className={styles.macroLabel}>Set Your Macro Goals</h5>
+
         {(['protein', 'carbs', 'fats'] as const).map((macro) => (
           <div key={macro} className={styles.macroInputGroup}>
             <label htmlFor={macro} className={styles.macroLabel}>
               {macro.charAt(0).toUpperCase() + macro.slice(1)}
-              (g):
               <span> (g):</span>
               <input
                 type="number"
+                name={macro}
+                value={macroGoals[macro]}
                 onChange={handleChange}
                 className={styles.macroInput}
               />
