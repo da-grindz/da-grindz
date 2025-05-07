@@ -66,7 +66,7 @@ const NavBar: React.FC = () => {
           {/* Sign In / Sign Out */}
           <Nav className="login-dropdown justify-content-end auth-buttons">
             {session ? (
-              <NavDropdown id="login-dropdown" title={currentUser}>
+              <NavDropdown id="login-dropdown" className="colorlink" title={currentUser}>
                 <NavDropdown.Item
                   id="login-dropdown-sign-out"
                   href="/api/auth/signout"
