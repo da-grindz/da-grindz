@@ -37,17 +37,10 @@ export default function PlannerClient({ mood }: Props) {
   const [waterLogs, setWaterLogs] = useState<WaterLog>(createInitialWaterLogs());
   const [hasMounted, setHasMounted] = useState(false);
   const [view, setView] = useState<'weekly' | 'macros'>('weekly');
-  const [macroGoals, setMacroGoals] = useState({
-    protein: 150,
-    carbs: 250,
-    fats: 70,
-  });
-  const [currentMacros, setCurrentMacros] = useState({
-    protein: 0,
-    carbs: 0,
-    fats: 0,
-  });
+  const [macroGoals, setMacroGoals] = useState({ protein: 150, carbs: 250, fats: 70 });
+  const [currentMacros, setCurrentMacros] = useState({ protein: 0, carbs: 0, fats: 0 });
   const [selectedVendor, setSelectedVendor] = useState<string | null>(null);
+  const [calorieGoal, setCalorieGoal] = useState(2000);
 
   useEffect(() => {
     setHasMounted(true);
@@ -61,11 +54,13 @@ export default function PlannerClient({ mood }: Props) {
       const savedWater = localStorage.getItem('waterLogs');
       const savedMacros = localStorage.getItem('macroGoals');
       const savedCurrent = localStorage.getItem('currentMacros');
+      const savedCalorieGoal = localStorage.getItem('calorieGoal');
 
       if (savedPlanner) setPlannerData(JSON.parse(savedPlanner));
       if (savedWater) setWaterLogs(JSON.parse(savedWater));
       if (savedMacros) setMacroGoals(JSON.parse(savedMacros));
       if (savedCurrent) setCurrentMacros(JSON.parse(savedCurrent));
+      if (savedCalorieGoal) setCalorieGoal(Number(savedCalorieGoal));
     } catch (e) {
       console.error('Error parsing saved data:', e);
     }
@@ -82,18 +77,9 @@ export default function PlannerClient({ mood }: Props) {
     if (!macros) return;
 
     setCurrentMacros((prev) => ({
-      protein:
-        direction === 'add'
-          ? prev.protein + macros.protein
-          : prev.protein - macros.protein,
-      carbs:
-        direction === 'add'
-          ? prev.carbs + macros.carbs
-          : prev.carbs - macros.carbs,
-      fats:
-        direction === 'add'
-          ? prev.fats + macros.fats
-          : prev.fats - macros.fats,
+      protein: direction === 'add' ? prev.protein + macros.protein : prev.protein - macros.protein,
+      carbs: direction === 'add' ? prev.carbs + macros.carbs : prev.carbs - macros.carbs,
+      fats: direction === 'add' ? prev.fats + macros.fats : prev.fats - macros.fats,
     }));
   };
 
@@ -102,10 +88,7 @@ export default function PlannerClient({ mood }: Props) {
       localStorage.setItem('plannerData', JSON.stringify(plannerData));
       localStorage.setItem('waterLogs', JSON.stringify(waterLogs));
       localStorage.setItem('currentMacros', JSON.stringify(currentMacros));
-
-      swal('Success', 'Your planner has been saved', 'success', {
-        timer: 2000,
-      });
+      swal('Success', 'Your planner has been saved', 'success', { timer: 2000 });
     } catch (error) {
       console.error('Save failed:', error);
       swal('Error', 'Failed to save planner. Please try again.', 'error');
@@ -115,9 +98,8 @@ export default function PlannerClient({ mood }: Props) {
   const handleSaveMacroGoals = () => {
     try {
       localStorage.setItem('macroGoals', JSON.stringify(macroGoals));
-      swal('Success', 'Your macro goals have been saved', 'success', {
-        timer: 2000,
-      });
+      localStorage.setItem('calorieGoal', String(calorieGoal));
+      swal('Success', 'Your macro goals have been saved', 'success', { timer: 2000 });
     } catch (error) {
       console.error('Save failed:', error);
       swal('Error', 'Failed to save macro goals. Please try again.', 'error');
@@ -126,21 +108,12 @@ export default function PlannerClient({ mood }: Props) {
 
   const handleDragStart = (
     e: React.DragEvent,
-    payload: {
-      meal: string;
-      fromDay?: string;
-      fromMealType?: string;
-      index?: number;
-    },
+    payload: { meal: string; fromDay?: string; fromMealType?: string; index?: number },
   ) => {
     e.dataTransfer.setData('text/plain', JSON.stringify(payload));
   };
 
-  const handleDrop = (
-    e: React.DragEvent,
-    targetDay: string,
-    targetMealType: string,
-  ) => {
+  const handleDrop = (e: React.DragEvent, targetDay: string, targetMealType: string) => {
     e.preventDefault();
     const data = JSON.parse(e.dataTransfer.getData('text/plain'));
 
@@ -157,19 +130,15 @@ export default function PlannerClient({ mood }: Props) {
       return;
     }
 
-    if (
-      data.fromDay
-      && data.fromMealType !== undefined
-      && data.index !== undefined
-    ) {
+    if (data.fromDay && data.fromMealType !== undefined && data.index !== undefined) {
       const draggedMeal = plannerData[data.fromDay][data.fromMealType][data.index];
       if (!draggedMeal) return;
 
       setPlannerData((prev) => {
         const updated = { ...prev };
-        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][
-          data.fromMealType
-        ].filter((_, i) => i !== data.index);
+        updated[data.fromDay][data.fromMealType] = updated[data.fromDay][data.fromMealType].filter(
+          (_, i) => i !== data.index,
+        );
         const targetMeals = updated[targetDay][targetMealType];
         if (!targetMeals.includes(draggedMeal)) {
           updated[targetDay][targetMealType] = [...targetMeals, draggedMeal];
@@ -202,11 +171,7 @@ export default function PlannerClient({ mood }: Props) {
     <div className="content" style={{ backgroundColor: '#FFFFFF', paddingBottom: '2rem' }}>
       <Container fluid className="p-0 m-0">
         <MoodBanner mood={mood} />
-        <ViewToggleButtons
-          view={view}
-          setView={setView}
-          handleClearAll={handleClearAll}
-        />
+        <ViewToggleButtons view={view} setView={setView} handleClearAll={handleClearAll} />
         <div className="text-center mb-3">
           <button
             type="button"
@@ -226,18 +191,10 @@ export default function PlannerClient({ mood }: Props) {
             />
           </Col>
           <Col lg={6}>
-            <Card
-              className="h-100"
-              style={{ backgroundColor: '#FFF7E6', borderRadius: '12px' }}
-            >
+            <Card className="h-100" style={{ backgroundColor: '#FFF7E6', borderRadius: '12px' }}>
               <Card.Body>
-                <Card.Title
-                  className="text-center mb-4"
-                  style={{ color: '#00684A', fontWeight: 'bold' }}
-                >
-                  {view === 'weekly'
-                    ? 'Weekly Meal Plan'
-                    : 'Macros Goal Overview'}
+                <Card.Title className="text-center mb-4" style={{ color: '#00684A', fontWeight: 'bold' }}>
+                  {view === 'weekly' ? 'Weekly Meal Plan' : 'Macros Goal Overview'}
                 </Card.Title>
                 {view === 'weekly' ? (
                   <MealPlannerTable
@@ -255,20 +212,20 @@ export default function PlannerClient({ mood }: Props) {
                     setMacroGoals={setMacroGoals}
                     onSave={handleSaveMacroGoals}
                     currentMacros={currentMacros}
+                    calorieGoal={calorieGoal}
+                    setCalorieGoal={setCalorieGoal}
                   />
                 )}
               </Card.Body>
             </Card>
           </Col>
           <Col lg={3}>
-            <Card
-              className="h-100"
-              style={{ backgroundColor: '#DCE7E2', borderRadius: '12px' }}
-            >
+            <Card className="h-100" style={{ backgroundColor: '#DCE7E2', borderRadius: '12px' }}>
               <Card.Body>
                 <Card.Title style={{ color: '#00684A', fontWeight: 'bold', fontSize: '1.2rem' }}>
                   Meal Tracker
                 </Card.Title>
+
                 <p className="mb-1">
                   <strong>
                     Protein:
@@ -278,6 +235,7 @@ export default function PlannerClient({ mood }: Props) {
                     g
                   </strong>
                 </p>
+
                 <p className="mb-1">
                   <strong>
                     Carbs:
@@ -287,6 +245,7 @@ export default function PlannerClient({ mood }: Props) {
                     g
                   </strong>
                 </p>
+
                 <p className="mb-1">
                   <strong>
                     Fat:
@@ -296,22 +255,21 @@ export default function PlannerClient({ mood }: Props) {
                     g
                   </strong>
                 </p>
+
                 <p className="mb-1">
                   <strong>
                     Calories:
                     {' '}
-                    {currentMacros.protein * 4
-                      + currentMacros.carbs * 4
-                      + currentMacros.fats * 9}
+                    {(currentMacros.protein * 4)
+                      + (currentMacros.carbs * 4)
+                      + (currentMacros.fats * 9)}
                     {' '}
                     kcal
                   </strong>
                 </p>
+
                 <hr />
-                <WaterTracker
-                  waterLogs={waterLogs}
-                  setWaterLogs={setWaterLogs}
-                />
+                <WaterTracker waterLogs={waterLogs} setWaterLogs={setWaterLogs} />
               </Card.Body>
             </Card>
           </Col>
