@@ -71,7 +71,7 @@ const PreferencesForm: React.FC = () => {
   return (
     <Container id="preference-page" className="mt-5 py-3">
       <Row className="justify-content-center">
-        <Col xs={5}>
+        <Col xs={12} md={8} lg={6}>
           <Card>
             <Card.Header>
               <Col className="text-center">
