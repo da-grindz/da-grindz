@@ -263,16 +263,21 @@ footer, footer a {
   transition: transform 0.3s ease;
 }
 
-.colorlink:hover::after {
-  transform: translateX(-50%) scaleX(1);
-}
-
 .colorlink:hover {
   color: #ff7c01 !important;
 }
 .colorlink:active {
   color: #ff7c01;
 }
+
+#links-dropdown:hover {
+  color: #ff7c01;
+}
+
+.colorlink:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
 .nav-links-wrapper{
   display: flex;
   justify-content: center;
@@ -280,9 +285,14 @@ footer, footer a {
   width: 100%;
 }
 
-.login-dropdown{
+/*.login-dropdown{
   align-items: center !important;
   display: flex !important;
+}*/
+
+.navbar .dropdown-menu{
+  background-color: #FFF7E6 !important;
+  border: none !important;
 }
 
 .navbar .dropdown-item:hover {
@@ -292,5 +302,38 @@ footer, footer a {
 
 .custom-toggler:hover{
   color: #ff7c01 !important;
-  list-style: circle !important;
+}
+
+.login-button {
+  background-color: #d1dbd6;
+  border: 2.5px solid white;
+  border-radius: 2em;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-button:hover {
+  background-color: #FFF7E6;
+  color: #ff7c01;
+  border-color: #FFF7E6;
+}
+
+.join-button {
+  background-color: #f2f5f7;
+  border: 2.5px solid #f2f5f7;
+  border-radius: 2em;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #32343a;
+  transition: all 0.3s ease-in-out;
+}
+
+.join-button:hover {
+  background-color: #d1dbd6;
+  color: white;
+  border-color: white;
 }

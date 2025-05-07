@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-indent, @typescript-eslint/indent */
-
 'use client';
 
 import { useSession } from 'next-auth/react';
@@ -20,15 +18,15 @@ const NavBar: React.FC = () => {
       <Container className="position-relative mr-1">
         {/* Logo & Brand */}
         <Navbar.Brand href="/" className="d-flex align-items-center justify-content-start">
-        <Image
-          src="/bone-apple-teeth.jpg"
-          alt="Logo"
-          width={30}
-          height={30}
-          className="me-2 rounded-circle"
-          style={{ height: 'auto' }}
-          priority
-        />
+          <Image
+            src="/bone-apple-teeth.jpg"
+            alt="Logo"
+            width={30}
+            height={30}
+            className="me-2 rounded-circle"
+            style={{ height: 'auto' }}
+            priority
+          />
           Da Grindz
         </Navbar.Brand>
 
@@ -66,29 +64,31 @@ const NavBar: React.FC = () => {
           </Nav>
 
           {/* Sign In / Sign Out */}
-          <Nav className="login-dropdown justify-content-end colorlink">
+          <Nav className="login-dropdown justify-content-end auth-buttons">
             {session ? (
               <NavDropdown id="login-dropdown" title={currentUser}>
-                <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
+                <NavDropdown.Item
+                  id="login-dropdown-sign-out"
+                  href="/api/auth/signout"
+                  className="login-button"
+                >
                   <BoxArrowRight className="me-2" />
                   Sign Out
                 </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-change-password" href="/auth/change-password">
+                <NavDropdown.Item
+                  id="login-dropdown-change-password"
+                  href="/auth/change-password"
+                  className="login-button"
+                >
                   <Lock className="me-2" />
                   Change Password
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <NavDropdown id="login-dropdown" title="Login">
-                <NavDropdown.Item id="login-dropdown-sign-in" href="/auth/signin">
-                  <PersonFill className="me-2" />
-                  Sign in
-                </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-sign-up" href="/auth/signup">
-                  <PersonPlusFill className="me-2" />
-                  Sign up
-                </NavDropdown.Item>
-              </NavDropdown>
+              <div className="d-flex gap-2">
+                <a href="/auth/signin" className="login-button">Loin</a>
+                <a href="/auth/signup" className="join-button">Join</a>
+              </div>
             )}
           </Nav>
         </Navbar.Collapse>
