@@ -271,6 +271,10 @@ footer, footer a {
 }
 
 #links-dropdown:hover {
+  color: #ff7c01 !important;
+}
+
+#links-dropdown:active {
   color: #ff7c01;
 }
 
