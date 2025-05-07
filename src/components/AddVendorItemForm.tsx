@@ -133,6 +133,7 @@ const AddVendorItemForm = ({ vendorId, owner }: { vendorId: string; owner: strin
                   <Form.Label>Price ($)</Form.Label>
                   <Form.Control
                     type="number"
+                    step="0.01"
                     placeholder="Enter the price of the item."
                     {...register('price')}
                     isInvalid={!!errors.price}

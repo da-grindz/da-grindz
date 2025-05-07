@@ -7,17 +7,17 @@ import swal from 'sweetalert';
 import { EditVendorItemSchema } from '@/lib/validationSchemas';
 import { editVendorItem } from '@/lib/dbActions';
 
-// const allergiesList = [
-//   'Peanuts',
-//   'Tree Nuts',
-//   'Milk',
-//   'Fish',
-//   'Shellfish',
-//   'Wheat',
-//   'Gluten',
-//   'Sesame',
-//   'Mustard',
-// ];
+const allergiesList = [
+  'Peanuts',
+  'Tree Nuts',
+  'Milk',
+  'Fish',
+  'Shellfish',
+  'Wheat',
+  'Gluten',
+  'Sesame',
+  'Mustard',
+];
 
 type EditVendorItemFormProps = {
   item: {
@@ -80,11 +80,11 @@ const EditVendorItemForm = ({ item }: EditVendorItemFormProps) => {
 
   return (
     <Container id="vendor-item-form" className="mt-5 py-3">
-      <Row className="justify-content-center">
+      <Row className="justify-content-center mb-5">
         <Col xs={6}>
           <Card>
             <Card.Header className="text-center">
-              <h2>Edit Vendor Item</h2>
+              <h1>Edit Vendor Item</h1>
             </Card.Header>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
@@ -101,15 +101,87 @@ const EditVendorItemForm = ({ item }: EditVendorItemFormProps) => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Alt Text</Form.Label>
+                  <Form.Label>Image Name</Form.Label>
                   <Form.Control type="text" {...register('alt')} isInvalid={!!errors.alt} />
                   <Form.Control.Feedback type="invalid">{errors.alt?.message}</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Price</Form.Label>
-                  <Form.Control type="number" step="0.01" {...register('price')} isInvalid={!!errors.price} />
+                  <Form.Label>Calories</Form.Label>
+                  <Form.Control
+                    type="number"
+                    {...register('calories')}
+                    isInvalid={!!errors.calories}
+                  />
+                  <Form.Control.Feedback type="invalid">{errors.calories?.message}</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Protein (g)</Form.Label>
+                  <Form.Control
+                    type="number"
+                    {...register('protein')}
+                    isInvalid={!!errors.protein}
+                  />
+                  <Form.Control.Feedback type="invalid">{errors.protein?.message}</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Fat (g)</Form.Label>
+                  <Form.Control
+                    type="number"
+                    {...register('fat')}
+                    isInvalid={!!errors.fat}
+                  />
+                  <Form.Control.Feedback type="invalid">{errors.fat?.message}</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Carbohydrates (g)</Form.Label>
+                  <Form.Control
+                    type="number"
+                    {...register('carbs')}
+                    isInvalid={!!errors.carbs}
+                  />
+                  <Form.Control.Feedback type="invalid">{errors.carbs?.message}</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Price ($)</Form.Label>
+                  <Form.Control
+                    type="number"
+                    step="0.01"
+                    {...register('price')}
+                    isInvalid={!!errors.price}
+                  />
                   <Form.Control.Feedback type="invalid">{errors.price?.message}</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    {...register('description')}
+                    isInvalid={!!errors.description}
+                  />
+                  <Form.Control.Feedback type="invalid">{errors.description?.message}</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Allergies</Form.Label>
+                  <div>
+                    {allergiesList.map((allergy) => (
+                      <Form.Check
+                        key={allergy}
+                        type="checkbox"
+                        label={allergy}
+                        value={allergy}
+                        defaultChecked={item.allergies.includes(allergy)}
+                        {...register('allergies')}
+                      />
+                    ))}
+                  </div>
                 </Form.Group>
 
                 <input type="hidden" value={item.id} {...register('id')} />
