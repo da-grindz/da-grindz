@@ -280,10 +280,10 @@ footer, footer a {
   color: #ff7c01;
 }
 
-/*.navbar .dropdown-item.active {
+.navbar .dropdown-item.active {
   background-color: #fdebc2 !important;
   color: #ff7c01 !important;
-}*/
+}
 
 .colorlink:hover::after {
   transform: translateX(-50%) scaleX(1);
