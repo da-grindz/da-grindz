@@ -272,10 +272,18 @@ footer, footer a {
   color: #ff7c01 !important;
 }
 
-#links-dropdown .text:hover {
+/*#login-dropdown #text:hover {
+  color: #ff7c01;
+}*/
+
+#login-dropdown:hover {
   color: #ff7c01;
 }
 
+/*.navbar .dropdown-item.active {
+  background-color: #fdebc2 !important;
+  color: #ff7c01 !important;
+}*/
 
 .colorlink:hover::after {
   transform: translateX(-50%) scaleX(1);
@@ -292,7 +300,8 @@ footer, footer a {
   align-items: center !important;
   display: flex !important;
 }
-.login-dropdown #text{
+
+#login-dropdown .dropdown-toggle:hover {
   color: #ff7c01 !important;
 }
 
