@@ -87,3 +87,7 @@ export const EditVendorItemSchema = Yup.object({
     .default([]),
   vendorId: Yup.string().required('Vendor ID is required'),
 });
+
+export const DeleteVendorItemSchema = Yup.object({
+  id: Yup.number().required('ID is required'),
+});

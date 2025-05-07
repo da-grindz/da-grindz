@@ -6,6 +6,7 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import swal from 'sweetalert';
 import { EditVendorItemSchema } from '@/lib/validationSchemas';
 import { editVendorItem } from '@/lib/dbActions';
+import DeleteVendorItemForm from './DeleteVendorItemForm'; // Import the delete form
 
 const allergiesList = [
   'Peanuts',
@@ -45,7 +46,7 @@ const EditVendorItemForm = ({ item }: EditVendorItemFormProps) => {
   } = useForm({
     resolver: yupResolver(EditVendorItemSchema),
     defaultValues: {
-      id: item.id, // Include the id field
+      id: item.id,
       name: item.name,
       image: item.image,
       alt: item.alt,
@@ -61,11 +62,9 @@ const EditVendorItemForm = ({ item }: EditVendorItemFormProps) => {
   });
 
   const onSubmit = async (data: any) => {
-    console.log('Submitted data:', data); // Debugging log
-
     const sanitizedData = {
       ...data,
-      id: parseInt(data.id, 10), // Ensure id is a number
+      id: parseInt(data.id, 10),
       allergies: (data.allergies || []).filter((a: unknown): a is string => !!a),
     };
 
@@ -187,18 +186,22 @@ const EditVendorItemForm = ({ item }: EditVendorItemFormProps) => {
                 <input type="hidden" value={item.id} {...register('id')} />
 
                 <Row>
-                  <Col>
+                  <Col xs={4} className="">
                     <Button type="submit" variant="primary">
                       Update Item
                     </Button>
                   </Col>
-                  <Col>
-                    <Button type="button" variant="warning" onClick={() => reset()}>
+                  <Col xs={4} className="">
+                    <DeleteVendorItemForm itemId={item.id} />
+                  </Col>
+                  <Col xs={4}>
+                    <Button className="justify-content-center" type="button" variant="warning" onClick={() => reset()}>
                       Reset
                     </Button>
                   </Col>
                 </Row>
               </Form>
+
             </Card.Body>
           </Card>
         </Col>

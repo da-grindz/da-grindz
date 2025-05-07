@@ -272,3 +272,18 @@ export async function editVendorItem(item: {
     throw new Error('Failed to edit vendor item. Please try again.');
   }
 }
+
+/**
+ * Removes an existing menu item from the database.
+ * @param id,  The id of the menu item to delete.
+ */
+export const deleteVendorItem = async (id: number) => {
+  try {
+    await prisma.vendorItem.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.error('Failed to delete vendor item:', error);
+    throw error;
+  }
+};

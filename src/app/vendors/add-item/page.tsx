@@ -2,23 +2,24 @@ import { getServerSession } from 'next-auth';
 import authOptions from '@/lib/authOptions';
 import { loggedInProtectedPage } from '@/lib/page-protection';
 import AddVendorItemForm from '@/components/AddVendorItemForm';
-import { prisma } from '@/lib/prisma'; // Adjust if you import prisma differently
+import { prisma } from '@/lib/prisma';
 import { Container } from 'react-bootstrap';
 
-// This page is for adding a new vendor item.
-// It is protected and requires the user to be logged in and the user must have a vendor associated with their account.
 const AddVendorItemPage = async () => {
+  // Get the current session to check if the user is logged in
   const session = await getServerSession(authOptions);
 
-  const user = session?.user;
+  // Protect the page for logged-in users
   loggedInProtectedPage(
     session as {
       user: { email: string; id: string; randomKey: string };
     } | null,
   );
 
+  const user = session?.user;
+
   try {
-    // Fetch vendorId from user's eatery
+    // Fetch the vendorId associated with the logged-in user's eatery
     const dbUser = await prisma.user.findUnique({
       where: { email: user?.email ?? '' },
       select: {
@@ -30,6 +31,7 @@ const AddVendorItemPage = async () => {
 
     const vendorId = dbUser?.eatery?.id;
 
+    // If the user does not have a vendor associated with their account, show an error
     if (!vendorId) {
       return (
         <main>
@@ -43,6 +45,7 @@ const AddVendorItemPage = async () => {
       );
     }
 
+    // Render the AddVendorItemForm with the vendorId and user email
     return (
       <main>
         <AddVendorItemForm
