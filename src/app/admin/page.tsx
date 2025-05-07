@@ -3,48 +3,58 @@ import { Col, Container, Row, Table } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
 import { adminProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
-import ListUsersAdmin from '@/components/ListUsersAdmin';
+import EditUserAdmin from '@/components/EditUserAdmin';
 
 const AdminPage = async () => {
   const session = await getServerSession(authOptions);
   adminProtectedPage(
     session as {
-      user: { email: string; id: string; randomKey: string, role: string };
+      user: { email: string; id: string; randomKey: string };
     } | null,
   );
 
   const users = await prisma.user.findMany({
     include: {
-      eatery: true, // Include the eatery relation
+      eatery: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 
   return (
     <main>
-      <Container id="list" fluid className="py-3">
+      <Container id="adminpage" fluid className="py-3 px-5">
         <Row>
           <Col>
-            <h1>List Users Admin</h1>
+            <h1>Overview</h1>
+            <p>Manage user roles and eateries.</p>
+            <hr />
             <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>Email</th>
                   <th>Role</th>
-                  <th>Eatery ID</th>
-                  <th>Eatery Name</th>
+                  <th>Eatery</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {users.map((user) => (
-                  <ListUsersAdmin
-                    key={user.id}
-                    id={user.id}
-                    email={user.email}
-                    role={user.role}
-                    eateryId={user.eatery?.id || null} // Pass eatery ID if available
-                    eateryName={user.eatery?.name || null} // Pass eatery name if available
-                  />
+                  <tr key={user.id}>
+                    <td>{user.email}</td>
+                    <td>{user.role}</td>
+                    <td>{user.eatery?.name || 'N/A'}</td>
+                    <td>
+                      <EditUserAdmin
+                        userId={user.id}
+                        email={user.email}
+                        currentRole={user.role}
+                        currentEateryName={user.eatery?.name || ''}
+                      />
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </Table>

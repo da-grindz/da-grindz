@@ -298,7 +298,6 @@ export async function updateUserRoleAndEatery(userId: number, role: string, eate
   console.log(`Updating user ID ${userId} with role ${role} and eatery name ${eateryName}`);
 
   try {
-    // Check if the eatery exists, or create it if it doesn't
     const eatery = await prisma.eatery.findUnique({
       where: { name: eateryName },
     });
