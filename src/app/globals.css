@@ -272,7 +272,11 @@ footer, footer a {
   color: #ff7c01 !important;
 }
 
-#login-dropdown #text:hover {
+/*#login-dropdown #text:hover {
+  color: #ff7c01;
+}*/
+
+#login-dropdown:hover {
   color: #ff7c01;
 }
 
