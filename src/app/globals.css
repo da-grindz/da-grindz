@@ -320,12 +320,12 @@ footer, footer a {
 }
 
 .custom-toggler{
-  border: transparent !important;
-  text-decoration: none !important;
+  border: transparent;
+  text-decoration: none;
 }
 
 .custom-toggler:active{
-  color: #ff7c01 !important;
+  color: #ff7c01;
 }
 
 .login-button {
