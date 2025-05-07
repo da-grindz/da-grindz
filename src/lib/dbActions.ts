@@ -99,38 +99,30 @@ export async function changePassword(credentials: { email: string; password: str
  */
 export async function addPreferences(preferences: { owner: string; allergies: string[]; mood: string }) {
   const { owner, allergies, mood } = preferences;
-  console.log('Preferences:', preferences);
 
   try {
-    // Update the user's preferences
+    // Update the user's preferences in the database
     await prisma.user.update({
       where: { email: owner },
       data: {
-        // Clear existing allergies and set the new ones
-        allergies: {
-          set: [], // Clear all existing allergies
-          connectOrCreate: allergies.map((name) => ({
-            where: { name }, // Check if the allergy exists
-            create: { name }, // Create the allergy if it doesn't exist
-          })),
-        },
-        // Update the grindz mood
         grindzMood: {
           connectOrCreate: {
             where: { name: mood },
             create: { name: mood },
           },
         },
+        allergies: {
+          set: [], // Clear existing allergies
+          connect: allergies.map((allergy) => ({ name: allergy })),
+        },
       },
     });
-
-    console.log('Allergies:', allergies);
-    console.log('Mood:', mood);
   } catch (error) {
     console.error('Error updating preferences:', error);
-    throw new Error('Failed to update preferences. Please try again.');
+    throw new Error('Failed to update preferences');
   }
 }
+
 /**
  * Adds a new menu item to the database.
  * @param VendorItem, an object with the following properties: id, name, image, alt,

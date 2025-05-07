@@ -223,12 +223,17 @@ footer, footer a {
   background: #DCE7E2;
 }
 
-#vendor-item-form .card, #preference-page .card, #signin-page .card, #change-password-page .card, #signup-page .card {
+
+#adminpage .card, #vendor-item-form .card, #signin-page .card, #change-password-page .card, #signup-page .card {
   background: #DCE7E2;
   min-width: 400px;
 }
 
-#vendor-item-form a, #preference-page a, #signin-page a, #change-password-page a, #signup-page a {
+#preference-page .card {
+  background: #DCE7E2;
+}
+
+#adminpage a, #vendor-item-form a, #preference-page a, #signin-page a, #change-password-page a, #signup-page a {
   color: #00684A;
   text-decoration: underline;
 }
