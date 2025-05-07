@@ -247,7 +247,8 @@ footer, footer a {
   color: #000; 
   text-decoration: none;
   padding: 0;
-  margin: 0 0.75rem;
+  margin: 0 0.85rem;
+
 }
 
 .colorlink::after {
@@ -266,15 +267,12 @@ footer, footer a {
 .colorlink:hover {
   color: #ff7c01 !important;
 }
-.colorlink:active {
-  color: #ff7c01;
-}
 
 #links-dropdown:hover {
   color: #ff7c01 !important;
 }
 
-#links-dropdown:active {
+#links-dropdown .title::hover {
   color: #ff7c01;
 }
 
@@ -308,6 +306,15 @@ footer, footer a {
 }
 
 .custom-toggler:hover{
+  color: #ff7c01 !important;
+}
+
+.custom-toggler{
+  border: transparent !important;
+  text-decoration: none !important;
+}
+
+.custom-toggler:active{
   color: #ff7c01 !important;
 }
 
