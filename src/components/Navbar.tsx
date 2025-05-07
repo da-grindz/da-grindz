@@ -5,7 +5,7 @@
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { BoxArrowRight, Lock, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
+import { BoxArrowRight, Lock, PersonFill, PersonPlusFill, PersonCircle } from 'react-bootstrap-icons';
 import Image from 'next/image';
 
 const NavBar: React.FC = () => {
@@ -32,7 +32,7 @@ const NavBar: React.FC = () => {
           Da Grindz
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className="custom-toggler" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto d-flex nav-links-wrapper">
             {/* Home Link */}
@@ -66,7 +66,7 @@ const NavBar: React.FC = () => {
           </Nav>
 
           {/* Sign In / Sign Out */}
-          <Nav className="justify-content-end colorlink">
+          <Nav className="login-dropdown justify-content-end colorlink">
             {session ? (
               <NavDropdown id="login-dropdown" title={currentUser}>
                 <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
