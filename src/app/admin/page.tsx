@@ -32,7 +32,7 @@ const AdminPage = () => {
         <Row>
           <Col>
             <h1>Overview</h1>
-            <p>Manage user roles and eateries.</p>
+            <p>Manage user roles and their vendors.</p>
             <hr />
             <Table striped bordered hover>
               <thead>
