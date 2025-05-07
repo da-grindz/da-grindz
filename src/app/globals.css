@@ -206,7 +206,7 @@ footer, footer a {
   color: #FF6347;
 }
 
-#vendor-item-form button, #preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
+#modalButton, #vendor-item-form button, #preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
   background-color: #2b6555 !important;
   color: #FFF !important;
   border: white !important;
@@ -244,7 +244,7 @@ footer, footer a {
   padding-bottom: 50px;
 }
 
-#vendor-item-form, #preference-page, #signin-page, #change-password-page, #signup-page, #signout-page {
+#adminpage, #vendor-item-form, #preference-page, #signin-page, #change-password-page, #signup-page, #signout-page {
   padding: 20px;
   background: white;
   color: #00684A;
