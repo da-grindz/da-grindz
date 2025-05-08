@@ -10,6 +10,10 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import { PreferencesSchema } from '@/lib/validationSchemas';
 import { addPreferences } from '@/lib/dbActions';
 import { useEffect } from 'react';
+import { GiPeanut, GiWheat, GiSesame, GiMilkCarton } from 'react-icons/gi';
+import { FaSeedling, FaFish, FaBreadSlice } from 'react-icons/fa';
+import { TbBottleFilled } from 'react-icons/tb';
+import { FaShrimp } from 'react-icons/fa6';
 
 const allergiesList = [
   'Peanuts',
@@ -22,6 +26,18 @@ const allergiesList = [
   'Sesame',
   'Mustard',
 ];
+
+const iconList: Record<string, JSX.Element> = {
+  Peanuts: <GiPeanut />,
+  'Tree Nuts': <FaSeedling />,
+  Milk: <GiMilkCarton />,
+  Fish: <FaFish />,
+  Shellfish: <FaShrimp />,
+  Wheat: <GiWheat />,
+  Gluten: <FaBreadSlice />,
+  Sesame: <GiSesame />,
+  Mustard: <TbBottleFilled />,
+};
 
 interface PreferencesFormProps {
   userAllergies: string[];
@@ -113,9 +129,18 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ userAllergies }: Pref
                   <div>
                     {allergiesList.map((allergy) => (
                       <Form.Check
+                        className="allergy-checkbox"
                         key={allergy}
                         type="checkbox"
-                        label={allergy}
+                        label={
+                          (
+                            <span className="allergy-label">
+                              {iconList[allergy]}
+                              {' '}
+                              {allergy}
+                            </span>
+                          )
+                        }
                         value={allergy}
                         defaultChecked={userAllergies.includes(allergy)}
                         {...register('allergies')}
@@ -123,6 +148,7 @@ const PreferencesForm: React.FC<PreferencesFormProps> = ({ userAllergies }: Pref
                     ))}
                   </div>
                 </Form.Group>
+
                 <Form.Group>
                   <Form.Label className="pt-2">Grindz Mood</Form.Label>
                   <select {...register('mood')} className={`form-control ${errors.mood ? 'is-invalid' : ''}`}>

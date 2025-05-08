@@ -209,10 +209,27 @@ footer, footer a {
 #modalButton, #vendor-item-form button, #preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
   background-color: #2b6555 !important;
   color: #FFF !important;
-  border: white !important;
+  border: none !important;
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 5px;
+  box-shadow: 0 5px 10px #2b6555;
+}
+
+#modalButton, #vendor-item-form button:hover, #preference-page button:hover, #signin-page button:hover, #change-password-page button:hover, #signup-page button:hover, #signout-page button:hover{
+  background-color: #2b6555 !important;
+  color: white !important;
+  border: 2px solid #2b6555 !important;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: transform 0.5s ease;
+}
+
+.allergy-label {
+  color: #2b6555 !important;
+  font-size: 1.1rem;
 }
 
 #vendor-item-form .card-footer, #preference-page .card-footer, #signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
@@ -237,6 +254,9 @@ footer, footer a {
   color: #00684A;
   text-decoration: underline;
 }
+#adminpage a:hover, #vendor-item-form a:hover, #preference-page a:hover, #signin-page a:hover, #change-password-page a:hover, #signup-page a:hover {
+  font-weight: bolder;
+}
 
 #login, #allergy-banner {
   background: #DCE7E2;
@@ -254,6 +274,7 @@ footer, footer a {
 #vendor-item-form .form-label, #preference-page .form-label, #preference-page .form-label, #signin-page .form-label, #change-password-page .form-label, #signup-page .form-label {
   color: #00684A;
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
 /* #preference-page .form-check label {
@@ -449,12 +470,12 @@ table.adminTable.table-hover tbody tr:hover td {
   font-weight: bold;
 }
 
-button.tableButton {
+button.vendorItem, button.tableButton {
   background-color: #00684A  !important;
   border: 2px solid #00684A !important;
 }
 
-.tableButton:hover {
+button.vendorItem:hover, .tableButton:hover {
   background-color: white !important;
   border: 2px solid #00684A !important;
   color: #00684A !important;
