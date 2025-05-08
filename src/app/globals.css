@@ -394,6 +394,14 @@ table.adminTable.table-hover tbody tr:hover td {
   font-weight: bold;
 }
 
-.adminTable thead {
-  
+button.tableButton {
+  background-color: #00684A  !important;
+  border: 2px solid #00684A !important;
+}
+
+.tableButton:hover {
+  background-color: white !important;
+  border: 2px solid #00684A !important;
+  color: #00684A !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

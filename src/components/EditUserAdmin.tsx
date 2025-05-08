@@ -79,7 +79,7 @@ const EditUserRoleAndEateryForm = ({
 
   return (
     <>
-      <Button id="modalButton" variant="primary" onClick={() => setShowModal(true)}>
+      <Button className="tableButton" onClick={() => setShowModal(true)}>
         Edit User
       </Button>
 
