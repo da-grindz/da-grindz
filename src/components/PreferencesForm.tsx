@@ -5,10 +5,15 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import swal from 'sweetalert';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Import useRouter for redirection
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { PreferencesSchema } from '@/lib/validationSchemas';
 import { addPreferences } from '@/lib/dbActions';
+import { useEffect } from 'react';
+import { GiPeanut, GiWheat, GiSesame, GiMilkCarton } from 'react-icons/gi';
+import { FaSeedling, FaFish, FaBreadSlice } from 'react-icons/fa';
+import { TbBottleFilled } from 'react-icons/tb';
+import { FaShrimp } from 'react-icons/fa6';
 
 const allergiesList = [
   'Peanuts',
@@ -22,30 +27,26 @@ const allergiesList = [
   'Mustard',
 ];
 
-const onSubmit = async (data: { allergies?: (string | undefined)[]; mood: string; owner: string }) => {
-  try {
-    console.log('Raw form data:', data);
-
-    const sanitizedData = {
-      ...data,
-      allergies: (data.allergies || []).filter((allergy): allergy is string => !!allergy),
-    };
-
-    console.log('Sanitized data:', sanitizedData);
-
-    await addPreferences(sanitizedData);
-
-    swal('Success', 'Your preferences have been updated', 'success', {
-      timer: 2000,
-    });
-  } catch (error) {
-    console.error('Error during form submission:', error);
-    swal('Error', 'Failed to update preferences. Please try again.', 'error');
-  }
+const iconList: Record<string, JSX.Element> = {
+  Peanuts: <GiPeanut />,
+  'Tree Nuts': <FaSeedling />,
+  Milk: <GiMilkCarton />,
+  Fish: <FaFish />,
+  Shellfish: <FaShrimp />,
+  Wheat: <GiWheat />,
+  Gluten: <FaBreadSlice />,
+  Sesame: <GiSesame />,
+  Mustard: <TbBottleFilled />,
 };
 
-const PreferencesForm: React.FC = () => {
+interface PreferencesFormProps {
+  userAllergies: string[];
+}
+
+const PreferencesForm: React.FC<PreferencesFormProps> = ({ userAllergies }: PreferencesFormProps) => {
+  console.log('Rendering PreferencesForm...');
   const { data: session, status } = useSession();
+  const router = useRouter(); // Initialize the router for navigation
   const currentUser = session?.user?.email || '';
   const {
     register,
@@ -54,20 +55,58 @@ const PreferencesForm: React.FC = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(PreferencesSchema),
+    defaultValues: {
+      allergies: userAllergies || [],
+      mood: '',
+      owner: '', // Temp value; will be updated when session loads
+    },
   });
+
+  useEffect(() => {
+    if (session?.user?.email) {
+      reset({
+        allergies: userAllergies || [],
+        mood: '',
+        owner: session.user.email,
+      });
+    }
+  }, [session, reset, userAllergies]);
+
+  const onSubmit = async (data: { allergies?: (string | undefined)[]; mood: string; owner: string }) => {
+    try {
+      const sanitizedData = {
+        ...data,
+        allergies: (data.allergies || []).filter((allergy): allergy is string => !!allergy),
+      };
+
+      await addPreferences(sanitizedData);
+      swal('Success', 'Your preferences have been updated', 'success', {
+        timer: 2000,
+      });
+
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('Error during form submission:', error);
+      swal('Error', 'Failed to update preferences. Please try again.', 'error');
+    }
+  };
 
   if (status === 'loading') {
     return <LoadingSpinner />;
   }
 
   if (status === 'unauthenticated') {
-    redirect('/auth/signin');
+    router.push('/auth/signin');
   }
+
+  console.log('Session:', session);
+  console.log('Status:', status);
+  console.log('Current User:', currentUser);
 
   return (
     <Container id="preference-page" className="mt-5 py-3">
       <Row className="justify-content-center">
-        <Col xs={5}>
+        <Col xs={12} md={8} lg={6}>
           <Card>
             <Card.Header>
               <Col className="text-center">
@@ -90,15 +129,26 @@ const PreferencesForm: React.FC = () => {
                   <div>
                     {allergiesList.map((allergy) => (
                       <Form.Check
+                        className="allergy-checkbox"
                         key={allergy}
                         type="checkbox"
-                        label={allergy}
+                        label={
+                          (
+                            <span className="allergy-label">
+                              {iconList[allergy]}
+                              {' '}
+                              {allergy}
+                            </span>
+                          )
+                        }
                         value={allergy}
+                        defaultChecked={userAllergies.includes(allergy)}
                         {...register('allergies')}
                       />
                     ))}
                   </div>
                 </Form.Group>
+
                 <Form.Group>
                   <Form.Label className="pt-2">Grindz Mood</Form.Label>
                   <select {...register('mood')} className={`form-control ${errors.mood ? 'is-invalid' : ''}`}>

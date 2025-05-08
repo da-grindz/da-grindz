@@ -1,46 +1,24 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider  = "postgresql"
-  // for local development
-  //url      = env("DATABASE_URL")
-  // for Vercel
- url       = env("POSTGRES_URL_NON_POOLING")
- directUrl = env("POSTGRES_URL_NON_POOLING")
-}
-
-enum Role {
-  USER
-  ADMIN
-  VENDOR
+  url       = env("POSTGRES_URL_NON_POOLING")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
-  id           Int       @id @default(autoincrement())
-  email        String    @unique
-  password     String
-  role         Role      @default(USER)
-  grindzMood   Mood?     @relation(fields: [grindzMoodId], references: [id])
-  grindzMoodId Int?
-  allergies    Allergy[] @relation("UserAllergies")
-  eatery       Eatery? 
-  waterLogs  WaterLog[]
+  id             Int            @id @default(autoincrement())
+  email          String         @unique
+  password       String
+  role           Role           @default(USER)
+  grindzMoodId   Int?
+  eatery         Eatery?
   plannerEntries PlannerEntry[]
-}
-
-enum Condition {
-  excellent
-  good
-  fair
-  poor
+  grindzMood     Mood?          @relation(fields: [grindzMoodId], references: [id])
+  waterLogs      WaterLog[]
+  allergies      Allergy[]      @relation("UserAllergies")
 }
 
 model Stuff {
@@ -49,17 +27,6 @@ model Stuff {
   quantity  Int
   condition Condition @default(good)
   owner     String
-}
-
-enum EateryType {
-  RETAIL_DINING
-  RESIDENTIAL_DINING
-  FOOD_TRUCK
-}
-
-enum EaterySubtype {
-  MEAL_POINTS_ACCEPTED
-  MEAL_POINTS_NOT_ACCEPTED
 }
 
 model Eatery {
@@ -78,30 +45,25 @@ model Eatery {
   notes    String?
   x        Float
   y        Float
-  user     User?         @relation(fields: [userId], references: [id])
   userId   Int?          @unique
-  items    VendorItem[]  // New: menu items for this eatery
+  user     User?         @relation(fields: [userId], references: [id])
+  items    VendorItem[]
 }
 
 model VendorItem {
-  id          Int     @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   image       String
   alt         String
-  calories    Int
-  description String  @default("No description provided")
-  fat         Int
-  carbs       Int
-  protein     Int 
-  price       Float   @default(0.0)
-  eatery      Eatery  @relation(fields: [eateryId], references: [id])
   eateryId    Int
+  calories    Int
+  carbs       Int
+  fat         Int
+  protein     Int
+  description String    @default("No description provided")
+  price       Float     @default(0.0)
+  eatery      Eatery    @relation(fields: [eateryId], references: [id])
   allergies   Allergy[] @relation("VendorItemAllergies")
-}
-
-enum VendingType {
-  SNACK
-  BEVERAGE
 }
 
 model VendingMachine {
@@ -115,18 +77,18 @@ model VendingMachine {
 }
 
 model Allergy {
-  id    Int             @id @default(autoincrement())
-  name  String          @unique
-  users User[]          @relation("UserAllergies")
+  id             Int             @id @default(autoincrement())
+  name           String          @unique
   dashboardItems DashboardItem[] @relation("DashboardItemAllergies")
+  users          User[]          @relation("UserAllergies")
   vendorItems    VendorItem[]    @relation("VendorItemAllergies")
 }
 
 model Mood {
   id    Int             @id @default(autoincrement())
   name  String          @unique
-  users User[]          // Users who selected this mood
-  items DashboardItem[] // Meals/items associated with this mood
+  items DashboardItem[]
+  users User[]
 }
 
 model DashboardItem {
@@ -136,20 +98,19 @@ model DashboardItem {
   alt       String
   source    String
   nutrition String
-  mood      Mood      @relation(fields: [moodId], references: [id])
   moodId    Int
+  mood      Mood      @relation(fields: [moodId], references: [id])
   allergies Allergy[] @relation("DashboardItemAllergies")
 }
 
 model WaterLog {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  date      DateTime
-  count     Int      @default(0)
+  id     Int      @id @default(autoincrement())
+  userId Int
+  date   DateTime
+  count  Int      @default(0)
+  user   User     @relation(fields: [userId], references: [id])
 
-  user      User     @relation(fields: [userId], references: [id])
-
-  @@unique([userId, date]) // 1 log per user per day
+  @@unique([userId, date])
 }
 
 model PlannerEntry {
@@ -160,4 +121,33 @@ model PlannerEntry {
   meal      String
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+  VENDOR
+}
+
+enum Condition {
+  excellent
+  good
+  fair
+  poor
+}
+
+enum EateryType {
+  RETAIL_DINING
+  RESIDENTIAL_DINING
+  FOOD_TRUCK
+}
+
+enum EaterySubtype {
+  MEAL_POINTS_ACCEPTED
+  MEAL_POINTS_NOT_ACCEPTED
+}
+
+enum VendingType {
+  SNACK
+  BEVERAGE
 }

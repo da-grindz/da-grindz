@@ -26,9 +26,12 @@ export default async function EditPreferencesPage() {
   if (!user) {
     return notFound();
   }
+  console.log('Rendering PreferencesForm...');
+  const userAllergies = user.allergies.map((allergy) => allergy.name);
+
   return (
     <main>
-      <PreferencesForm />
+      <PreferencesForm userAllergies={userAllergies} />
     </main>
   );
 }

@@ -58,11 +58,18 @@ body {
   padding-bottom: 10px;
 }
 
+.landingimage {
+  border: 4px solid white;
+  margin: 10px 0 20px 0;
+  box-shadow: 0 8px 15px rgba(156, 159, 164, 0.6);
+}
+
 .landingcontainer {
   background-color: rgba(255, 255, 255, 0.778);
   padding: 20px;
   margin-bottom: 40px;
   border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(156, 159, 164, 0.6);
 }
 
 .landingbutton {
@@ -72,6 +79,32 @@ body {
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(94, 138, 112, 0.6);
+}
+
+.landingbutton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(132, 209, 164, 0.6);
+  color: white;
+}
+
+/*newbutton on landing page*/
+.cool-button {
+  background: linear-gradient(45deg, #b4e7d9, #2b6555);
+  color: white !important;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(132, 209, 164, 0.6);
+}
+
+.cool-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(132, 209, 164, 0.6);
 }
 
 #landing-page a {
@@ -173,31 +206,56 @@ footer, footer a {
   color: #FF6347;
 }
 
-#preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
+#modalButton, #vendor-item-form button, #preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
   background-color: #2b6555 !important;
   color: #FFF !important;
-  border: white !important;
+  border: none !important;
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 5px;
+  box-shadow: 0 5px 10px #2b6555;
 }
 
-#preference-page .card-footer, #signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
+#modalButton, #vendor-item-form button:hover, #preference-page button:hover, #signin-page button:hover, #change-password-page button:hover, #signup-page button:hover, #signout-page button:hover{
+  background-color: #2b6555 !important;
+  color: white !important;
+  border: 2px solid #2b6555 !important;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: transform 0.5s ease;
+}
+
+.allergy-label {
+  color: #2b6555 !important;
+  font-size: 1.1rem;
+}
+
+#vendor-item-form .card-footer, #preference-page .card-footer, #signin-page .card-footer, #change-password-page .card-footer, #signup-page .card-footer {
   background: #BFD0C9;
 }
 
-#preference-page .card-body, #signin-page .card-body, #change-password-page .card-body, #signup-page .card-body {
+#vendor-item-form .card-body, #preference-page .card-body, #signin-page .card-body, #change-password-page .card-body, #signup-page .card-body {
   background: #DCE7E2;
 }
 
-#preference-page .card, #signin-page .card, #change-password-page .card, #signup-page .card {
+
+#adminpage .card, #vendor-item-form .card, #signin-page .card, #change-password-page .card, #signup-page .card {
   background: #DCE7E2;
   min-width: 400px;
 }
 
-#preference-page a, #signin-page a, #change-password-page a, #signup-page a {
+#preference-page .card {
+  background: #DCE7E2;
+}
+
+#adminpage a, #vendor-item-form a, #preference-page a, #signin-page a, #change-password-page a, #signup-page a {
   color: #00684A;
   text-decoration: underline;
+}
+#adminpage a:hover, #vendor-item-form a:hover, #preference-page a:hover, #signin-page a:hover, #change-password-page a:hover, #signup-page a:hover {
+  font-weight: bolder;
 }
 
 #login, #allergy-banner {
@@ -206,16 +264,17 @@ footer, footer a {
   padding-bottom: 50px;
 }
 
-#preference-page, #signin-page, #change-password-page, #signup-page, #signout-page {
+#adminpage, #vendor-item-form, #preference-page, #signin-page, #change-password-page, #signup-page, #signout-page {
   padding: 20px;
   background: white;
   color: #00684A;
   min-height: 75%;
 }
 
-#preference-page .form-label, #preference-page .form-label, #signin-page .form-label, #change-password-page .form-label, #signup-page .form-label {
+#vendor-item-form .form-label, #preference-page .form-label, #preference-page .form-label, #signin-page .form-label, #change-password-page .form-label, #signup-page .form-label {
   color: #00684A;
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
 /* #preference-page .form-check label {
@@ -239,4 +298,186 @@ footer, footer a {
 
 .custom-dropdown-menu .dropdown-item {
   color: #2b6555 !important;
+}
+
+.colorlink {
+  position: relative;
+  display: inline-block !important;
+  color: #000; 
+  text-decoration: none;
+  padding: 0;
+  margin: 0 0.85rem;
+
+}
+
+.colorlink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  width: 100%;
+  height: 2px;
+  background-color: #ff7c01;
+  transition: transform 0.3s ease;
+}
+
+.colorlink:hover {
+  color: #ff7c01 !important;
+}
+
+#links-dropdown:hover {
+  color: #ff7c01 !important;
+}
+
+/*#login-dropdown #text:hover {
+  color: #ff7c01;
+}*/
+
+#login-dropdown:hover {
+  color: #ff7c01;
+}
+
+.navbar .dropdown-item.active {
+  background-color: #fdebc2 !important;
+  color: #ff7c01 !important;
+}
+
+.colorlink:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.nav-links-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.login-dropdown{
+  align-items: center !important;
+  display: flex !important;
+}
+
+#login-dropdown .dropdown-toggle:hover {
+  color: #ff7c01 !important;
+}
+
+.navbar .dropdown-menu{
+  background-color: #fff7e6ee !important;
+  border-color: #fff7e6 !important;
+}
+
+.navbar .dropdown-item:hover {
+  background-color: #fdebc2;
+  color: #ff7c01;
+}
+
+.custom-toggler:hover{
+  color: #ff7c01 !important;
+}
+
+.custom-toggler{
+  border: transparent;
+  text-decoration: none;
+}
+
+.custom-toggler:active{
+  color: #ff7c01;
+}
+
+.login-button {
+  background-color: #c7d1cc;
+  border: 2.5px solid white;
+  border-radius: 2em;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-button:hover {
+  background-color: #FFF7E6;
+  color: #ff7c01;
+  border-color: #FFF7E6;
+}
+
+.join-button {
+  background-color: #f2f5f7;
+  border: 2.5px solid #f2f5f7;
+  border-radius: 2em;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #32343a;
+  transition: all 0.3s ease-in-out;
+}
+
+.join-button:hover {
+  background-color: #c7d1cc;
+  color: white;
+  border-color: white;
+}
+
+/* Admin Page */
+#adminpage .table {
+  background: #DCE7E2;
+  color: #00684A;
+}
+
+button.adminButton {
+  background-color: #DCE7E2;
+  border: 2px solid #82a299;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: 1px;
+  margin-right: 1px;
+  color:#00684A;
+}
+
+.adminButton.active {
+  background-color: #00684A !important;
+  color: white;
+  outline: none !important;
+  border: 2px solid #00684A !important;
+}
+
+.adminButton:hover {
+  background-color: #00684A  !important;
+  border: 2px solid #00684A !important;
+}
+
+
+.adminButton:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+table.adminTable.table-hover tbody tr:hover td {
+  background-color: #DCE7E2 !important;
+  border: 2px solid #00684A !important;
+}
+
+.adminTable thead th {
+  background-color: #DCE7E2  !important;
+  border: 2px solid #82a299; 
+  padding: 12px;
+  font-weight: bold;
+}
+
+button.vendorItem, button.tableButton {
+  background-color: #00684A  !important;
+  border: 2px solid #00684A !important;
+}
+
+button.vendorItem:hover, .tableButton:hover {
+  background-color: white !important;
+  border: 2px solid #00684A !important;
+  color: #00684A !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

@@ -26,7 +26,7 @@ const VendorsPage = async () => {
       <Container id="allergy-banner" className="p-4 mt-5 mb-3">
         <Row>
           <Col className="text-center px-5">
-            <h1>Vendors Page</h1>
+            <h1>Vendors List</h1>
             <p>
               Here you can look at lists of vendors and their menus.
               <br />
