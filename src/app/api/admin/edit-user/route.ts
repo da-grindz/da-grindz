@@ -8,17 +8,8 @@ export async function POST(req: Request) {
     const { userId, role, eateryName } = body;
 
     // Validate input
-    if (!userId || !role || !eateryName) {
+    if (!userId || !role) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
-    }
-
-    // Find the eatery by name
-    const eatery = await prisma.eatery.findUnique({
-      where: { name: eateryName },
-    });
-
-    if (!eatery) {
-      return NextResponse.json({ error: `Eatery "${eateryName}" not found` }, { status: 404 });
     }
 
     // Update the user's role and eatery
@@ -26,9 +17,9 @@ export async function POST(req: Request) {
       where: { id: userId },
       data: {
         role,
-        eatery: {
-          connect: { id: eatery.id },
-        },
+        eatery: eateryName
+          ? { connect: { name: eateryName } }
+          : { disconnect: true }, // Disconnect eatery if none is provided
       },
     });
 

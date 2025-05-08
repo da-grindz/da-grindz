@@ -16,24 +16,28 @@ const AdminPage = () => {
 
   const [users, setUsers] = useState<User[]>([]);
 
+  // Fetch users from the API
   const fetchUsers = async () => {
-    const response = await fetch('/api/admin/users', { cache: 'no-store' });
-    const data = await response.json();
-    setUsers(data);
-  };
-
-  const refreshUserList = async () => {
     try {
-      const response = await fetch('/api/admin/users', { cache: 'no-store' });
-      const updatedUsers = await response.json();
-      setUsers([...updatedUsers]);
+      const response = await fetch('/api/admin/users', { cache: 'no-store' }); // Disable caching
+      if (!response.ok) {
+        throw new Error('Failed to fetch users');
+      }
+      const data = await response.json();
+      setUsers(data);
     } catch (error) {
-      console.error('Error refreshing user list:', error);
+      console.error('Error fetching users:', error);
     }
   };
 
+  // Refresh the user list after an update
+  const refreshUserList = async () => {
+    console.log('Refreshing user list...');
+    await fetchUsers(); // Reuse the fetchUsers function
+  };
+
   useEffect(() => {
-    fetchUsers();
+    fetchUsers(); // Fetch users on component mount
   }, []);
 
   return (
