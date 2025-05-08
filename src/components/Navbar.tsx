@@ -62,6 +62,11 @@ const NavBar: React.FC = () => {
                 Admin
               </Nav.Link>
             )}
+            {currentUser && role === 'VENDOR' && (
+              <Nav.Link id="admin-stuff-nav" href="/vendors/add-item" active={pathName === '/vendors/add-item'}>
+                Add Menu Item
+              </Nav.Link>
+            )}
           </Nav>
 
           {/* Sign In / Sign Out */}

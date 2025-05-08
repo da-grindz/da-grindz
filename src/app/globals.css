@@ -470,12 +470,12 @@ table.adminTable.table-hover tbody tr:hover td {
   font-weight: bold;
 }
 
-button.tableButton {
+button.vendorItem, button.tableButton {
   background-color: #00684A  !important;
   border: 2px solid #00684A !important;
 }
 
-.tableButton:hover {
+button.vendorItem:hover, .tableButton:hover {
   background-color: white !important;
   border: 2px solid #00684A !important;
   color: #00684A !important;
