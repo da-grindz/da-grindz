@@ -9,9 +9,9 @@ const SignOut = () => (
     <Container id="login" className="mt-3">
       <h1 className="py-5">Do you want to sign out?</h1>
       <Row>
-        <Col xs={4} />
+        <Col xs={2} />
         <Col>
-          <Button variant="danger" onClick={() => signOut({ callbackUrl: '/', redirect: true })}>
+          <Button onClick={() => signOut({ callbackUrl: '/', redirect: true })}>
             Sign Out
           </Button>
         </Col>
@@ -20,7 +20,7 @@ const SignOut = () => (
             Cancel
           </Button>
         </Col>
-        <Col xs={4} />
+        <Col xs={2} />
       </Row>
     </Container>
   </Container>

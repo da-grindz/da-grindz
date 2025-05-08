@@ -101,10 +101,10 @@ const SignUp = () => {
               <Card.Footer>
                 <Row className="justify-content-center">
                   <Col xs={6}>
-                    Don&apos;t have an account?
+                    Already have an account?
                   </Col>
                   <Col xs={6} className="text-end">
-                    <a href="/auth/signup">Sign up!</a>
+                    <a href="/auth/signin">Sign in!</a>
                   </Col>
                 </Row>
               </Card.Footer>

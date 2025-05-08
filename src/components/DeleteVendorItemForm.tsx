@@ -39,7 +39,7 @@ const DeleteVendorItemForm = ({ itemId, onDeleteSuccess }: DeleteVendorItemFormP
 
   return (
     <>
-      <Button variant="danger" onClick={() => setShowModal(true)}>
+      <Button className="vendorItem" onClick={() => setShowModal(true)}>
         Delete Item
       </Button>
 
@@ -51,10 +51,10 @@ const DeleteVendorItemForm = ({ itemId, onDeleteSuccess }: DeleteVendorItemFormP
           <p>Are you sure you want to delete this vendor item? This action cannot be undone.</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
+          <Button className="vendorItem" onClick={() => setShowModal(false)}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDelete} disabled={isDeleting}>
+          <Button className="vendorItem" onClick={handleDelete} disabled={isDeleting}>
             {isDeleting ? 'Deleting...' : 'Delete'}
           </Button>
         </Modal.Footer>
