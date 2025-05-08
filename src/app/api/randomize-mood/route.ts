@@ -14,6 +14,14 @@ export async function POST() {
 
     const { email } = session.user;
 
+    // Step 1: Get current mood
+    const user = await prisma.user.findUnique({
+      where: { email },
+      include: { grindzMood: true },
+    });
+
+    const currentMood = user?.grindzMood?.name;
+
     const moods = [
       'Vegetarian Vibes',
       'Quick Bento Run',
@@ -21,7 +29,12 @@ export async function POST() {
       'Satisfying Sips',
       'Sugar Rush',
     ];
-    const randomMood = moods[Math.floor(Math.random() * moods.length)];
+
+    // Step 2: Filter out the current mood
+    const otherMoods = moods.filter((mood) => mood !== currentMood);
+
+    // Step 3: Pick a new one
+    const randomMood = otherMoods[Math.floor(Math.random() * otherMoods.length)];
 
     await prisma.user.update({
       where: { email },
