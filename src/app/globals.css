@@ -173,7 +173,7 @@ footer, footer a {
   color: #FF6347;
 }
 
-#modalButton, #adminpage button, #vendor-item-form button, #preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
+#modalButton, #vendor-item-form button, #preference-page button, #signin-page button, #change-password-page button, #signup-page button, #signout-page button, #signout-page a {
   background-color: #2b6555 !important;
   color: #FFF !important;
   border: white !important;
@@ -343,4 +343,57 @@ footer, footer a {
   background-color: #d1dbd6;
   color: white;
   border-color: white;
+}
+
+/* Admin Page */
+#adminpage .table {
+  background: #DCE7E2;
+  color: #00684A;
+}
+
+button.adminButton {
+  background-color: #DCE7E2;
+  border: 2px solid #82a299;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: 1px;
+  margin-right: 1px;
+  color:#00684A;
+}
+
+.adminButton.active {
+  background-color: #00684A !important;
+  color: white;
+  outline: none !important;
+  border: 2px solid #00684A !important;
+}
+
+.adminButton:hover {
+  background-color: #00684A  !important;
+  border: 2px solid #00684A !important;
+}
+
+
+.adminButton:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+table.adminTable.table-hover tbody tr:hover td {
+  background-color: #DCE7E2 !important;
+  border: 2px solid #00684A !important;
+}
+
+.adminTable thead th {
+  background-color: #DCE7E2  !important;
+  border: 2px solid #82a299; 
+  padding: 12px;
+  font-weight: bold;
+}
+
+.adminTable thead {
+  
 }
