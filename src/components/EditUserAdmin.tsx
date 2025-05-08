@@ -67,7 +67,8 @@ const EditUserRoleAndEateryForm = ({
       setShowModal(false);
 
       if (onUserUpdated) {
-        onUserUpdated(); // Trigger callback to refresh the user list
+        console.log('Calling onUserUpdated...');
+        onUserUpdated();
       }
     } catch (error) {
       console.error('Error updating user:', error);

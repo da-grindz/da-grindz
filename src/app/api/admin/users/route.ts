@@ -14,12 +14,10 @@ export async function GET() {
       },
     });
 
-    // Disable caching
-    const response = NextResponse.json(users);
-    response.headers.set('Cache-Control', 'no-store');
-    return response;
+    console.log('Fetched Users:', users); // Debugging
+    return NextResponse.json(users);
   } catch (error) {
-    console.error('Failed to fetch users:', error);
+    console.error('Error fetching users:', error);
     return NextResponse.json({ error: 'Failed to fetch users' }, { status: 500 });
   }
 }
