@@ -53,7 +53,7 @@ const AdminPage = () => {
             <Row className="justify-content-between align-items-center">
               <Col xs={6} md={6} className="">
                 <h1>Overview</h1>
-                <p>Manage user roles and their vendors.</p>
+                <p>Manage user roles and their vendor access.</p>
               </Col>
               <Col id="adminSort" xs={12} lg={3} className="mb-1">
                 <ButtonGroup className="d-flex justify-content-between w-100">
