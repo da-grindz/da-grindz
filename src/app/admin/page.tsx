@@ -20,7 +20,7 @@ const AdminPage = () => {
     try {
       const response = await fetch('/api/admin/users');
       const updatedUsers = await response.json();
-      setUsers(updatedUsers); // Update the state with the new user list
+      setUsers([...updatedUsers]);
     } catch (error) {
       console.error('Error refreshing user list:', error);
     }
