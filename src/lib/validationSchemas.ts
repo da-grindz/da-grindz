@@ -91,3 +91,11 @@ export const EditVendorItemSchema = Yup.object({
 export const DeleteVendorItemSchema = Yup.object({
   id: Yup.number().required('ID is required'),
 });
+
+export const EditRoleAndEaterySchema = Yup.object({
+  userId: Yup.number().required('User ID is required'),
+  role: Yup.string()
+    .oneOf(['USER', 'VENDOR', 'ADMIN'], 'Invalid role')
+    .required('Role is required'),
+  eateryName: Yup.string().required('Eatery name is required'),
+});

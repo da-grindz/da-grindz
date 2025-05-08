@@ -68,7 +68,8 @@ const grindzMood = () => {
     },
     {
       id: 2,
-      image: 'http://devjj.jambajuice.ph/wp-content/uploads/ODM.jpg',
+      image: 'https://tb-static.uber.com/prod/image-proc/processed_images/26442f12f17030'
+          + '126de3721d6fb13253/0fb376d1da56c05644450062d25c5c84.jpeg',
       alt: 'Orange Dream Machine from Jamba Juice',
       title: 'Jamba Juice',
       subtitle: 'Orange Dream Machine',
