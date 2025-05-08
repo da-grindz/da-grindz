@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { mealItems } from '@/lib/mealItems';
 import { Card } from 'react-bootstrap';
 import styles from './planner.module.css';
@@ -11,20 +11,32 @@ type Props = {
   handleDragStart: (e: React.DragEvent, payload: { meal: string }) => void;
 };
 
-const vendorList = [
-  'Bale', 'Buns Hawaii', "B'rito Bowl", 'Campus Center Food Court', 'Ding Tea',
-  'Dunkin Donuts', 'Gateway Cafe', 'Hale Aloha Cafe', 'Holo Holo Grill',
-  'Holo Holo Okazuya & Musubi', 'Jamba Juice', 'Krazy Dogs', 'Lasoon', 'L&L',
-  'Middle Eats', "Olay's Thai Lao Express", 'Panda Express', 'Quick Bites',
-  'Saap Saap HI', 'Starbucks', 'Subway', 'The Bean Counter', 'The Market',
-  'Veggi Dogs', 'Walking Tacos Hawaii',
-];
+type Eatery = {
+  id: number;
+  name: string;
+};
 
 const GrindzVault: React.FC<Props> = ({
   selectedVendor,
   setSelectedVendor,
   handleDragStart,
 }) => {
+  const [eateries, setEateries] = useState<Eatery[]>([]);
+
+  useEffect(() => {
+    const fetchEateries = async () => {
+      try {
+        const res = await fetch('/api/eateries');
+        const data = await res.json();
+        setEateries(data);
+      } catch (err) {
+        console.error('Failed to load eateries:', err);
+      }
+    };
+
+    fetchEateries();
+  }, []);
+
   const availableMeals = mealItems.filter(
     (item) => (selectedVendor ? item.vendor === selectedVendor : false),
   );
@@ -43,9 +55,7 @@ const GrindzVault: React.FC<Props> = ({
         <p className="text-muted" style={{ fontSize: '0.9rem' }}>
           No meals found for
           {' '}
-          <strong>
-            {selectedVendor}
-          </strong>
+          <strong>{selectedVendor}</strong>
           .
         </p>
       );
@@ -58,7 +68,6 @@ const GrindzVault: React.FC<Props> = ({
         onDragStart={(e) => handleDragStart(e, { meal: meal.name })}
         className={styles.vendorMeal}
       >
-        {' '}
         {meal.name}
       </div>
     ));
@@ -67,7 +76,13 @@ const GrindzVault: React.FC<Props> = ({
   return (
     <Card className="h-100">
       <Card.Body>
-        <Card.Title style={{ color: '#00684A', fontSize: '1.1rem', fontWeight: 'bold' }}>
+        <Card.Title
+          style={{
+            color: '#00684A',
+            fontSize: '1.1rem',
+            fontWeight: 'bold',
+          }}
+        >
           Grindz Vault
         </Card.Title>
         <select
@@ -76,9 +91,9 @@ const GrindzVault: React.FC<Props> = ({
           onChange={(e) => setSelectedVendor(e.target.value || null)}
         >
           <option value="">Select a Vendor</option>
-          {vendorList.map((vendor) => (
-            <option key={vendor} value={vendor}>
-              {vendor}
+          {eateries.map((eatery) => (
+            <option key={eatery.id} value={eatery.name}>
+              {eatery.name}
             </option>
           ))}
         </select>
