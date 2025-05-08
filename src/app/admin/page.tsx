@@ -16,6 +16,16 @@ const AdminPage = () => {
 
   const [users, setUsers] = useState<User[]>([]);
 
+  const refreshUserList = async () => {
+    try {
+      const response = await fetch('/api/admin/users');
+      const updatedUsers = await response.json();
+      setUsers(updatedUsers); // Update the state with the new user list
+    } catch (error) {
+      console.error('Error refreshing user list:', error);
+    }
+  };
+
   const fetchUsers = async () => {
     const response = await fetch('/api/admin/users'); // Create an API route to fetch users
     const data = await response.json();
@@ -55,7 +65,7 @@ const AdminPage = () => {
                         email={user.email}
                         currentRole={user.role}
                         currentEateryName={user.eatery?.name || ''}
-                        onUserUpdated={fetchUsers} // Pass the callback
+                        onUserUpdated={refreshUserList} // Pass the callback
                       />
                     </td>
                   </tr>
