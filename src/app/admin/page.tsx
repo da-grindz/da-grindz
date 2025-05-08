@@ -32,7 +32,7 @@ const AdminPage = () => {
 
   const refreshUserList = async () => {
     console.log('Refreshing user list...');
-    await fetchUsers();
+    await fetchUsers(); // Reuse the fetchUsers function
   };
 
   useEffect(() => {
