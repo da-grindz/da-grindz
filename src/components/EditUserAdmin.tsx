@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import swal from 'sweetalert';
+import { useRouter } from 'next/navigation';
 
 type EditUserRoleAndEateryFormProps = {
   userId: number;
@@ -24,9 +25,9 @@ const EditUserRoleAndEateryForm = ({
   const [newEateryName, setNewEateryName] = useState(currentEateryName);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [eateries, setEateries] = useState<{ id: number; name: string }[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
-    // Fetch the list of eateries from the API
     const fetchEateries = async () => {
       try {
         const response = await fetch('/api/eateries');
@@ -70,6 +71,9 @@ const EditUserRoleAndEateryForm = ({
         console.log('Calling onUserUpdated...');
         onUserUpdated();
       }
+
+      // Refresh the page or navigate to another page
+      router.refresh(); // Refresh the current page
     } catch (error) {
       console.error('Error updating user:', error);
       swal('Error', 'Failed to update user. Please try again.', 'error');
