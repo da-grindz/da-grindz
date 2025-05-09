@@ -74,17 +74,11 @@ const Home = () => (
             <Container className="pt-5">
               <p className="pr-3">
                 <CaretRight size={25} className="mx-2" />
-                Then fill out your preferences for allergies and Grindz Mood:
+                Then fill out your preferences for allergies and choose your Grindz Mood:
               </p>
-              <Button href="/allergies" className="mx-2 landingbutton" variant="none">Allergies</Button>
+              <Button href="/preferences" className="mx-2 landingbutton" variant="none">Preferences</Button>
               <Image
-                src="/allergiespage.png"
-                sizes="(100vw)"
-                className="img-fluid landingimage"
-              />
-              <Button href="/grindz-mood" className="mx-2 landingbutton" variant="none">Grindz Mood</Button>
-              <Image
-                src="/grindzmoodpage.png"
+                src="/preferences.png"
                 sizes="(100vw)"
                 className="img-fluid landingimage"
               />
@@ -104,7 +98,7 @@ const Home = () => (
             <Container className="pt-5">
               <p className="pr-3">
                 <CaretRight size={25} className="mx-2" />
-                Now you can start filling out your planner
+                And now you can start filling out your planner
                 and looking at the list of vendors and their menus!
               </p>
               <Button href="/planner" className="mx-2 landingbutton" variant="none">Planner</Button>
@@ -114,6 +108,11 @@ const Home = () => (
                 className="img-fluid landingimage"
               />
               <Button href="/vendors" className="mx-2 landingbutton" variant="none">Vendors List</Button>
+              <Image
+                src="/vendorspage.png"
+                sizes="(100vw)"
+                className="img-fluid landingimage"
+              />
             </Container>
           </Col>
         </Row>

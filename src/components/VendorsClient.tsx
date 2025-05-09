@@ -43,7 +43,7 @@ const VendorsClient = ({ vendors }: { vendors: Vendor[] }) => {
       <Container className="mb-4">
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Form onSubmit={handleFormSubmit}>
+            <Form onSubmit={handleFormSubmit} className="searchbar">
               <Form.Group controlId="search">
                 <InputGroup>
                   <InputGroup.Text
