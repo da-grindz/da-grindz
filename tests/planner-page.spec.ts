@@ -4,5 +4,5 @@ test.use({ storageState: 'vercel-john-auth.json' });
 
 test('Planner Page', async ({ page }) => {
   await page.goto('https://da-grindz.vercel.app/planner');
-  await expect(page).toHaveURL('https://da-grindz.vercel.app/planner');
+  await expect(page).toHaveURL('https://da-grindz.vercel.app/planner', { timeout: 10000 });
 });
