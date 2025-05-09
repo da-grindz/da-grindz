@@ -23,7 +23,7 @@ const VendorsPage = async () => {
   return (
     <Container fluid className="py-3">
       {/* Banner */}
-      <Container id="allergy-banner" className="p-4 mt-5 mb-3">
+      <Container id="" className="p-4 mt-5 mb-3 vendorspagebanner">
         <Row>
           <Col className="text-center px-5">
             <h1>Vendors List</h1>
@@ -32,13 +32,23 @@ const VendorsPage = async () => {
               <br />
               You can also check if they are currently
               {' '}
-              <Badge bg="success" className="" style={{ fontSize: '0.6rem', verticalAlign: 'middle' }}>
+              <Badge
+                bg="success"
+                /* id="badgegreen" */
+                className="rounded-pill"
+                style={{ fontSize: '0.6rem', verticalAlign: 'middle' }}
+              >
                 Open
               </Badge>
               {' '}
               or
               {' '}
-              <Badge bg="danger" className="me-1" style={{ fontSize: '0.6rem', verticalAlign: 'middle' }}>
+              <Badge
+                bg="danger"
+                /* id="badgered" */
+                className="rounded-pill me-1"
+                style={{ fontSize: '0.6rem', verticalAlign: 'middle' }}
+              >
                 Closed
               </Badge>
               !

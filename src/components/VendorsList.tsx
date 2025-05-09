@@ -99,19 +99,22 @@ const VendorsList = ({
       <Row>
         {sortedVendors.map((vendor) => {
           const status = isOpen(vendor.hours) ? 'Open' : 'Closed';
+          const badgeshadow = status === 'Open' ? 'badgegreen' : 'badgered';
 
           return (
             <Col key={vendor.id} md={4} className="mb-4" id={`vendor-${vendor.id}`}>
               <Card>
-                <Card.Body id="quick-bento-run">
-                  <Card.Title className="d-flex justify-content-between align-items-center">
-                    <h2>{vendor.name}</h2>
-                    <Badge
-                      bg={status === 'Open' ? 'success' : 'danger'}
-                      style={{ fontSize: '0.8rem', verticalAlign: 'top' }}
-                    >
-                      {status}
-                    </Badge>
+                <Card.Body id="vendor-cards">
+                  <Badge
+                    id={badgeshadow}
+                    bg={status === 'Open' ? 'success' : 'danger'}
+                    className="rounded-pill badgecard"
+                    style={{ fontSize: '0.8rem', verticalAlign: 'top' }}
+                  >
+                    {status}
+                  </Badge>
+                  <Card.Title className="pt-3 d-flex justify-content-between align-items-center">
+                    <h2 className="">{vendor.name}</h2>
                   </Card.Title>
                   <Card.Text>
                     <strong>Location:</strong>

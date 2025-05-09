@@ -1,4 +1,5 @@
 import { Col, Container } from 'react-bootstrap';
+import { Github } from 'react-bootstrap-icons';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => (
@@ -11,7 +12,8 @@ const Footer = () => (
         <br />
         Honolulu, HI 96822
         <br />
-        <a href="https://da-grindz.github.io/">https://da-grindz.github.io/</a>
+        <Github size={25} className="mx-1" />
+        <a className="mx-1" href="https://da-grindz.github.io/">https://da-grindz.github.io/</a>
       </Col>
     </Container>
   </footer>
