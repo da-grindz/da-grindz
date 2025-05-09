@@ -149,11 +149,7 @@ async function main() {
         },
         {
           name: 'Kunia Bowl',
-          image: 'https://scontent.fhnl2-1.fna.fbcdn.net/v/t39.30808-6/472008578_8866533393424437_'
-          + '341002345256174148_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=3a1ebe&_nc_ohc'
-          + '=f3qtJNBRL2AQ7kNvwGD14nE&_nc_oc=Adkz5oz83iTSUQNMm3RAG9SuPltPL1fpK11MTIBO6YTIke5HtZHxYbFlmsM-dC-7K4A&_nc_'
-          + 'zt=23&_nc_ht=scontent.fhnl2-1.fna&_nc_gid=eo6miVb7J63zrK0aMdjcmg&oh=00_AfHl-'
-          + 'Rppsj2KKGWoI3yidIcLw5gDOh2pF5mwE8bMepgkXA&oe=681C6899',
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZnzMmF5AVMysYBphv0WOmgwcxnSEXoROm8A&s',
           alt: 'Kunia Bowl from Bowlful',
           source: 'Bowlful - Kunia Bowl',
           nutrition: 'Calories: 834 | Protein: 35g | Fat: 40g | Carbs: 95g',

@@ -1,0 +1,45 @@
+{
+  "cookies": [
+    {
+      "name": "__Host-next-auth.csrf-token",
+      "value": "577f1437e33f136fb333aacab928b6f54301ae9fcab50a5145b84440be8c82e6%7C367075a60f8bae9030e02e1c2a775e0ac7f7d17a2927a5cb5e56d006fc7be5c1",
+      "domain": "da-grindz.vercel.app",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-next-auth.callback-url",
+      "value": "https%3A%2F%2Fda-grindz.vercel.app%2Fdashboard",
+      "domain": "da-grindz.vercel.app",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-next-auth.session-token",
+      "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..nlE_jbSZYplzVBPl.ZuRHTpnnY4he2EtLUG7to7zgXFKO_Pvwrrx2-Or3jqtLeI2Tla9nTqGkE_3t4t21XFdSMVecE-bR5uSPWARXSaVKTiuScRd3HXAKtR-on9GbaG92Xjmi3huYTdaJP7gNCHwHrVBc0Aek-CuxHb-Fiihm9Xy51vpEI1LSrK3JHmWZ36VETDp6-VjD9a3hRQM.HyGEgMMn0exb1TDXl0161w",
+      "domain": "da-grindz.vercel.app",
+      "path": "/",
+      "expires": 1749370688,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://da-grindz.vercel.app",
+      "localStorage": [
+        {
+          "name": "nextauth.message",
+          "value": "{\"event\":\"session\",\"data\":{\"trigger\":\"getSession\"},\"timestamp\":1746778688}"
+        }
+      ]
+    }
+  ]
+}
