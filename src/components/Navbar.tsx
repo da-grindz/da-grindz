@@ -58,12 +58,12 @@ const NavBar: React.FC = () => {
 
             {/* Conditional Auth Links */}
             {currentUser && role === 'ADMIN' && (
-              <Nav.Link id="admin-stuff-nav" href="/admin" active={pathName === '/admin'}>
+              <Nav.Link className="colorlink" href="/admin" active={pathName === '/admin'}>
                 Admin
               </Nav.Link>
             )}
             {currentUser && role === 'VENDOR' && (
-              <Nav.Link id="admin-stuff-nav" href="/vendors/add-item" active={pathName === '/vendors/add-item'}>
+              <Nav.Link className="colorlink" href="/vendors/add-item" active={pathName === '/vendors/add-item'}>
                 Add Menu Item
               </Nav.Link>
             )}

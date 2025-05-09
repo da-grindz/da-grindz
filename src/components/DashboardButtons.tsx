@@ -36,8 +36,8 @@ const DashboardButtons = () => {
           Preferences
         </Button>
       </Link>
-      <Link href="/vendormenu" passHref>
-        <Button variant={pathname === '/vendormenu' ? 'success' : 'outline-success'}>
+      <Link href="/vendors" passHref>
+        <Button variant={pathname === '/vendors' ? 'success' : 'outline-success'}>
           Vendor Menu
         </Button>
       </Link>
