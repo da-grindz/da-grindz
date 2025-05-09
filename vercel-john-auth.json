@@ -2,7 +2,7 @@
   "cookies": [
     {
       "name": "__Host-next-auth.csrf-token",
-      "value": "2b858d874c877d0ad1de037757d90a96a2a3028100b7475bff43a316cec0f485%7C271475b85aba358df516217e540d26ff20f3a916f9742ac58a09d978bc67907a",
+      "value": "1e44418dac3a363ef10aca0ba3ab8edbb7fb87eabe32b5da56ef3de9bdb4eadb%7C46c641acf100338edf8f8033fcc3b0e07c95c793579770c8842ae660a917ff11",
       "domain": "da-grindz.vercel.app",
       "path": "/",
       "expires": -1,
@@ -22,10 +22,10 @@
     },
     {
       "name": "__Secure-next-auth.session-token",
-      "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..6hUvc9Sw2D3uUtn8.zqy_Cj9OzQ5O1mojxlhtCVAsB8GAh-R3IU3CSc_vj0ZW4eakpuZ8e01I-Hf2CLGR2h-JduUKVulWxQvrZWs_Q2AYzcn4tXIy_k6kbIoS5G4JuPvBfcNUlEA2SjzpMuJL5cQd4kExj8bHqn6GkzHChsp_fLXdrZjLPi89qPtMv8NWd3FTXqX6or_y5Vkt.aaT_lWMydlLszFg2QwhldA",
+      "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..iCCN6H4N3KEltGbk.jJ_vUx0VGkLsv-KB9dfHL-phDuqRBD5e_7pyDr8YaJZm9dH9vipxB9x6Rl4gUJcJDSkqfE0765_1lYivJDtMx6alZUGs7IYejyC9XALQWVKm0Owp-E8QocVdRRa4Tb_ZLgfKY85wSZWYl-nFJLsroGjChJbKg-uc3uRY_h3ziJkczoW_dLI6dOPGOC25.Q7oIWVSf1LnxVSPuQkeAXQ",
       "domain": "da-grindz.vercel.app",
       "path": "/",
-      "expires": 1749356880,
+      "expires": 1749370689,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None"
@@ -37,7 +37,7 @@
       "localStorage": [
         {
           "name": "nextauth.message",
-          "value": "{\"event\":\"session\",\"data\":{\"trigger\":\"getSession\"},\"timestamp\":1746764880}"
+          "value": "{\"event\":\"session\",\"data\":{\"trigger\":\"getSession\"},\"timestamp\":1746778690}"
         }
       ]
     }
