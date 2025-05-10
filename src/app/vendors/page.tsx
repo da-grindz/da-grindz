@@ -1,55 +1,10 @@
-'use client';
-
-import { Col, Container, Row, Badge, Card } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
-
-type Vendor = {
-  id: number;
-  name: string;
-  location: string;
-  hours: string;
-  phone: string;
-  email: string | null;
-//  type: string;
-};
-
-const isOpen = (hours: string) => {
-  if (!hours) return false; // Return false if hours is undefined or empty
-
-  const now = new Date();
-  const day = now.getDay(); // 0 (Sunday) to 6 (Saturday)
-  const currentTime = now.getHours() * 60 + now.getMinutes(); // Current time in minutes
-
-  // Parse hours string (e.g., "Mon-Fri: 8 am-3 pm, Sat-Sun: 10:30 am-1:30 pm")
-  const hoursArray = hours.split(',').map((range) => range.trim());
-  for (const range of hoursArray) {
-    const [days, timeRange] = range.split(':').map((part) => part.trim());
-
-    if (timeRange) {
-      const [openTime, closeTime] = timeRange.split('-').map((time) => {
-        const [hour, minute] = time.trim().split(/[: ]/).map(Number);
-        const isPM = time.includes('pm');
-        return (hour % 12) * 60 + (minute || 0) + (isPM ? 720 : 0);
-      });
-
-      // Check if the current day matches and time is within range
-      if (
-        (days.includes('Mon') && day >= 1 && day <= 5)
-        || (days.includes('Sat') && day === 6)
-        || (days.includes('Sun') && day === 0)
-      ) {
-        if (currentTime >= openTime && currentTime < closeTime) {
-          return true;
-        }
-      }
-    }
-  }
-  return false;
-};
+import VendorsList from '@/components/VendorsList';
+import { Container, Row, Col, Badge } from 'react-bootstrap';
 
 const VendorsPage = async () => {
   // Fetch only the required fields from the database
-  const vendors: Vendor[] = await prisma.eatery.findMany({
+  const vendors = await prisma.eatery.findMany({
     where: {
       type: {
         in: ['RETAIL_DINING', 'RESIDENTIAL_DINING', 'FOOD_TRUCK'],
@@ -66,7 +21,7 @@ const VendorsPage = async () => {
   });
 
   return (
-    <Container>
+    <Container fluid className="py-3">
       {/* Banner */}
       <Container id="allergy-banner" className="p-4 mt-5 mb-5">
         <Row>
@@ -90,49 +45,8 @@ const VendorsPage = async () => {
         </Row>
       </Container>
 
-      {/* Vendor Cards */}
-      <Container>
-        <Row>
-          {vendors.map((vendor) => {
-            const status = isOpen(vendor.hours) ? 'Open' : 'Closed';
-
-            return (
-              <Col key={vendor.id} md={4} className="mb-4">
-                <Card>
-                  <Card.Body>
-                    <Card.Title className="d-flex justify-content-between align-items-center">
-                      {vendor.name}
-                      <Badge
-                        bg={status === 'Open' ? 'success' : 'danger'}
-                        style={{ fontSize: '0.8rem', verticalAlign: 'middle' }}
-                      >
-                        {status}
-                      </Badge>
-                    </Card.Title>
-                    <Card.Text>
-                      <strong>Location:</strong>
-                      {' '}
-                      {vendor.location}
-                      <br />
-                      <strong>Hours:</strong>
-                      {' '}
-                      {vendor.hours}
-                      <br />
-                      <strong>Phone:</strong>
-                      {' '}
-                      {vendor.phone}
-                      <br />
-                      <strong>Email:</strong>
-                      {' '}
-                      {vendor.email}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            );
-          })}
-        </Row>
-      </Container>
+      {/* Render Vendors List */}
+      <VendorsList vendors={vendors} />
     </Container>
   );
 };
